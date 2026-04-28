@@ -1,0 +1,1642 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\Sameera-2767\\playwright-qa\\playwright.config.ts",
+    "rootDir": "C:/Users/Sameera-2767/playwright-qa/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/Sameera-2767/playwright-qa/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/Sameera-2767/playwright-qa/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/Sameera-2767/playwright-qa/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "C:/Users/Sameera-2767/playwright-qa/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/Sameera-2767/playwright-qa/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "C:/Users/Sameera-2767/playwright-qa/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/Sameera-2767/playwright-qa/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "etsy-authenticated",
+        "name": "etsy-authenticated",
+        "testDir": "C:/Users/Sameera-2767/playwright-qa/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/(etsy-app|etsy-dashboard|etsy-profiling|dashboard|dashboard-functional|onboarding|products|settings|templates|templates-functional|create-templates-manual|orders|pricing|profile|activities|bundle-products)\\.spec\\.(js|ts)/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/Sameera-2767/playwright-qa/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "etsy-shopify-auth",
+        "name": "etsy-shopify-auth",
+        "testDir": "C:/Users/Sameera-2767/playwright-qa/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/open-etsy-app\\.spec\\.(js|ts)/"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "templates-functional.spec.js",
+      "file": "templates-functional.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Etsy Templates – Functional",
+          "file": "templates-functional.spec.js",
+          "line": 24,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_01: Shipping – create first template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 20949,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:51:10.799Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-19850a33b813f2476290",
+              "file": "templates-functional.spec.js",
+              "line": 143,
+              "column": 3
+            },
+            {
+              "title": "TC_02: Shipping – create second template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 20701,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:52:25.906Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-8633d692b18a0df3805e",
+              "file": "templates-functional.spec.js",
+              "line": 151,
+              "column": 3
+            },
+            {
+              "title": "TC_03: Shipping – edit first template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 37198,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:52:46.663Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-9e54d80abfab05f72612",
+              "file": "templates-functional.spec.js",
+              "line": 158,
+              "column": 3
+            },
+            {
+              "title": "TC_04: Shipping – filter by name",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12278,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:53:23.882Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-b62b55d3399f19ee889c",
+              "file": "templates-functional.spec.js",
+              "line": 193,
+              "column": 3
+            },
+            {
+              "title": "TC_05: Shipping – sort by column header",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3284,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:53:36.192Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-4aac29467c6d1defbf56",
+              "file": "templates-functional.spec.js",
+              "line": 202,
+              "column": 3
+            },
+            {
+              "title": "TC_06: Shipping – fetch from Etsy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8223,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:53:39.509Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-6722a3ea26d192dd27df",
+              "file": "templates-functional.spec.js",
+              "line": 209,
+              "column": 3
+            },
+            {
+              "title": "TC_07: Shipping – delete one template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 41852,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:53:47.772Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-b73184478d075ec7d70a",
+              "file": "templates-functional.spec.js",
+              "line": 217,
+              "column": 3
+            },
+            {
+              "title": "TC_08: Inventory – create first template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 19588,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:54:29.667Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-0ceca9278dffab3e164c",
+              "file": "templates-functional.spec.js",
+              "line": 235,
+              "column": 3
+            },
+            {
+              "title": "TC_09: Inventory – create second template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 19439,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:54:49.286Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-2f77ad2ceff822089493",
+              "file": "templates-functional.spec.js",
+              "line": 242,
+              "column": 3
+            },
+            {
+              "title": "TC_10: Inventory – edit first template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 47063,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:55:08.753Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-7aef4eff3a7252f43be3",
+              "file": "templates-functional.spec.js",
+              "line": 249,
+              "column": 3
+            },
+            {
+              "title": "TC_11: Inventory – filter by name",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 25550,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:55:55.848Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-5d4b88e90f6c831dc639",
+              "file": "templates-functional.spec.js",
+              "line": 288,
+              "column": 3
+            },
+            {
+              "title": "TC_12: Inventory – sort by column header",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3363,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:56:21.435Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-baa5c1f7ad43391567b9",
+              "file": "templates-functional.spec.js",
+              "line": 296,
+              "column": 3
+            },
+            {
+              "title": "TC_13: Inventory – fetch from Etsy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4220,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:56:24.830Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-365437bb5bd6cb063c1b",
+              "file": "templates-functional.spec.js",
+              "line": 302,
+              "column": 3
+            },
+            {
+              "title": "TC_14: Inventory – delete one template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 42053,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:56:29.080Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-ddf1a03c520d3f2087c5",
+              "file": "templates-functional.spec.js",
+              "line": 309,
+              "column": 3
+            },
+            {
+              "title": "TC_15: Price – create first template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 19157,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:57:11.158Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-f234094fea36645bf66b",
+              "file": "templates-functional.spec.js",
+              "line": 326,
+              "column": 3
+            },
+            {
+              "title": "TC_16: Price – create second template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 18966,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:57:30.343Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-f4bdc5b6c31c4443cc94",
+              "file": "templates-functional.spec.js",
+              "line": 333,
+              "column": 3
+            },
+            {
+              "title": "TC_17: Price – edit first template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 17687,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:57:49.341Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-500cade6d3a894017964",
+              "file": "templates-functional.spec.js",
+              "line": 340,
+              "column": 3
+            },
+            {
+              "title": "TC_18: Price – filter by name",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6342,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:58:07.064Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-44aaa09ed7270f8318ef",
+              "file": "templates-functional.spec.js",
+              "line": 353,
+              "column": 3
+            },
+            {
+              "title": "TC_19: Price – sort by column header",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3428,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:58:13.440Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-d5f572da96b09cb1abdf",
+              "file": "templates-functional.spec.js",
+              "line": 361,
+              "column": 3
+            },
+            {
+              "title": "TC_20: Price – fetch from Etsy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4237,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:58:16.905Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-6786ab910cb8ad4e7933",
+              "file": "templates-functional.spec.js",
+              "line": 367,
+              "column": 3
+            },
+            {
+              "title": "TC_21: Price – delete one template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 41958,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:58:21.171Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-6528272a8460d0e5dd6e",
+              "file": "templates-functional.spec.js",
+              "line": 374,
+              "column": 3
+            },
+            {
+              "title": "TC_22: Policy – create first template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 14380,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:59:03.161Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-f19a81440981c9ecd33a",
+              "file": "templates-functional.spec.js",
+              "line": 398,
+              "column": 3
+            },
+            {
+              "title": "TC_23: Policy – create second template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 14325,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:59:17.576Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-3af17d6f2110e1ffe7f0",
+              "file": "templates-functional.spec.js",
+              "line": 405,
+              "column": 3
+            },
+            {
+              "title": "TC_24: Policy – edit first template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 55256,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T06:59:31.934Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-83cf80fe7238464d620c",
+              "file": "templates-functional.spec.js",
+              "line": 412,
+              "column": 3
+            },
+            {
+              "title": "TC_25: Policy – filter by days",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6369,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:00:27.221Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-b0c4ac53c7cd829ae26c",
+              "file": "templates-functional.spec.js",
+              "line": 430,
+              "column": 3
+            },
+            {
+              "title": "TC_26: Policy – sort by column header",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3281,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:00:33.627Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-2977f59b0510ebd371cb",
+              "file": "templates-functional.spec.js",
+              "line": 438,
+              "column": 3
+            },
+            {
+              "title": "TC_27: Policy – fetch from Etsy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8222,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:00:36.945Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-dc136c4135e198be44bb",
+              "file": "templates-functional.spec.js",
+              "line": 444,
+              "column": 3
+            },
+            {
+              "title": "TC_28: Policy – delete one template",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 19317,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:00:45.195Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-17d17effd4757aaced8e",
+              "file": "templates-functional.spec.js",
+              "line": 451,
+              "column": 3
+            },
+            {
+              "title": "TC_29: Shop Sections – create first section",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 28947,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:01:04.552Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-1b319968a50426cb3c15",
+              "file": "templates-functional.spec.js",
+              "line": 467,
+              "column": 3
+            },
+            {
+              "title": "TC_30: Shop Sections – create second section",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 28636,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:01:33.539Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-a4c61e6dadca748c25f6",
+              "file": "templates-functional.spec.js",
+              "line": 480,
+              "column": 3
+            },
+            {
+              "title": "TC_31: Shop Sections – edit first section",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 33415,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:02:02.205Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-d38126eb4f84449a61d4",
+              "file": "templates-functional.spec.js",
+              "line": 492,
+              "column": 3
+            },
+            {
+              "title": "TC_32: Shop Sections – filter by name",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 33532,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:02:35.649Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-2da8df98b8940170986e",
+              "file": "templates-functional.spec.js",
+              "line": 511,
+              "column": 3
+            },
+            {
+              "title": "TC_33: Shop Sections – sort by column header",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5408,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:03:09.222Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-1cb5e3009d0fbf4461a3",
+              "file": "templates-functional.spec.js",
+              "line": 524,
+              "column": 3
+            },
+            {
+              "title": "TC_34: Shop Sections – fetch from Etsy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11458,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:03:14.660Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-9b57b2604e86014b9f7c",
+              "file": "templates-functional.spec.js",
+              "line": 530,
+              "column": 3
+            },
+            {
+              "title": "TC_35: Shop Sections – delete one section",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 34957,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:03:26.148Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-b0a4ca9caf2b89d309ff",
+              "file": "templates-functional.spec.js",
+              "line": 537,
+              "column": 3
+            },
+            {
+              "title": "TC_36: Production Partners – fetch from Etsy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6193,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:04:01.133Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-c778aacb3b83390c4ca3",
+              "file": "templates-functional.spec.js",
+              "line": 555,
+              "column": 3
+            },
+            {
+              "title": "TC_37: Production Partners – filter (if data present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 31688,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:04:07.359Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-16f33be742e431703a77",
+              "file": "templates-functional.spec.js",
+              "line": 563,
+              "column": 3
+            },
+            {
+              "title": "TC_38: Processing Profiles – create first profile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 65330,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:04:39.075Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-5e86e5946023ab672372",
+              "file": "templates-functional.spec.js",
+              "line": 590,
+              "column": 3
+            },
+            {
+              "title": "TC_39: Processing Profiles – create second profile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 52374,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:05:44.439Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-22bb77e79c46304a46de",
+              "file": "templates-functional.spec.js",
+              "line": 600,
+              "column": 3
+            },
+            {
+              "title": "TC_40: Processing Profiles – edit first profile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 21052,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:06:36.873Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-7dd2e74c53ccf1ffcfa5",
+              "file": "templates-functional.spec.js",
+              "line": 610,
+              "column": 3
+            },
+            {
+              "title": "TC_41: Processing Profiles – filter by name",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6273,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:06:57.955Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-aecae4aedcfadb1c768f",
+              "file": "templates-functional.spec.js",
+              "line": 622,
+              "column": 3
+            },
+            {
+              "title": "TC_42: Processing Profiles – sort by column header",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3314,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:07:04.258Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-762220b0ebb3ba762432",
+              "file": "templates-functional.spec.js",
+              "line": 630,
+              "column": 3
+            },
+            {
+              "title": "TC_43: Processing Profiles – fetch from Etsy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10255,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:07:07.603Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-8b3d350f95a31c4cba2f",
+              "file": "templates-functional.spec.js",
+              "line": 636,
+              "column": 3
+            },
+            {
+              "title": "TC_44: Processing Profiles – delete one profile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "etsy-authenticated",
+                  "projectName": "etsy-authenticated",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 51218,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-25T07:07:17.888Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "70f5661c76c1d62d1821-db7ac992f506f0ba4c83",
+              "file": "templates-functional.spec.js",
+              "line": 644,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-04-25T06:51:08.854Z",
+    "duration": 1022156.746,
+    "expected": 44,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

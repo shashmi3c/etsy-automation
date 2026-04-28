@@ -1,0 +1,58 @@
+Test Scenario,Section,Test case ID,Test cases,Test steps,Test data,Expected result,Actual result,Automated,Status,regression
+Access Dashboard with Profiling Option,Dashboard,TC_001,Check if the dashboard displays the Create Profiling option.,"1. Log in to the CedCommerce Etsy Integration App dashboard. 
+2. Check if the dashboard displays the Create Profiling option.",N/A,displays the Create Profiling option.,displays the Create Profiling option.,Pending,Pass,10-12-2024
+,Dashboard,TC_002,Verify that there is a brief message explaining the benefits of profiling functionalities.,"1. Log in to the CedCommerce Etsy Integration App dashboard. 
+2. Verify that there is a brief message explaining the benefits of profiling functionalities.",N/A,Profiling option is visible with relevant messages and links.,Profiling option is visible with relevant messages and links.,Pending,Pass,10-12-2024
+,Dashboard,TC_003,Click on the Watch Tutorial link and verify it redirects to the tutorial page.,"1. Log in to the CedCommerce Etsy Integration App dashboard.
+2. Click on the Watch Tutorial link and verify it redirects to the tutorial page.",N/A,Watch Tutorial link redirects to the tutorial page,Watch Tutorial link redirects to the tutorial page,Pending,Pass,10-12-2024
+,Dashboard,TC_004,Click on the Learn more about profiling link and verify it redirects to the user guide of profiling functionality.,"1. Log in to the CedCommerce Etsy Integration App dashboard. 
+2. Click on the Learn more about profiling link and verify it redirects to the user guide of profiling functionality.",N/A,Learn more about profiling link redirects to the user guide of profiling functionality.,Learn more about profiling link redirects to the user guide of profiling functionality.,Pending,Pass,10-12-2024
+Hide Profiling Option if Profile Exists,Dashboard,TC_005,Verify that the Create Profiling option is not displayed if the seller has already created a profile.,"1. Log in to the CedCommerce Etsy Integration App dashboard.
+2. Verify that the Create Profiling option is not displayed if the seller has already created a profile.",N/A,Seller already has a profile,Seller already has a profile,Pending,Pass,10-12-2024
+Products Analysis,Dashboard,TC_006,Check the total count of seller's products.,"1. Navigate to the Products section on the dashboard. 
+2. Check the total count of seller's products.",N/A,Total count of seller's products.,Total count of seller's products.,Pending,Pass,10-12-2024
+,Dashboard,TC_007,"Verify the bifurcation by status (Active, Not Published, Not Profiled, Others).","1. Navigate to the Products section on the dashboard.
+2. Verify the bifurcation by status (Active, Not Published, Not Profiled, Others).",N/A,"Bifurcation on the basis of Active, Not Published, Not Profiled, Others","Bifurcation on the basis of Active, Not Published, Not Profiled, Others",Pending,Pass,10-12-2024
+,Dashboard,TC_008,Ensure the pie-chart display is correct.,"1. Navigate to the Products section on the dashboard.
+2. Ensure the pie-chart display is correct.",N/A,pie-chart display is correct.,pie-chart display is correct.,Pending,Pass,10-12-2024
+,Dashboard,TC_009,Click on the All Products link and verify redirection to the All Products section.,"1. Navigate to the Products section on the dashboard.
+2. Click on the All Products link and verify redirection to the All Products section.",N/A,All Products link redirection to the All Products section.,All Products link redirection to the All Products section.,Pending,Pass,10-12-2024
+,Dashboard,TC_010,Verify the list displays top selling items with titles and listing IDs.,"1. Navigate to the Top Selling Products section on the dashboard.
+2. Verify the list displays top selling items with titles and listing IDs.",N/A,List of top selling products is accurate.,List of top selling products is accurate.,Pending,Pass,10-12-2024
+Order Analysis,Dashboard,TC_011,Check the total count of seller's orders.,"1. Navigate to the Order section on the dashboard. 
+2. Check the total count of seller's orders.",N/A,Total count of seller's orders.,Total count of seller's orders.,Pending,Pass,10-12-2024
+,Dashboard,TC_012,"Verify the bifurcation by status 
+--Total Orders (Has count of total orders)
+--Paid (Has count of paid orders)
+--Failed (has count of failed orders)
+--Completed (has count of completed orders)
+--Others (others miscelleuous orders count).","1. Navigate to the Order section on the dashboard. 
+2. Verify the bifurcation by status (Active, Not Published, Not Profiled, Others).",N/A,"Bifurcation on the basis of
+--Total Orders (Has count of total orders)
+--Paid (Has count of paid orders)
+--Failed (has count of failed orders)
+--Completed (has count of completed orders)
+--Others (others miscelleuous orders count).","Bifurcation on the basis of
+--Total Orders (Has count of total orders)
+--Paid (Has count of paid orders)
+--Failed (has count of failed orders)
+--Completed (has count of completed orders)
+--Others (others miscelleuous orders count).",Pending,Pass,10-12-2024
+,Dashboard,TC_013,Ensure the pie-chart display is correct.,"1. Navigate to the Order section on the dashboard.
+2. Ensure the pie-chart display is correct.",N/A,pie-chart display is correct.,pie-chart display is correct.,Pending,Pass,10-12-2024
+,Dashboard,TC_014,Click on the view all orders link and verify redirection to the Order section.,"1. Navigate to the Order section on the dashboard.
+2. Click on the view all orders link and verify redirection to the Order section.",N/A,View all orders link redirection to the Order section.,View all orders link redirection to the Order section.,Pending,Pass,10-12-2024
+,Dashboard,TC_015,Orders section should have revenue analytics.,"1. Navigate to the Order section on the dashboard.
+2. Orders section should have revenue analytics.",N/A,Revenue analytics is visible.,Revenue analytics is visible.,Pending,Pass,10-12-2024
+,Dashboard,TC_016,Orders revenue should display with bar chart as well,"1. Navigate to the Order section on the dashboard.
+2. Orders revenue should display with bar chart as well.",N/A,Revenue should display with bar chart as well,Revenue should display with bar chart as well,,Pass,10-12-2024
+,Dashboard,TC_017,Orders section should have revenue calendar filter,"1. Navigate to the Order section on the dashboard.
+2. Orders section should have revenue calendar filter.",N/A,Calendar is visible.,Calendar is visible.,Pending,Pass,10-12-2024
+App & Services Rating Functionality,Dashboard,TC_018,Verify the rating and feedback submission section on the dashboard.,"1. Locate the rating and feedback submission section on the dashboard.
+2. Submit a rating and provide feedback.",N/A,Rating and feedback are successfully submitted.,Rating and feedback are successfully submitted.,Pending,Pass,10-12-2024
+Pricing Details,Dashboard,TC_019,"Verify the display of Active Plan, Plan Amount, Plan Status, Billing Date, Monthly Order Limit, and Manage Listings information.","1. Navigate to the Pricing Info section on the dashboard. 
+2. Verify the display of Active Plan, Plan Amount, Plan Status, Billing Date, Monthly Order Limit, and Manage Listings information.",N/A,Pricing information is displayed.,Pricing information is displayed.,Pending,Pass,10-12-2024
+,Dashboard,TC_020,Click on the Upgrade Plan link and verify redirection to the pricing plan section.,"1. Navigate to the Pricing Info section on the dashboard.
+2. Click on the Upgrade Plan link and verify redirection to the pricing plan section.",N/A,Upgrade Plan link and verify redirection to the pricing plan section.,Upgrade Plan link and verify redirection to the pricing plan section.,Pending,Pass,10-12-2024
+Etsy Shop Status Metric,Dashboard,TC_021,Verify the display of relevant metrics related to Etsy shop status.,"1. Locate the Etsy Shop Status section on the dashboard.
+2. Verify the display of relevant metrics related to Etsy shop status.",N/A,Etsy shop metrics are displayed accurately.,Etsy shop metrics are displayed accurately.,Pending,Pass,10-12-2024

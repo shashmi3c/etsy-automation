@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Etsy Templates — Functional QA Report</title>
+<style>
+  :root{--bg:#0f1117;--surface:#1a1d27;--card:#20232e;--border:#2d3142;
+    --pass:#22c55e;--skip:#f59e0b;--fail:#ef4444;--pend:#64748b;
+    --text:#e2e8f0;--muted:#64748b;--accent:#10b981;--r:10px}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px}
+
+  /* Header */
+  header{background:linear-gradient(135deg,#0f1f1a,#0d3326 50%,#0f1f1a);
+    padding:28px 40px 22px;border-bottom:1px solid #065f46;position:relative;overflow:hidden}
+  header::before{content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse at 70% 50%,rgba(16,185,129,.13),transparent 70%);pointer-events:none}
+  .hi{position:relative;z-index:1}
+  .ht{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  header h1{font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px}
+  .bm{background:rgba(16,185,129,.25);border:1px solid rgba(16,185,129,.45);border-radius:6px;
+    padding:2px 10px;font-size:11px;font-weight:600;color:#6ee7b7;letter-spacing:.5px}
+  .bc{background:rgba(34,197,94,.2);border:1px solid rgba(34,197,94,.4);border-radius:6px;
+    padding:2px 10px;font-size:11px;font-weight:600;color:#86efac}
+  header p.sub{margin-top:6px;color:#6ee7b7;font-size:13px}
+  .run-meta{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+  .chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;
+    padding:4px 12px;font-size:11.5px;color:#a7f3d0}
+  .chip strong{color:#d1fae5}
+
+  /* Main */
+  main{max-width:1140px;margin:0 auto;padding:26px 22px}
+
+  /* Stats */
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
+  .sc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+    padding:16px 14px;text-align:center;transition:transform .15s,box-shadow .15s;cursor:default}
+  .sc:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.4)}
+  .sc .num{font-size:36px;font-weight:800;line-height:1;letter-spacing:-1px}
+  .sc .lbl{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-top:6px}
+  .sc-all {border-top:3px solid #6366f1}.sc-all  .num{color:var(--text)}
+  .sc-pass{border-top:3px solid var(--pass)}.sc-pass .num{color:var(--pass)}
+  .sc-skip{border-top:3px solid var(--skip)}.sc-skip .num{color:var(--skip)}
+  .sc-fail{border-top:3px solid var(--fail)}.sc-fail .num{color:var(--fail)}
+  .sc-rate{border-top:3px solid var(--accent)}.sc-rate .num{color:var(--accent);font-size:28px}
+
+  /* Progress */
+  .pw{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+    padding:16px 20px;margin-bottom:18px}
+  .pl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+  .pb{height:9px;border-radius:6px;background:var(--border);overflow:hidden;display:flex}
+  .ps{height:100%;transition:width .6s cubic-bezier(.4,0,.2,1)}
+  #pp{background:var(--pass)}#psk{background:var(--skip)}#pf{background:var(--fail)}#ppend{background:var(--pend)}
+  .pl2{display:flex;gap:18px;margin-top:10px;font-size:12px;flex-wrap:wrap}
+  .li{display:flex;align-items:center;gap:6px}
+  .ld{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .li span{color:var(--muted)}
+
+  /* Section chips */
+  .sec-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .sec-chip{background:var(--card);border:1px solid var(--border);border-radius:20px;
+    padding:5px 14px;font-size:12px;color:var(--muted);cursor:pointer;transition:all .15s;
+    display:flex;align-items:center;gap:6px}
+  .sec-chip:hover{border-color:var(--accent);color:var(--text)}
+  .sec-chip.active{background:rgba(16,185,129,.15);border-color:var(--accent);color:#6ee7b7}
+  .sec-cnt{background:rgba(255,255,255,.1);border-radius:10px;padding:1px 7px;font-size:10px}
+
+  /* Controls */
+  .ctrl{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .fbtns{display:flex;gap:6px}
+  .fb{background:var(--card);border:1px solid var(--border);color:var(--muted);
+    border-radius:6px;padding:6px 14px;font-size:12px;cursor:pointer;transition:all .15s}
+  .fb:hover{border-color:var(--accent);color:var(--text)}
+  .fb.active{background:#059669;border-color:#059669;color:#fff;font-weight:600}
+  .sb{flex:1;min-width:200px;background:var(--card);border:1px solid var(--border);
+    color:var(--text);border-radius:6px;padding:6px 12px;font-size:13px;outline:none}
+  .sb:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(16,185,129,.2)}
+  .sb::placeholder{color:var(--muted)}
+  .rc{font-size:12px;color:var(--muted);white-space:nowrap}
+
+  /* Table */
+  .tw{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+  table{width:100%;border-collapse:collapse}
+  thead tr{background:var(--surface)}
+  thead th{padding:11px 16px;text-align:left;font-size:10.5px;text-transform:uppercase;
+    letter-spacing:.9px;color:var(--muted);border-bottom:1px solid var(--border);
+    cursor:pointer;user-select:none;white-space:nowrap;transition:color .15s}
+  thead th:hover{color:var(--text)}
+  thead th.sorted{color:var(--accent)}
+  .sa{display:inline-block;margin-left:4px;opacity:.5;font-size:10px}
+  thead th.sorted .sa{opacity:1}
+  tbody tr.dr{border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s}
+  tbody tr.dr:hover{background:rgba(16,185,129,.07)}
+  tbody tr.dr.expanded{background:rgba(16,185,129,.05)}
+  td{padding:11px 16px;vertical-align:middle}
+  .td-tc{font-weight:700;font-size:12.5px;color:var(--accent);white-space:nowrap;font-family:monospace}
+  .td-title{color:var(--text);line-height:1.4}
+  .td-sec{font-size:11.5px;color:var(--muted)}
+  .sec-label{display:inline-flex;align-items:center;gap:5px}
+  .td-dur{font-size:11.5px;color:var(--muted);white-space:nowrap;font-family:monospace}
+  .chevron{display:inline-block;margin-left:6px;font-size:10px;color:var(--muted);transition:transform .2s}
+  .expanded .chevron{transform:rotate(180deg)}
+
+  /* Pills */
+  .pill{display:inline-flex;align-items:center;gap:5px;border-radius:20px;
+    padding:3px 11px;font-size:11px;font-weight:600;white-space:nowrap}
+  .pill-pass{background:rgba(34,197,94,.12);color:var(--pass);border:1px solid rgba(34,197,94,.3)}
+  .pill-skip{background:rgba(245,158,11,.12);color:var(--skip);border:1px solid rgba(245,158,11,.3)}
+  .pill-fail{background:rgba(239,68,68,.12);color:var(--fail);border:1px solid rgba(239,68,68,.3)}
+  .pill-pend{background:rgba(100,116,139,.1);color:var(--muted);border:1px solid rgba(100,116,139,.2)}
+
+  /* Detail rows */
+  tr.detr td{padding:0;border-bottom:1px solid var(--border)}
+  .detail-inner{padding:14px 16px 16px 52px;background:rgba(15,17,23,.5);border-top:1px solid var(--border)}
+  .detail-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;
+    padding:14px 16px;font-size:12.5px;line-height:1.75;color:#94a3b8}
+  .detail-heading{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px}
+  .dm-row{display:flex;gap:16px;margin-bottom:10px;flex-wrap:wrap}
+  .dm{font-size:11px;color:var(--muted)}
+  .dm strong{color:#94a3b8}
+  .skip-note{padding:8px 12px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);
+    border-radius:6px;font-size:11.5px;color:#fcd34d}
+  .err-pre{white-space:pre-wrap;word-break:break-word;font-size:12px;
+    color:#f87171;font-family:'Cascadia Code','Courier New',monospace;margin-top:8px}
+
+  .empty{text-align:center;padding:48px 24px;color:var(--muted)}
+  footer{text-align:center;padding:24px;color:var(--muted);font-size:11.5px;
+    border-top:1px solid var(--border);margin-top:36px}
+  .hidden{display:none!important}
+  @media(max-width:680px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    header{padding:18px}
+    main{padding:18px 12px}
+    .td-sec,.td-dur{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hi">
+    <div class="ht">
+      <div>
+        <h1>Etsy Templates <span class="bm">Functional</span> <span class="bc">44 TCs</span></h1>
+        <p class="sub">TC_01 – TC_44 &nbsp;·&nbsp; /panel/template &nbsp;·&nbsp; store: etsy-test-gp7o90bx</p>
+      </div>
+      <div style="text-align:right;font-size:12px;color:#6ee7b7">
+        <div>25 Apr 2026, 12:38</div>
+        <div style="margin-top:4px;color:#4ade80;font-weight:600">100% pass rate</div>
+      </div>
+    </div>
+    <div class="run-meta">
+      <span class="chip"><strong>Spec:</strong> tests/templates-functional.spec.js</span>
+      <span class="chip"><strong>Project:</strong> etsy-authenticated</span>
+      <span class="chip"><strong>Mode:</strong> headed</span>
+      <span class="chip"><strong>Runtime:</strong> 17m 8s</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="stats">
+    <div class="sc sc-all">  <div class="num">44</div>   <div class="lbl">Total</div></div>
+    <div class="sc sc-pass"> <div class="num">44</div>  <div class="lbl">Passed</div></div>
+    <div class="sc sc-skip"> <div class="num">0</div> <div class="lbl">Skipped</div></div>
+    <div class="sc sc-fail"> <div class="num">0</div>  <div class="lbl">Failed</div></div>
+    <div class="sc sc-rate"> <div class="num">100%</div><div class="lbl">Pass Rate</div></div>
+  </div>
+
+  <div class="pw">
+    <div class="pl">Coverage Breakdown</div>
+    <div class="pb">
+      <div class="ps" id="pp"    style="width:100.0%"></div>
+      <div class="ps" id="psk"   style="width:0.0%"></div>
+      <div class="ps" id="pf"    style="width:0.0%"></div>
+      <div class="ps" id="ppend" style="width:0.0%"></div>
+    </div>
+    <div class="pl2">
+      <div class="li"><div class="ld" style="background:var(--pass)"></div><span>Passed (44)</span></div>
+      <div class="li"><div class="ld" style="background:var(--skip)"></div><span>Skipped (0)</span></div>
+      <div class="li"><div class="ld" style="background:var(--fail)"></div><span>Failed (0)</span></div>
+      <div class="li"><div class="ld" style="background:var(--pend)"></div><span>Pending (0)</span></div>
+    </div>
+  </div>
+
+  <div class="sec-bar"><button class="sec-chip" data-section="Shipping Templates" onclick="filterSection(this)"><span style="color:#22c55e">●</span> 📦 Shipping Templates <span class="sec-cnt">7</span></button><button class="sec-chip" data-section="Inventory Templates" onclick="filterSection(this)"><span style="color:#22c55e">●</span> 📋 Inventory Templates <span class="sec-cnt">7</span></button><button class="sec-chip" data-section="Price Templates" onclick="filterSection(this)"><span style="color:#22c55e">●</span> 💰 Price Templates <span class="sec-cnt">7</span></button><button class="sec-chip" data-section="Policy Templates" onclick="filterSection(this)"><span style="color:#22c55e">●</span> 📜 Policy Templates <span class="sec-cnt">7</span></button><button class="sec-chip" data-section="Shop Sections" onclick="filterSection(this)"><span style="color:#22c55e">●</span> 🏪 Shop Sections <span class="sec-cnt">7</span></button><button class="sec-chip" data-section="Production Partners" onclick="filterSection(this)"><span style="color:#22c55e">●</span> 🤝 Production Partners <span class="sec-cnt">2</span></button><button class="sec-chip" data-section="Processing Profiles" onclick="filterSection(this)"><span style="color:#22c55e">●</span> ⚙️ Processing Profiles <span class="sec-cnt">7</span></button></div>
+
+  <div class="ctrl">
+    <div class="fbtns">
+      <button class="fb active" data-f="all"     onclick="setF(this)">All</button>
+      <button class="fb"        data-f="passed"  onclick="setF(this)">Passed</button>
+      <button class="fb"        data-f="skipped" onclick="setF(this)">Skipped</button>
+      <button class="fb"        data-f="failed"  onclick="setF(this)">Failed</button>
+    </div>
+    <input class="sb" type="text" placeholder="Search TC or title…" oninput="applyAll()">
+    <span class="rc" id="rc"></span>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr>
+        <th style="width:80px"  onclick="srt('tc')"  id="th-tc">     TC # <span class="sa">↕</span></th>
+        <th                     onclick="srt('ttl')" id="th-ttl">    Title <span class="sa">↕</span></th>
+        <th style="width:185px" onclick="srt('sec')" id="th-sec">  Section <span class="sa">↕</span></th>
+        <th style="width:115px" onclick="srt('st')"  id="th-st">   Status <span class="sa">↕</span></th>
+        <th style="width:85px"  onclick="srt('dur')" id="th-dur"> Duration <span class="sa">↕</span></th>
+      </tr></thead>
+      <tbody id="tb">
+<tr class="data-row" data-status="passed" data-section="Shipping Templates" data-tc="1" onclick="toggleRow(this)">
+  <td class="td-tc">TC_01</td>
+  <td class="td-title">Create first template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">20.9s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="1">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create first template — completed in 20.9s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Shipping Templates" data-tc="2" onclick="toggleRow(this)">
+  <td class="td-tc">TC_02</td>
+  <td class="td-title">Create second template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">20.7s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="2">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create second template — completed in 20.7s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Shipping Templates" data-tc="3" onclick="toggleRow(this)">
+  <td class="td-tc">TC_03</td>
+  <td class="td-title">Edit first template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">37.2s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="3">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Edit first template — completed in 37.2s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Shipping Templates" data-tc="4" onclick="toggleRow(this)">
+  <td class="td-tc">TC_04</td>
+  <td class="td-title">Filter by name<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">12.3s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="4">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Filter by name — completed in 12.3s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Shipping Templates" data-tc="5" onclick="toggleRow(this)">
+  <td class="td-tc">TC_05</td>
+  <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">3.3s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="5">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Sort by column header — completed in 3.3s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Shipping Templates" data-tc="6" onclick="toggleRow(this)">
+  <td class="td-tc">TC_06</td>
+  <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">8.2s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="6">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Fetch from Etsy — completed in 8.2s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Shipping Templates" data-tc="7" onclick="toggleRow(this)">
+  <td class="td-tc">TC_07</td>
+  <td class="td-title">Delete one template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">41.9s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="7">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Delete one template — completed in 41.9s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Inventory Templates" data-tc="8" onclick="toggleRow(this)">
+  <td class="td-tc">TC_08</td>
+  <td class="td-title">Create first template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">19.6s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="8">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create first template — completed in 19.6s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Inventory Templates" data-tc="9" onclick="toggleRow(this)">
+  <td class="td-tc">TC_09</td>
+  <td class="td-title">Create second template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">19.4s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="9">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create second template — completed in 19.4s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Inventory Templates" data-tc="10" onclick="toggleRow(this)">
+  <td class="td-tc">TC_10</td>
+  <td class="td-title">Edit first template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">47.1s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="10">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Edit first template — completed in 47.1s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Inventory Templates" data-tc="11" onclick="toggleRow(this)">
+  <td class="td-tc">TC_11</td>
+  <td class="td-title">Filter by name<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">25.6s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="11">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Filter by name — completed in 25.6s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Inventory Templates" data-tc="12" onclick="toggleRow(this)">
+  <td class="td-tc">TC_12</td>
+  <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">3.4s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="12">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Sort by column header — completed in 3.4s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Inventory Templates" data-tc="13" onclick="toggleRow(this)">
+  <td class="td-tc">TC_13</td>
+  <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">4.2s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="13">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Fetch from Etsy — completed in 4.2s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Inventory Templates" data-tc="14" onclick="toggleRow(this)">
+  <td class="td-tc">TC_14</td>
+  <td class="td-title">Delete one template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">42.1s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="14">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Delete one template — completed in 42.1s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Price Templates" data-tc="15" onclick="toggleRow(this)">
+  <td class="td-tc">TC_15</td>
+  <td class="td-title">Create first template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">💰 Price Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">19.2s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Price Templates" data-tc="15">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create first template — completed in 19.2s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Price Templates" data-tc="16" onclick="toggleRow(this)">
+  <td class="td-tc">TC_16</td>
+  <td class="td-title">Create second template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">💰 Price Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">19.0s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Price Templates" data-tc="16">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create second template — completed in 19.0s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Price Templates" data-tc="17" onclick="toggleRow(this)">
+  <td class="td-tc">TC_17</td>
+  <td class="td-title">Edit first template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">💰 Price Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">17.7s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Price Templates" data-tc="17">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Edit first template — completed in 17.7s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Price Templates" data-tc="18" onclick="toggleRow(this)">
+  <td class="td-tc">TC_18</td>
+  <td class="td-title">Filter by name<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">💰 Price Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">6.3s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Price Templates" data-tc="18">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Filter by name — completed in 6.3s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Price Templates" data-tc="19" onclick="toggleRow(this)">
+  <td class="td-tc">TC_19</td>
+  <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">💰 Price Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">3.4s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Price Templates" data-tc="19">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Sort by column header — completed in 3.4s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Price Templates" data-tc="20" onclick="toggleRow(this)">
+  <td class="td-tc">TC_20</td>
+  <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">💰 Price Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">4.2s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Price Templates" data-tc="20">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Fetch from Etsy — completed in 4.2s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Price Templates" data-tc="21" onclick="toggleRow(this)">
+  <td class="td-tc">TC_21</td>
+  <td class="td-title">Delete one template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">💰 Price Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">42.0s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Price Templates" data-tc="21">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Delete one template — completed in 42.0s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Policy Templates" data-tc="22" onclick="toggleRow(this)">
+  <td class="td-tc">TC_22</td>
+  <td class="td-title">Create first template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📜 Policy Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">14.4s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="22">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create first template — completed in 14.4s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Policy Templates" data-tc="23" onclick="toggleRow(this)">
+  <td class="td-tc">TC_23</td>
+  <td class="td-title">Create second template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📜 Policy Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">14.3s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="23">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create second template — completed in 14.3s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Policy Templates" data-tc="24" onclick="toggleRow(this)">
+  <td class="td-tc">TC_24</td>
+  <td class="td-title">Edit first template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📜 Policy Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">55.3s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="24">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Edit first template — completed in 55.3s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Policy Templates" data-tc="25" onclick="toggleRow(this)">
+  <td class="td-tc">TC_25</td>
+  <td class="td-title">Filter by days<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📜 Policy Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">6.4s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="25">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Filter by days — completed in 6.4s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Policy Templates" data-tc="26" onclick="toggleRow(this)">
+  <td class="td-tc">TC_26</td>
+  <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📜 Policy Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">3.3s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="26">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Sort by column header — completed in 3.3s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Policy Templates" data-tc="27" onclick="toggleRow(this)">
+  <td class="td-tc">TC_27</td>
+  <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📜 Policy Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">8.2s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="27">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Fetch from Etsy — completed in 8.2s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Policy Templates" data-tc="28" onclick="toggleRow(this)">
+  <td class="td-tc">TC_28</td>
+  <td class="td-title">Delete one template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📜 Policy Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">19.3s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="28">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Delete one template — completed in 19.3s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Shop Sections" data-tc="29" onclick="toggleRow(this)">
+  <td class="td-tc">TC_29</td>
+  <td class="td-title">Create first section<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">28.9s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="29">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create first section — completed in 28.9s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Shop Sections" data-tc="30" onclick="toggleRow(this)">
+  <td class="td-tc">TC_30</td>
+  <td class="td-title">Create second section<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">28.6s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="30">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create second section — completed in 28.6s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Shop Sections" data-tc="31" onclick="toggleRow(this)">
+  <td class="td-tc">TC_31</td>
+  <td class="td-title">Edit first section<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">33.4s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="31">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Edit first section — completed in 33.4s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Shop Sections" data-tc="32" onclick="toggleRow(this)">
+  <td class="td-tc">TC_32</td>
+  <td class="td-title">Filter by name<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">33.5s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="32">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Filter by name — completed in 33.5s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Shop Sections" data-tc="33" onclick="toggleRow(this)">
+  <td class="td-tc">TC_33</td>
+  <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">5.4s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="33">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Sort by column header — completed in 5.4s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Shop Sections" data-tc="34" onclick="toggleRow(this)">
+  <td class="td-tc">TC_34</td>
+  <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">11.5s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="34">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Fetch from Etsy — completed in 11.5s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Shop Sections" data-tc="35" onclick="toggleRow(this)">
+  <td class="td-tc">TC_35</td>
+  <td class="td-title">Delete one section<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">35.0s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="35">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Delete one section — completed in 35.0s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Production Partners" data-tc="36" onclick="toggleRow(this)">
+  <td class="td-tc">TC_36</td>
+  <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">🤝 Production Partners</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">6.2s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Production Partners" data-tc="36">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Fetch from Etsy — completed in 6.2s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Production Partners" data-tc="37" onclick="toggleRow(this)">
+  <td class="td-tc">TC_37</td>
+  <td class="td-title">Filter (if data present)<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">🤝 Production Partners</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">31.7s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Production Partners" data-tc="37">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box"><div class="skip-note">⊘ Skips when no production partners exist in the test store</div></div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Processing Profiles" data-tc="38" onclick="toggleRow(this)">
+  <td class="td-tc">TC_38</td>
+  <td class="td-title">Create first profile<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">1m 5s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="38">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create first profile — completed in 1m 5s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Processing Profiles" data-tc="39" onclick="toggleRow(this)">
+  <td class="td-tc">TC_39</td>
+  <td class="td-title">Create second profile<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">52.4s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="39">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create second profile — completed in 52.4s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Processing Profiles" data-tc="40" onclick="toggleRow(this)">
+  <td class="td-tc">TC_40</td>
+  <td class="td-title">Edit first profile<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">21.1s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="40">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Edit first profile — completed in 21.1s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Processing Profiles" data-tc="41" onclick="toggleRow(this)">
+  <td class="td-tc">TC_41</td>
+  <td class="td-title">Filter by name<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">6.3s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="41">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Filter by name — completed in 6.3s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Processing Profiles" data-tc="42" onclick="toggleRow(this)">
+  <td class="td-tc">TC_42</td>
+  <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">3.3s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="42">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Sort by column header — completed in 3.3s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Processing Profiles" data-tc="43" onclick="toggleRow(this)">
+  <td class="td-tc">TC_43</td>
+  <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">10.3s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="43">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Fetch from Etsy — completed in 10.3s</div></div></td>
+</tr>
+<tr class="data-row" data-status="passed" data-section="Processing Profiles" data-tc="44" onclick="toggleRow(this)">
+  <td class="td-tc">TC_44</td>
+  <td class="td-title">Delete one profile<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">51.2s</td>
+</tr>
+<tr class="detail-row" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="44">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Delete one profile — completed in 51.2s</div></div></td>
+</tr></tbody>
+    </table>
+    <div class="empty hidden" id="empty">🔍 No test cases match your filters.</div>
+  </div>
+</main>
+
+<footer>Etsy QA Automation · Templates Functional Suite · TC_01–TC_44 · store: etsy-test-gp7o90bx · 25 Apr 2026, 12:38</footer>
+
+<script>
+  let aF='all', aSec=null, aQ='', sCol='tc', sDir=1;
+
+  function toggleRow(r){
+    const d=r.nextElementSibling;
+    if(!d||!d.classList.contains('detr'))return;
+    const o=d.style.display!=='none';
+    d.style.display=o?'none':'table-row';
+    r.classList.toggle('expanded',!o);
+  }
+
+  function filterSection(c){
+    const cs=document.querySelectorAll('.sec-chip');
+    if(c.classList.contains('active')){c.classList.remove('active');aSec=null;}
+    else{cs.forEach(x=>x.classList.remove('active'));c.classList.add('active');aSec=c.dataset.section;}
+    applyAll();
+  }
+
+  function setF(b){
+    document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');aF=b.dataset.f;applyAll();
+  }
+
+  function applyAll(){
+    aQ=document.querySelector('.sb').value.toLowerCase();
+    const drs=[...document.querySelectorAll('tr.dr')];
+    const dtrs=[...document.querySelectorAll('tr.detr')];
+    let vis=0;
+    drs.forEach((r,i)=>{
+      const okF  = aF==='all'||r.dataset.status===aF;
+      const okS  = !aSec||r.dataset.section===aSec;
+      const txt  = (r.querySelector('.td-tc')?.textContent+' '+r.querySelector('.td-title')?.textContent).toLowerCase();
+      const okQ  = !aQ||txt.includes(aQ);
+      const show = okF&&okS&&okQ;
+      r.classList.toggle('hidden',!show);
+      if(dtrs[i]){
+        if(!show){dtrs[i].style.display='none';r.classList.remove('expanded');}
+        dtrs[i].classList.toggle('hidden',!show);
+      }
+      if(show)vis++;
+    });
+    document.getElementById('rc').textContent=vis===drs.length?'':vis+' of '+drs.length;
+    document.getElementById('empty').classList.toggle('hidden',vis>0);
+  }
+
+  function srt(col){
+    if(sCol===col)sDir*=-1;else{sCol=col;sDir=1;}
+    document.querySelectorAll('thead th').forEach(h=>{
+      h.classList.remove('sorted');
+      const a=h.querySelector('.sa');if(a)a.textContent='↕';
+    });
+    const th=document.getElementById('th-'+col);
+    if(th){th.classList.add('sorted');const a=th.querySelector('.sa');if(a)a.textContent=sDir===1?'↑':'↓';}
+    const tb=document.getElementById('tb');
+    const pairs=[...document.querySelectorAll('tr.dr')].map(r=>[r,r.nextElementSibling?.classList.contains('detr')?r.nextElementSibling:null]);
+    pairs.sort(([a],[b])=>{
+      if(col==='tc') return sDir*(parseInt(a.dataset.tc)-parseInt(b.dataset.tc));
+      if(col==='dur'){
+        const va=parseFloat(a.querySelector('.td-dur')?.textContent)||0;
+        const vb=parseFloat(b.querySelector('.td-dur')?.textContent)||0;
+        return sDir*(va-vb);
+      }
+      const map={ttl:'.td-title',sec:'.td-sec',st:'[class^="pill"]'};
+      const va=a.querySelector(map[col])?.textContent??'';
+      const vb=b.querySelector(map[col])?.textContent??'';
+      return sDir*va.localeCompare(vb,undefined,{numeric:true});
+    });
+    pairs.forEach(([r,d])=>{tb.appendChild(r);if(d)tb.appendChild(d);});
+  }
+</script>
+</body>
+</html>

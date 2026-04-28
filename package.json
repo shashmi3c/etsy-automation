@@ -1,0 +1,32 @@
+{
+  "name": "playwright-qa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "auth:shopify": "node scripts/shopify-auth.mjs",
+    "test:etsy": "npx playwright test tests/etsy-app.spec.js --project=etsy-authenticated",
+    "test:open-etsy": "npx playwright test tests/open-etsy-app.spec.js --project=etsy-shopify-auth",
+    "test:open-etsy:headed": "npx playwright test tests/open-etsy-app.spec.js --project=etsy-shopify-auth --headed",
+    "test:shopify-dashboard": "npx playwright test tests/dashboard.spec.js --project=etsy-authenticated",
+    "test:etsy:headed": "npx playwright test tests/etsy-app.spec.js --project=etsy-authenticated --headed",
+    "test:dashboard": "npx playwright test tests/cedcommerce-dashboard.spec.js",
+    "record": "npx playwright codegen",
+    "record:etsy": "npx playwright codegen https://admin.shopify.com/store/etsy-new-tester/apps/etsy-dev-public/panel/overview",
+    "record:cedcommerce": "npx playwright codegen https://dev.apps.cedcommerce.com/marketplace-integration/etsy/api/dashboard"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.4.0",
+    "dotenv": "^16.4.5"
+  },
+  "dependencies": {
+    "pdf-parse": "^1.1.1",
+    "xlsx": "^0.18.5"
+  }
+}
