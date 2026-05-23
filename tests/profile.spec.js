@@ -172,11 +172,12 @@ test.describe('Profile Section – Core UI & CRUD (TC_47–TC_90)', () => {
     expect(found).toBeGreaterThanOrEqual(3);
   });
 
-  test('TC_48: "Create New Profile" button is visible on the profiling grid page', async () => {
-    await p.goto(PROFILING_URL);
-    await p.dismissOverlays();
-    await expect(p.getCreateButton()).toBeVisible({ timeout: 10000 });
-  });
+  test.describe.configure({ mode: 'serial' });
+
+  test('TC_48: "Create New Profile" button is visible on the profiling grid page', async () => { await p.goto(PROFILING_URL); 
+  await p.dismissOverlays(); 
+  await expect(p.getCreateButton()).toBeVisible({ timeout: 10000 });
+ });
 
   test('TC_49: Search bar is present on the profiling grid page', async () => {
     await p.goto(PROFILING_URL);

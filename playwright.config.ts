@@ -52,11 +52,14 @@ export default defineConfig({
     /* Etsy app tests with saved Shopify login (run scripts/shopify-auth first) */
     {
       name: 'etsy-authenticated',
-      testMatch: /(etsy-app|etsy-dashboard|etsy-profiling|dashboard|dashboard-functional|onboarding|products|settings|templates|templates-functional|create-templates-manual|orders|pricing|profile|activities|bundle-products)\.spec\.(js|ts)/,
+      testMatch: /(etsy-app|etsy-dashboard|etsy-profiling|dashboard|dashboard-functional|onboarding|products|settings|templates|templates-functional|create-templates-manual|orders|orders-fetch-bulk|orders-debug|pricing|profile|activities|bundle-products)\.spec\.(js|ts)/,
       use: {
         ...devices['Desktop Chrome'],
         storageState: 'playwright/.auth/shopify.json',
-        viewport: { width: 1440, height: 900 },
+        viewport: { width: 1440, height: 1080 },
+        launchOptions: {
+          args: ['--force-device-scale-factor=0.75'],
+        },
       },
     },
 
