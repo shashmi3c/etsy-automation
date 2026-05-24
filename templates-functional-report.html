@@ -123,6 +123,11 @@
   .err-pre{white-space:pre-wrap;word-break:break-word;font-size:12px;
     color:#f87171;font-family:'Cascadia Code','Courier New',monospace;margin-top:8px}
 
+  /* Steps list */
+  .steps-list{margin:10px 0 4px 18px;padding:0;display:flex;flex-direction:column;gap:5px}
+  .steps-list li{font-size:12.5px;color:#94a3b8;line-height:1.6;padding-left:4px}
+  .steps-list li::marker{color:var(--accent);font-weight:700}
+
   .empty{text-align:center;padding:48px 24px;color:var(--muted)}
   footer{text-align:center;padding:24px;color:var(--muted);font-size:11.5px;
     border-top:1px solid var(--border);margin-top:36px}
@@ -145,7 +150,7 @@
         <p class="sub">TC_01 – TC_44 &nbsp;·&nbsp; /panel/template &nbsp;·&nbsp; store: etsy-test-gp7o90bx</p>
       </div>
       <div style="text-align:right;font-size:12px;color:#6ee7b7">
-        <div>25 Apr 2026, 12:38</div>
+        <div>24 May 2026, 00:24</div>
         <div style="margin-top:4px;color:#4ade80;font-weight:600">100% pass rate</div>
       </div>
     </div>
@@ -153,7 +158,7 @@
       <span class="chip"><strong>Spec:</strong> tests/templates-functional.spec.js</span>
       <span class="chip"><strong>Project:</strong> etsy-authenticated</span>
       <span class="chip"><strong>Mode:</strong> headed</span>
-      <span class="chip"><strong>Runtime:</strong> 17m 8s</span>
+      <span class="chip"><strong>Runtime:</strong> 18m 11s</span>
     </div>
   </div>
 </header>
@@ -206,452 +211,892 @@
         <th style="width:85px"  onclick="srt('dur')" id="th-dur"> Duration <span class="sa">↕</span></th>
       </tr></thead>
       <tbody id="tb">
-<tr class="data-row" data-status="passed" data-section="Shipping Templates" data-tc="1" onclick="toggleRow(this)">
+<tr class="dr" data-status="passed" data-section="Shipping Templates" data-tc="1" onclick="toggleRow(this)">
   <td class="td-tc">TC_01</td>
-  <td class="td-title">Create first template<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">20.9s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="1">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create first template — completed in 20.9s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Shipping Templates" data-tc="2" onclick="toggleRow(this)">
-  <td class="td-tc">TC_02</td>
-  <td class="td-title">Create second template<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">20.7s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="2">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create second template — completed in 20.7s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Shipping Templates" data-tc="3" onclick="toggleRow(this)">
-  <td class="td-tc">TC_03</td>
-  <td class="td-title">Edit first template<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">37.2s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="3">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Edit first template — completed in 37.2s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Shipping Templates" data-tc="4" onclick="toggleRow(this)">
-  <td class="td-tc">TC_04</td>
-  <td class="td-title">Filter by name<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">12.3s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="4">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Filter by name — completed in 12.3s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Shipping Templates" data-tc="5" onclick="toggleRow(this)">
-  <td class="td-tc">TC_05</td>
-  <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">3.3s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="5">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Sort by column header — completed in 3.3s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Shipping Templates" data-tc="6" onclick="toggleRow(this)">
-  <td class="td-tc">TC_06</td>
   <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
   <td class="td-dur">8.2s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="6">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Fetch from Etsy — completed in 8.2s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="1">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 8.2s</span>
+        <span class="dm"><strong>Section:</strong> Shipping Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to /panel/template and open the Shipping Templates tab</li><li>Click the Fetch from Etsy button</li><li>Wait 3 s for the sync response</li><li>Assert the templates page is still visible (no crash or redirect)</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Shipping Templates" data-tc="7" onclick="toggleRow(this)">
+<tr class="dr" data-status="passed" data-section="Shipping Templates" data-tc="2" onclick="toggleRow(this)">
+  <td class="td-tc">TC_02</td>
+  <td class="td-title">Create first template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">20.0s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="2">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 20.0s</span>
+        <span class="dm"><strong>Section:</strong> Shipping Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Shipping Templates tab</li><li>Click Create button</li><li>Enter template name Auto_Ship_1 in the name field</li><li>Click Save</li><li>Navigate back to Shipping Templates tab</li><li>Assert a row with name Auto_Ship_1 is visible in the list</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Shipping Templates" data-tc="3" onclick="toggleRow(this)">
+  <td class="td-tc">TC_03</td>
+  <td class="td-title">Create second template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">19.9s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="3">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 19.9s</span>
+        <span class="dm"><strong>Section:</strong> Shipping Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Shipping Templates tab</li><li>Click Create button</li><li>Enter template name Auto_Ship_2 in the name field</li><li>Click Save</li><li>Navigate back to Shipping Templates tab</li><li>Assert a row with name Auto_Ship_2 is visible in the list</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Shipping Templates" data-tc="4" onclick="toggleRow(this)">
+  <td class="td-tc">TC_04</td>
+  <td class="td-title">Edit first template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">31.1s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="4">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 31.1s</span>
+        <span class="dm"><strong>Section:</strong> Shipping Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Shipping Templates tab</li><li>Search for Auto_Ship_1</li><li>Click Edit on the first matching row</li><li>Update name to Auto_Ship_1_edit and change shipping field values (zip, numeric)</li><li>Click Save</li><li>Navigate back → assert updated name visible</li><li>Re-open the template and verify the changed field values are persisted</li><li>Click Cancel to close</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Shipping Templates" data-tc="5" onclick="toggleRow(this)">
+  <td class="td-tc">TC_05</td>
+  <td class="td-title">Filter by name<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">6.8s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="5">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 6.8s</span>
+        <span class="dm"><strong>Section:</strong> Shipping Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Shipping Templates tab</li><li>Type Auto_Ship_2 in the search box</li><li>Assert at least one row matching Auto_Ship_2 is visible</li><li>Clear the search box and verify all rows return</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Shipping Templates" data-tc="6" onclick="toggleRow(this)">
+  <td class="td-tc">TC_06</td>
+  <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">3.2s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="6">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 3.2s</span>
+        <span class="dm"><strong>Section:</strong> Shipping Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Shipping Templates tab</li><li>Click the Name column header to sort ascending</li><li>Assert templates page remains functional (no crash)</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Shipping Templates" data-tc="7" onclick="toggleRow(this)">
   <td class="td-tc">TC_07</td>
   <td class="td-title">Delete one template<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">📦 Shipping Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">41.9s</td>
+  <td class="td-dur">45.7s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="7">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Delete one template — completed in 41.9s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Shipping Templates" data-tc="7">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 45.7s</span>
+        <span class="dm"><strong>Section:</strong> Shipping Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Shipping Templates tab</li><li>Search for Auto_Ship_2</li><li>Click Delete on the first matching row</li><li>Confirm deletion in the dialog</li><li>Navigate back and search for Auto_Ship_2 again</li><li>Assert zero rows match (template removed)</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Inventory Templates" data-tc="8" onclick="toggleRow(this)">
+<tr class="dr" data-status="passed" data-section="Inventory Templates" data-tc="8" onclick="toggleRow(this)">
   <td class="td-tc">TC_08</td>
-  <td class="td-title">Create first template<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">19.6s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="8">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create first template — completed in 19.6s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Inventory Templates" data-tc="9" onclick="toggleRow(this)">
-  <td class="td-tc">TC_09</td>
-  <td class="td-title">Create second template<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">19.4s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="9">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create second template — completed in 19.4s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Inventory Templates" data-tc="10" onclick="toggleRow(this)">
-  <td class="td-tc">TC_10</td>
-  <td class="td-title">Edit first template<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">47.1s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="10">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Edit first template — completed in 47.1s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Inventory Templates" data-tc="11" onclick="toggleRow(this)">
-  <td class="td-tc">TC_11</td>
-  <td class="td-title">Filter by name<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">25.6s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="11">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Filter by name — completed in 25.6s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Inventory Templates" data-tc="12" onclick="toggleRow(this)">
-  <td class="td-tc">TC_12</td>
-  <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">3.4s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="12">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Sort by column header — completed in 3.4s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Inventory Templates" data-tc="13" onclick="toggleRow(this)">
-  <td class="td-tc">TC_13</td>
   <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
   <td class="td-dur">4.2s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="13">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Fetch from Etsy — completed in 4.2s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="8">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 4.2s</span>
+        <span class="dm"><strong>Section:</strong> Inventory Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to /panel/template and open the Inventory Templates tab</li><li>Click the Fetch from Etsy button</li><li>Wait 2 s for the sync response</li><li>Assert the templates page is still visible</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Inventory Templates" data-tc="14" onclick="toggleRow(this)">
+<tr class="dr" data-status="passed" data-section="Inventory Templates" data-tc="9" onclick="toggleRow(this)">
+  <td class="td-tc">TC_09</td>
+  <td class="td-title">Create first template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">14.5s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="9">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 14.5s</span>
+        <span class="dm"><strong>Section:</strong> Inventory Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Inventory Templates tab</li><li>Click Create button</li><li>Enter template name Auto_Inv_1</li><li>Set Minimum Threshold Value = 5 (placeholder &quot;0&quot; input)</li><li>Set Maximum Inventory Level = 100 (placeholder &quot;Enter value&quot; input)</li><li>Click Save</li><li>Navigate back and assert row Auto_Inv_1 is visible</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Inventory Templates" data-tc="10" onclick="toggleRow(this)">
+  <td class="td-tc">TC_10</td>
+  <td class="td-title">Create second template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">14.5s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="10">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 14.5s</span>
+        <span class="dm"><strong>Section:</strong> Inventory Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Inventory Templates tab</li><li>Click Create button</li><li>Enter template name Auto_Inv_2</li><li>Set Minimum Threshold Value = 5</li><li>Set Maximum Inventory Level = 100</li><li>Click Save</li><li>Navigate back and assert row Auto_Inv_2 is visible</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Inventory Templates" data-tc="11" onclick="toggleRow(this)">
+  <td class="td-tc">TC_11</td>
+  <td class="td-title">Edit first template<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">33.0s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="11">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 33.0s</span>
+        <span class="dm"><strong>Section:</strong> Inventory Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Inventory Templates tab</li><li>Search for Auto_Inv_1</li><li>Click Edit on the matching row</li><li>Update name to Auto_Inv_1_edit</li><li>Update threshold and max inventory fields</li><li>Click Save → navigate back → assert updated name visible</li><li>Re-open template and verify threshold/max values are persisted</li><li>Click Cancel</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Inventory Templates" data-tc="12" onclick="toggleRow(this)">
+  <td class="td-tc">TC_12</td>
+  <td class="td-title">Filter by name<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">7.0s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="12">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 7.0s</span>
+        <span class="dm"><strong>Section:</strong> Inventory Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Inventory Templates tab</li><li>Type Auto_Inv_2 in the search box</li><li>Assert at least one row matching Auto_Inv_2 is visible</li><li>Clear search</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Inventory Templates" data-tc="13" onclick="toggleRow(this)">
+  <td class="td-tc">TC_13</td>
+  <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">3.3s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="13">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 3.3s</span>
+        <span class="dm"><strong>Section:</strong> Inventory Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Inventory Templates tab</li><li>Click the Name column header</li><li>Assert page remains functional</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Inventory Templates" data-tc="14" onclick="toggleRow(this)">
   <td class="td-tc">TC_14</td>
   <td class="td-title">Delete one template<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">📋 Inventory Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">42.1s</td>
+  <td class="td-dur">49.9s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="14">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Delete one template — completed in 42.1s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Inventory Templates" data-tc="14">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 49.9s</span>
+        <span class="dm"><strong>Section:</strong> Inventory Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Inventory Templates tab</li><li>Search for Auto_Inv_2</li><li>Click Delete on the matching row</li><li>Confirm deletion</li><li>Navigate back → search Auto_Inv_2 → assert zero rows match</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Price Templates" data-tc="15" onclick="toggleRow(this)">
+<tr class="dr" data-status="passed" data-section="Price Templates" data-tc="15" onclick="toggleRow(this)">
   <td class="td-tc">TC_15</td>
+  <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">💰 Price Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">4.4s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Price Templates" data-tc="15">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 4.4s</span>
+        <span class="dm"><strong>Section:</strong> Price Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to /panel/template and open the Price Templates tab</li><li>Click Fetch from Etsy</li><li>Wait 2 s</li><li>Assert templates page is still visible</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Price Templates" data-tc="16" onclick="toggleRow(this)">
+  <td class="td-tc">TC_16</td>
   <td class="td-title">Create first template<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">💰 Price Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">19.2s</td>
+  <td class="td-dur">17.4s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Price Templates" data-tc="15">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create first template — completed in 19.2s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Price Templates" data-tc="16">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 17.4s</span>
+        <span class="dm"><strong>Section:</strong> Price Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Price Templates tab</li><li>Click Create button</li><li>Enter template name Auto_Price_1</li><li>Optionally enable Compare at Price toggle</li><li>Set pricing value field</li><li>Click Save</li><li>Navigate back → assert row Auto_Price_1 visible</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Price Templates" data-tc="16" onclick="toggleRow(this)">
-  <td class="td-tc">TC_16</td>
+<tr class="dr" data-status="passed" data-section="Price Templates" data-tc="17" onclick="toggleRow(this)">
+  <td class="td-tc">TC_17</td>
   <td class="td-title">Create second template<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">💰 Price Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">19.0s</td>
+  <td class="td-dur">17.4s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Price Templates" data-tc="16">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create second template — completed in 19.0s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Price Templates" data-tc="17">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 17.4s</span>
+        <span class="dm"><strong>Section:</strong> Price Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Price Templates tab</li><li>Click Create button</li><li>Enter template name Auto_Price_2</li><li>Configure pricing fields</li><li>Click Save</li><li>Navigate back → assert row Auto_Price_2 visible</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Price Templates" data-tc="17" onclick="toggleRow(this)">
-  <td class="td-tc">TC_17</td>
+<tr class="dr" data-status="passed" data-section="Price Templates" data-tc="18" onclick="toggleRow(this)">
+  <td class="td-tc">TC_18</td>
   <td class="td-title">Edit first template<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">💰 Price Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">17.7s</td>
+  <td class="td-dur">18.4s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Price Templates" data-tc="17">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Edit first template — completed in 17.7s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Price Templates" data-tc="18">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 18.4s</span>
+        <span class="dm"><strong>Section:</strong> Price Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Price Templates tab</li><li>Search for Auto_Price_1</li><li>Click Edit</li><li>Update name to Auto_Price_1_edit and change pricing fields</li><li>Click Save → navigate back → assert updated name visible</li><li>Re-open and verify pricing field values persisted</li><li>Click Cancel</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Price Templates" data-tc="18" onclick="toggleRow(this)">
-  <td class="td-tc">TC_18</td>
+<tr class="dr" data-status="passed" data-section="Price Templates" data-tc="19" onclick="toggleRow(this)">
+  <td class="td-tc">TC_19</td>
   <td class="td-title">Filter by name<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">💰 Price Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">6.3s</td>
+  <td class="td-dur">6.9s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Price Templates" data-tc="18">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Filter by name — completed in 6.3s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Price Templates" data-tc="19">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 6.9s</span>
+        <span class="dm"><strong>Section:</strong> Price Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Price Templates tab</li><li>Type Auto_Price_2 in search box</li><li>Assert matching row is visible</li><li>Clear search</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Price Templates" data-tc="19" onclick="toggleRow(this)">
-  <td class="td-tc">TC_19</td>
+<tr class="dr" data-status="passed" data-section="Price Templates" data-tc="20" onclick="toggleRow(this)">
+  <td class="td-tc">TC_20</td>
   <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">💰 Price Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
   <td class="td-dur">3.4s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Price Templates" data-tc="19">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Sort by column header — completed in 3.4s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Price Templates" data-tc="20">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 3.4s</span>
+        <span class="dm"><strong>Section:</strong> Price Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Price Templates tab</li><li>Click Name column header</li><li>Assert page remains functional</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Price Templates" data-tc="20" onclick="toggleRow(this)">
-  <td class="td-tc">TC_20</td>
-  <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">💰 Price Templates</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">4.2s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Price Templates" data-tc="20">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Fetch from Etsy — completed in 4.2s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Price Templates" data-tc="21" onclick="toggleRow(this)">
+<tr class="dr" data-status="passed" data-section="Price Templates" data-tc="21" onclick="toggleRow(this)">
   <td class="td-tc">TC_21</td>
   <td class="td-title">Delete one template<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">💰 Price Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">42.0s</td>
+  <td class="td-dur">46.3s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Price Templates" data-tc="21">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Delete one template — completed in 42.0s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Price Templates" data-tc="21">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 46.3s</span>
+        <span class="dm"><strong>Section:</strong> Price Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Price Templates tab</li><li>Search for Auto_Price_2</li><li>Click Delete → Confirm</li><li>Navigate back → search again → assert zero rows match</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Policy Templates" data-tc="22" onclick="toggleRow(this)">
+<tr class="dr" data-status="passed" data-section="Policy Templates" data-tc="22" onclick="toggleRow(this)">
   <td class="td-tc">TC_22</td>
+  <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">📜 Policy Templates</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">8.6s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="22">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 8.6s</span>
+        <span class="dm"><strong>Section:</strong> Policy Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to /panel/template and open the Policy Templates tab</li><li>Click Fetch from Etsy</li><li>Wait 2 s</li><li>Assert templates page is still visible</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Policy Templates" data-tc="23" onclick="toggleRow(this)">
+  <td class="td-tc">TC_23</td>
   <td class="td-title">Create first template<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">📜 Policy Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">14.4s</td>
+  <td class="td-dur">15.4s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="22">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create first template — completed in 14.4s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="23">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 15.4s</span>
+        <span class="dm"><strong>Section:</strong> Policy Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Policy Templates tab (no name field — identified by return-window days)</li><li>Click Create button</li><li>Select return-window days value (e.g., 7 days)</li><li>Fill required policy fields</li><li>Click Save</li><li>Navigate back → assert new policy row visible</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Policy Templates" data-tc="23" onclick="toggleRow(this)">
-  <td class="td-tc">TC_23</td>
+<tr class="dr" data-status="passed" data-section="Policy Templates" data-tc="24" onclick="toggleRow(this)">
+  <td class="td-tc">TC_24</td>
   <td class="td-title">Create second template<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">📜 Policy Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">14.3s</td>
+  <td class="td-dur">15.4s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="23">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create second template — completed in 14.3s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="24">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 15.4s</span>
+        <span class="dm"><strong>Section:</strong> Policy Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Policy Templates tab</li><li>Click Create</li><li>Select a different return-window days value</li><li>Fill required fields</li><li>Click Save</li><li>Navigate back → assert second policy row visible</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Policy Templates" data-tc="24" onclick="toggleRow(this)">
-  <td class="td-tc">TC_24</td>
+<tr class="dr" data-status="passed" data-section="Policy Templates" data-tc="25" onclick="toggleRow(this)">
+  <td class="td-tc">TC_25</td>
   <td class="td-title">Edit first template<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">📜 Policy Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">55.3s</td>
+  <td class="td-dur">54.0s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="24">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Edit first template — completed in 55.3s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="25">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 54.0s</span>
+        <span class="dm"><strong>Section:</strong> Policy Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Policy Templates tab</li><li>Locate first policy row</li><li>Click Edit</li><li>Change return-window days and/or other fields</li><li>Click Save → navigate back → assert change is visible</li><li>Re-open and verify values persisted</li><li>Click Cancel</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Policy Templates" data-tc="25" onclick="toggleRow(this)">
-  <td class="td-tc">TC_25</td>
+<tr class="dr" data-status="passed" data-section="Policy Templates" data-tc="26" onclick="toggleRow(this)">
+  <td class="td-tc">TC_26</td>
   <td class="td-title">Filter by days<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">📜 Policy Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">6.4s</td>
+  <td class="td-dur">7.0s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="25">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Filter by days — completed in 6.4s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="26">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 7.0s</span>
+        <span class="dm"><strong>Section:</strong> Policy Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Policy Templates tab</li><li>Type a days value in the search box</li><li>Assert only matching rows are shown</li><li>Clear search</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Policy Templates" data-tc="26" onclick="toggleRow(this)">
-  <td class="td-tc">TC_26</td>
+<tr class="dr" data-status="passed" data-section="Policy Templates" data-tc="27" onclick="toggleRow(this)">
+  <td class="td-tc">TC_27</td>
   <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">📜 Policy Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
   <td class="td-dur">3.3s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="26">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Sort by column header — completed in 3.3s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="27">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 3.3s</span>
+        <span class="dm"><strong>Section:</strong> Policy Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Policy Templates tab</li><li>Click a column header</li><li>Assert page remains functional</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Policy Templates" data-tc="27" onclick="toggleRow(this)">
-  <td class="td-tc">TC_27</td>
-  <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">📜 Policy Templates</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">8.2s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="27">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Fetch from Etsy — completed in 8.2s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Policy Templates" data-tc="28" onclick="toggleRow(this)">
+<tr class="dr" data-status="passed" data-section="Policy Templates" data-tc="28" onclick="toggleRow(this)">
   <td class="td-tc">TC_28</td>
   <td class="td-title">Delete one template<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">📜 Policy Templates</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">19.3s</td>
+  <td class="td-dur">22.5s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="28">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Delete one template — completed in 19.3s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Policy Templates" data-tc="28">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 22.5s</span>
+        <span class="dm"><strong>Section:</strong> Policy Templates</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Policy Templates tab</li><li>Locate a policy template row</li><li>Click Delete → Confirm</li><li>Navigate back → assert template no longer appears</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Shop Sections" data-tc="29" onclick="toggleRow(this)">
+<tr class="dr" data-status="passed" data-section="Shop Sections" data-tc="29" onclick="toggleRow(this)">
   <td class="td-tc">TC_29</td>
-  <td class="td-title">Create first section<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">28.9s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="29">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create first section — completed in 28.9s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Shop Sections" data-tc="30" onclick="toggleRow(this)">
-  <td class="td-tc">TC_30</td>
-  <td class="td-title">Create second section<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">28.6s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="30">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create second section — completed in 28.6s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Shop Sections" data-tc="31" onclick="toggleRow(this)">
-  <td class="td-tc">TC_31</td>
-  <td class="td-title">Edit first section<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">33.4s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="31">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Edit first section — completed in 33.4s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Shop Sections" data-tc="32" onclick="toggleRow(this)">
-  <td class="td-tc">TC_32</td>
-  <td class="td-title">Filter by name<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">33.5s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="32">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Filter by name — completed in 33.5s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Shop Sections" data-tc="33" onclick="toggleRow(this)">
-  <td class="td-tc">TC_33</td>
-  <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">5.4s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="33">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Sort by column header — completed in 5.4s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Shop Sections" data-tc="34" onclick="toggleRow(this)">
-  <td class="td-tc">TC_34</td>
   <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
   <td class="td-dur">11.5s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="34">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Fetch from Etsy — completed in 11.5s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="29">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 11.5s</span>
+        <span class="dm"><strong>Section:</strong> Shop Sections</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to /panel/template and open the Shop Sections tab</li><li>Click Fetch from Etsy</li><li>Wait for sync</li><li>Assert page is still visible</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Shop Sections" data-tc="35" onclick="toggleRow(this)">
+<tr class="dr" data-status="passed" data-section="Shop Sections" data-tc="30" onclick="toggleRow(this)">
+  <td class="td-tc">TC_30</td>
+  <td class="td-title">Create first section<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">17.5s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="30">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 17.5s</span>
+        <span class="dm"><strong>Section:</strong> Shop Sections</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Shop Sections tab</li><li>Click Add Section button</li><li>Shopify overlay modal appears — enter section title (max 24 chars)</li><li>Click Save in the modal</li><li>Navigate back → assert new section row is visible in list</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Shop Sections" data-tc="31" onclick="toggleRow(this)">
+  <td class="td-tc">TC_31</td>
+  <td class="td-title">Create second section<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">17.4s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="31">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 17.4s</span>
+        <span class="dm"><strong>Section:</strong> Shop Sections</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Shop Sections tab</li><li>Click Add Section</li><li>Enter a second unique section title (max 24 chars)</li><li>Click Save</li><li>Navigate back → assert second section row visible</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Shop Sections" data-tc="32" onclick="toggleRow(this)">
+  <td class="td-tc">TC_32</td>
+  <td class="td-title">Edit first section<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">33.4s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="32">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 33.4s</span>
+        <span class="dm"><strong>Section:</strong> Shop Sections</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Shop Sections tab</li><li>Search for first section</li><li>Click Edit</li><li>Update section name</li><li>Click Save</li><li>Navigate back → assert updated name visible</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Shop Sections" data-tc="33" onclick="toggleRow(this)">
+  <td class="td-tc">TC_33</td>
+  <td class="td-title">Filter by name<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">33.4s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="33">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 33.4s</span>
+        <span class="dm"><strong>Section:</strong> Shop Sections</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Shop Sections tab</li><li>Type section name in search box</li><li>Assert matching row is visible</li><li>Clear search</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Shop Sections" data-tc="34" onclick="toggleRow(this)">
+  <td class="td-tc">TC_34</td>
+  <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">5.3s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="34">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 5.3s</span>
+        <span class="dm"><strong>Section:</strong> Shop Sections</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Shop Sections tab</li><li>Click Name column header</li><li>Assert page remains functional</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Shop Sections" data-tc="35" onclick="toggleRow(this)">
   <td class="td-tc">TC_35</td>
   <td class="td-title">Delete one section<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">🏪 Shop Sections</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">35.0s</td>
+  <td class="td-dur">34.9s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="35">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Delete one section — completed in 35.0s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Shop Sections" data-tc="35">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 34.9s</span>
+        <span class="dm"><strong>Section:</strong> Shop Sections</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Shop Sections tab</li><li>Search for target section</li><li>Click Delete → Confirm</li><li>Navigate back → search again → assert zero rows match</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Production Partners" data-tc="36" onclick="toggleRow(this)">
+<tr class="dr" data-status="passed" data-section="Production Partners" data-tc="36" onclick="toggleRow(this)">
   <td class="td-tc">TC_36</td>
   <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">🤝 Production Partners</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
   <td class="td-dur">6.2s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Production Partners" data-tc="36">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Fetch from Etsy — completed in 6.2s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Production Partners" data-tc="36">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 6.2s</span>
+        <span class="dm"><strong>Section:</strong> Production Partners</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to /panel/template and open the Production Partners tab</li><li>Click Fetch from Etsy (or equivalent sync)</li><li>Wait for response</li><li>Assert page is still visible</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Production Partners" data-tc="37" onclick="toggleRow(this)">
+<tr class="dr" data-status="passed" data-section="Production Partners" data-tc="37" onclick="toggleRow(this)">
   <td class="td-tc">TC_37</td>
   <td class="td-title">Filter (if data present)<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">🤝 Production Partners</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
   <td class="td-dur">31.7s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Production Partners" data-tc="37">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box"><div class="skip-note">⊘ Skips when no production partners exist in the test store</div></div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Production Partners" data-tc="37">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 31.7s</span>
+        <span class="dm"><strong>Section:</strong> Production Partners</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Production Partners tab</li><li>Skip test if no partner rows are present (data-dependent)</li><li>Type partner name in search box</li><li>Assert only matching rows are shown</li><li>Clear search</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Processing Profiles" data-tc="38" onclick="toggleRow(this)">
+<tr class="dr" data-status="passed" data-section="Processing Profiles" data-tc="38" onclick="toggleRow(this)">
   <td class="td-tc">TC_38</td>
-  <td class="td-title">Create first profile<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">1m 5s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="38">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create first profile — completed in 1m 5s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Processing Profiles" data-tc="39" onclick="toggleRow(this)">
-  <td class="td-tc">TC_39</td>
-  <td class="td-title">Create second profile<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">52.4s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="39">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Create second profile — completed in 52.4s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Processing Profiles" data-tc="40" onclick="toggleRow(this)">
-  <td class="td-tc">TC_40</td>
-  <td class="td-title">Edit first profile<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">21.1s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="40">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Edit first profile — completed in 21.1s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Processing Profiles" data-tc="41" onclick="toggleRow(this)">
-  <td class="td-tc">TC_41</td>
-  <td class="td-title">Filter by name<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">6.3s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="41">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Filter by name — completed in 6.3s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Processing Profiles" data-tc="42" onclick="toggleRow(this)">
-  <td class="td-tc">TC_42</td>
-  <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
-  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
-  <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">3.3s</td>
-</tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="42">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Sort by column header — completed in 3.3s</div></div></td>
-</tr>
-<tr class="data-row" data-status="passed" data-section="Processing Profiles" data-tc="43" onclick="toggleRow(this)">
-  <td class="td-tc">TC_43</td>
   <td class="td-title">Fetch from Etsy<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
   <td class="td-dur">10.3s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="43">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Fetch from Etsy — completed in 10.3s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="38">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 10.3s</span>
+        <span class="dm"><strong>Section:</strong> Processing Profiles</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to /panel/template and open the Processing Profiles tab</li><li>Click Fetch from Etsy</li><li>Wait for sync response</li><li>Assert page is still visible</li></ol>
+      
+      
+     </div></div></td>
 </tr>
-<tr class="data-row" data-status="passed" data-section="Processing Profiles" data-tc="44" onclick="toggleRow(this)">
+<tr class="dr" data-status="passed" data-section="Processing Profiles" data-tc="39" onclick="toggleRow(this)">
+  <td class="td-tc">TC_39</td>
+  <td class="td-title">Create first profile<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">1m 5s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="39">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 1m 5s</span>
+        <span class="dm"><strong>Section:</strong> Processing Profiles</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Processing Profiles tab</li><li>Click Create button</li><li>Enter profile name Auto_Proc_1</li><li>Click Save</li><li>Navigate back → assert row Auto_Proc_1 is visible</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Processing Profiles" data-tc="40" onclick="toggleRow(this)">
+  <td class="td-tc">TC_40</td>
+  <td class="td-title">Create second profile<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">52.2s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="40">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 52.2s</span>
+        <span class="dm"><strong>Section:</strong> Processing Profiles</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Processing Profiles tab</li><li>Click Create</li><li>Enter profile name Auto_Proc_2</li><li>Click Save</li><li>Navigate back → assert row Auto_Proc_2 visible</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Processing Profiles" data-tc="41" onclick="toggleRow(this)">
+  <td class="td-tc">TC_41</td>
+  <td class="td-title">Edit first profile<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">59.8s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="41">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 59.8s</span>
+        <span class="dm"><strong>Section:</strong> Processing Profiles</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Processing Profiles tab</li><li>Search for Auto_Proc_1</li><li>Click Edit</li><li>Update profile name to Auto_Proc_1_edit</li><li>Click Save → navigate back → assert updated name visible</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Processing Profiles" data-tc="42" onclick="toggleRow(this)">
+  <td class="td-tc">TC_42</td>
+  <td class="td-title">Filter by name<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">6.9s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="42">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 6.9s</span>
+        <span class="dm"><strong>Section:</strong> Processing Profiles</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Processing Profiles tab</li><li>Type Auto_Proc_2 in search box</li><li>Assert matching row is visible</li><li>Clear search</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Processing Profiles" data-tc="43" onclick="toggleRow(this)">
+  <td class="td-tc">TC_43</td>
+  <td class="td-title">Sort by column header<span class="chevron">▼</span></td>
+  <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
+  <td><span class="pill pill-pass">✓ passed</span></td>
+  <td class="td-dur">3.3s</td>
+</tr>
+<tr class="detr" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="43">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 3.3s</span>
+        <span class="dm"><strong>Section:</strong> Processing Profiles</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Processing Profiles tab</li><li>Click Name column header</li><li>Assert page remains functional</li></ol>
+      
+      
+     </div></div></td>
+</tr>
+<tr class="dr" data-status="passed" data-section="Processing Profiles" data-tc="44" onclick="toggleRow(this)">
   <td class="td-tc">TC_44</td>
   <td class="td-title">Delete one profile<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">⚙️ Processing Profiles</span></td>
   <td><span class="pill pill-pass">✓ passed</span></td>
-  <td class="td-dur">51.2s</td>
+  <td class="td-dur">54.3s</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="44">
-  <td colspan="5"><div class="detail-inner"><div class="detail-box" style="color:#64748b;font-size:12px">Delete one profile — completed in 51.2s</div></div></td>
+<tr class="detr" style="display:none" data-status="passed" data-section="Processing Profiles" data-tc="44">
+  <td colspan="5"><div class="detail-inner"><div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> 54.3s</span>
+        <span class="dm"><strong>Section:</strong> Processing Profiles</span>
+        <span class="dm"><strong>Status:</strong> passed</span>
+      </div>
+      <ol class="steps-list"><li>Navigate to Processing Profiles tab</li><li>Search for Auto_Proc_2</li><li>Click Delete → Confirm</li><li>Navigate back → search again → assert zero rows match</li></ol>
+      
+      
+     </div></div></td>
 </tr></tbody>
     </table>
     <div class="empty hidden" id="empty">🔍 No test cases match your filters.</div>
   </div>
 </main>
 
-<footer>Etsy QA Automation · Templates Functional Suite · TC_01–TC_44 · store: etsy-test-gp7o90bx · 25 Apr 2026, 12:38</footer>
+<footer>Etsy QA Automation · Templates Functional Suite · TC_01–TC_44 · store: etsy-test-gp7o90bx · 24 May 2026, 00:24</footer>
 
 <script>
   let aF='all', aSec=null, aQ='', sCol='tc', sDir=1;

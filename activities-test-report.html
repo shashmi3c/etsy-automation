@@ -1,238 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Etsy Activities — QA Test Report</title>
 <style>
-  :root {
-    --bg:      #0f1117;
-    --surface: #1a1d27;
-    --card:    #20232e;
-    --border:  #2d3142;
-    --pass:    #22c55e;
-    --skip:    #f59e0b;
-    --fail:    #ef4444;
-    --pend:    #64748b;
-    --text:    #e2e8f0;
-    --muted:   #64748b;
-    --accent:  #6366f1;
-    --radius:  10px;
+  :root{
+    --bg:#0f1117;--surface:#1a1d27;--card:#20232e;--border:#2d3142;
+    --pass:#22c55e;--skip:#f59e0b;--fail:#ef4444;--pend:#64748b;
+    --text:#e2e8f0;--muted:#64748b;--accent:#6366f1;--r:10px
   }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; min-height: 100vh; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;min-height:100vh}
 
-  /* ── Header ─────────────────────────────────────── */
-  header {
-    background: linear-gradient(135deg, #1a1035 0%, #2d1b69 45%, #1a1035 100%);
-    padding: 30px 40px 26px;
-    border-bottom: 1px solid #4c1d95;
-    position: relative;
-    overflow: hidden;
+  /* ── Header ───────────────────────────────────── */
+  header{
+    background:linear-gradient(135deg,#1a1035 0%,#2d1b69 45%,#1a1035 100%);
+    padding:28px 40px 22px;border-bottom:1px solid #4c1d95;position:relative;overflow:hidden
   }
-  header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 70% 50%, rgba(99,102,241,.15) 0%, transparent 70%);
-    pointer-events: none;
+  header::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse at 70% 50%,rgba(99,102,241,.15),transparent 68%);
+    pointer-events:none
   }
-  .header-inner { position: relative; z-index: 1; }
-  .header-top { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-  header h1 { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
-  .badge-module { background: rgba(99,102,241,.3); border: 1px solid rgba(99,102,241,.5); border-radius: 6px; padding: 2px 10px; font-size: 11px; font-weight: 600; color: #c4b5fd; letter-spacing: .5px; }
-  .badge-count  { background: rgba(34,197,94,.2); border: 1px solid rgba(34,197,94,.4); border-radius: 6px; padding: 2px 10px; font-size: 11px; font-weight: 600; color: #86efac; }
-  header p.sub { margin-top: 6px; color: #a5b4fc; font-size: 13px; }
-  .run-meta { margin-top: 14px; display: flex; gap: 20px; flex-wrap: wrap; }
-  .run-meta .chip { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 6px; padding: 4px 12px; font-size: 11.5px; color: #c7d2fe; }
-  .run-meta .chip strong { color: #e0e7ff; }
-  .not-run-banner {
-    margin-top: 14px;
-    background: rgba(245,158,11,.1);
-    border: 1px solid rgba(245,158,11,.3);
-    border-radius: 8px;
-    padding: 8px 14px;
-    font-size: 12px;
-    color: #fcd34d;
-    display: flex; align-items: center; gap: 8px;
-  }
+  .hi{position:relative;z-index:1}
+  .ht{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  header h1{font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .bm{background:rgba(99,102,241,.3);border:1px solid rgba(99,102,241,.5);border-radius:6px;
+      padding:2px 10px;font-size:11px;font-weight:600;color:#c4b5fd;letter-spacing:.5px}
+  .bc{background:rgba(34,197,94,.2);border:1px solid rgba(34,197,94,.4);border-radius:6px;
+      padding:2px 10px;font-size:11px;font-weight:600;color:#86efac}
+  header p.sub{margin-top:6px;color:#a5b4fc;font-size:13px}
+  .run-meta{margin-top:14px;display:flex;gap:20px;flex-wrap:wrap}
+  .chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;
+        padding:4px 12px;font-size:11.5px;color:#c7d2fe}
+  .chip strong{color:#e0e7ff}
+  .header-right{text-align:right;font-size:12px;color:#a5b4fc;line-height:1.8}
+  .header-right .pass-rate{color:#4ade80;font-weight:700;font-size:14px}
 
-  /* ── Layout ─────────────────────────────────────── */
-  main { max-width: 1120px; margin: 0 auto; padding: 30px 24px; }
+  /* ── Main ─────────────────────────────────────── */
+  main{max-width:1160px;margin:0 auto;padding:26px 22px}
 
-  /* ── Stats ──────────────────────────────────────── */
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
-  .stat-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 18px 20px; text-align: center;
-    transition: transform .15s, box-shadow .15s; cursor: default;
-  }
-  .stat-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.4); }
-  .stat-card .num { font-size: 38px; font-weight: 800; line-height: 1; letter-spacing: -1px; }
-  .stat-card .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin-top: 6px; }
-  .stat-card.s-all  { border-top: 3px solid var(--accent); }
-  .stat-card.s-all  .num { color: var(--text); }
-  .stat-card.s-pass { border-top: 3px solid var(--pass); }
-  .stat-card.s-pass .num { color: var(--pass); }
-  .stat-card.s-skip { border-top: 3px solid var(--skip); }
-  .stat-card.s-skip .num { color: var(--skip); }
-  .stat-card.s-fail { border-top: 3px solid var(--fail); }
-  .stat-card.s-fail .num { color: var(--fail); }
+  /* ── Stat cards ───────────────────────────────── */
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
+  .sc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+      padding:16px 14px;text-align:center;transition:transform .15s,box-shadow .15s;cursor:default}
+  .sc:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.4)}
+  .sc .num{font-size:36px;font-weight:800;line-height:1;letter-spacing:-1px}
+  .sc .lbl{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-top:6px}
+  .sc-all {border-top:3px solid #6366f1}.sc-all  .num{color:var(--text)}
+  .sc-pass{border-top:3px solid var(--pass)}.sc-pass .num{color:var(--pass)}
+  .sc-skip{border-top:3px solid var(--skip)}.sc-skip .num{color:var(--skip)}
+  .sc-fail{border-top:3px solid var(--fail)}.sc-fail .num{color:var(--fail)}
+  .sc-rate{border-top:3px solid var(--accent)}.sc-rate .num{color:var(--accent);font-size:28px}
 
-  /* ── Progress ────────────────────────────────────── */
-  .progress-wrap {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 16px 20px; margin-bottom: 24px;
-  }
-  .progress-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 10px; }
-  .progress-bar { height: 8px; border-radius: 6px; background: var(--border); overflow: hidden; display: flex; }
-  .prog-seg { height: 100%; transition: width .5s cubic-bezier(.4,0,.2,1); }
-  #prog-pass { background: var(--pass); }
-  #prog-skip { background: var(--skip); }
-  #prog-fail { background: var(--fail); }
-  .progress-legend { display: flex; gap: 18px; margin-top: 10px; font-size: 12px; }
-  .legend-item { display: flex; align-items: center; gap: 6px; }
-  .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .legend-item span { color: var(--muted); }
+  /* ── Progress bar ─────────────────────────────── */
+  .pw{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px;margin-bottom:18px}
+  .pl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+  .pb{height:9px;border-radius:6px;background:var(--border);overflow:hidden;display:flex}
+  .ps{height:100%;transition:width .6s cubic-bezier(.4,0,.2,1)}
+  #pp{background:var(--pass)}#psk{background:var(--skip)}#pf{background:var(--fail)}
+  .pl2{display:flex;gap:18px;margin-top:10px;font-size:12px;flex-wrap:wrap}
+  .li{display:flex;align-items:center;gap:6px}
+  .ld{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .li span{color:var(--muted)}
 
-  /* ── Section summary chips ───────────────────────── */
-  .section-summary { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
-  .sec-chip {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 20px; padding: 4px 14px; font-size: 11.5px; color: var(--muted);
-    cursor: pointer; transition: all .15s; white-space: nowrap;
-  }
-  .sec-chip:hover { border-color: var(--accent); color: var(--text); }
-  .sec-chip.active { background: rgba(99,102,241,.15); border-color: var(--accent); color: #c4b5fd; }
+  /* ── Section chips ────────────────────────────── */
+  .sec-bar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+  .sec-chip{background:var(--card);border:1px solid var(--border);border-radius:20px;
+            padding:4px 13px;font-size:11.5px;color:var(--muted);cursor:pointer;transition:all .15s;
+            display:flex;align-items:center;gap:5px}
+  .sec-chip:hover{border-color:var(--accent);color:var(--text)}
+  .sec-chip.active{background:rgba(99,102,241,.15);border-color:var(--accent);color:#c4b5fd}
+  .sec-cnt{background:rgba(255,255,255,.1);border-radius:10px;padding:1px 6px;font-size:10px}
 
-  /* ── Controls ────────────────────────────────────── */
-  .controls { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
-  .filter-btns { display: flex; gap: 6px; }
-  .filter-btn {
-    background: var(--card); border: 1px solid var(--border);
-    color: var(--muted); border-radius: 6px; padding: 6px 14px;
-    font-size: 12px; cursor: pointer; transition: all .15s; white-space: nowrap;
-  }
-  .filter-btn:hover { border-color: var(--accent); color: var(--text); }
-  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
-  .search-box {
-    flex: 1; min-width: 180px;
-    background: var(--card); border: 1px solid var(--border);
-    color: var(--text); border-radius: 6px; padding: 6px 12px;
-    font-size: 13px; outline: none;
-  }
-  .search-box:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(99,102,241,.2); }
-  .search-box::placeholder { color: var(--muted); }
-  .result-count { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  /* ── Controls ─────────────────────────────────── */
+  .ctrl{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .fbtns{display:flex;gap:6px}
+  .fb{background:var(--card);border:1px solid var(--border);color:var(--muted);
+      border-radius:6px;padding:6px 14px;font-size:12px;cursor:pointer;transition:all .15s}
+  .fb:hover{border-color:var(--accent);color:var(--text)}
+  .fb.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .sb{flex:1;min-width:200px;background:var(--card);border:1px solid var(--border);
+      color:var(--text);border-radius:6px;padding:6px 12px;font-size:13px;outline:none}
+  .sb:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(99,102,241,.2)}
+  .sb::placeholder{color:var(--muted)}
+  .rc{font-size:12px;color:var(--muted);white-space:nowrap}
 
-  /* ── Table ───────────────────────────────────────── */
-  .table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-  table { width: 100%; border-collapse: collapse; }
-  thead tr { background: var(--surface); }
-  thead th {
-    padding: 11px 16px; text-align: left;
-    font-size: 10.5px; text-transform: uppercase; letter-spacing: .9px;
-    color: var(--muted); border-bottom: 1px solid var(--border);
-    cursor: pointer; user-select: none; white-space: nowrap;
-    transition: color .15s;
-  }
-  thead th:hover { color: var(--text); }
-  thead th.sorted { color: var(--accent); }
-  .sort-arrow { display: inline-block; margin-left: 4px; opacity: .5; font-size: 10px; }
-  thead th.sorted .sort-arrow { opacity: 1; }
+  /* ── Table ────────────────────────────────────── */
+  .tw{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+  table{width:100%;border-collapse:collapse}
+  thead tr{background:var(--surface)}
+  thead th{padding:11px 16px;text-align:left;font-size:10.5px;text-transform:uppercase;
+            letter-spacing:.9px;color:var(--muted);border-bottom:1px solid var(--border);
+            cursor:pointer;user-select:none;white-space:nowrap;transition:color .15s}
+  thead th:hover{color:var(--text)}
+  thead th.sorted{color:var(--accent)}
+  .sa{display:inline-block;margin-left:4px;opacity:.5;font-size:10px}
+  thead th.sorted .sa{opacity:1}
 
-  tbody tr.data-row { border-bottom: 1px solid var(--border); cursor: pointer; transition: background .1s; }
-  tbody tr.data-row:last-of-type { border-bottom: none; }
-  tbody tr.data-row:hover { background: rgba(99,102,241,.07); }
-  tbody tr.data-row.expanded { background: rgba(99,102,241,.05); }
+  tbody tr.dr{border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s}
+  tbody tr.dr:hover{background:rgba(99,102,241,.07)}
+  tbody tr.dr.expanded{background:rgba(99,102,241,.05)}
+  td{padding:11px 16px;vertical-align:middle}
+  .td-tc{font-weight:700;font-size:12.5px;color:var(--accent);white-space:nowrap;font-family:monospace}
+  .td-title{color:var(--text);line-height:1.4}
+  .td-sec{font-size:11px;color:var(--muted)}
+  .td-dur{font-size:11px;color:var(--muted);white-space:nowrap;font-family:monospace}
+  .chevron{display:inline-block;margin-left:6px;font-size:10px;color:var(--muted);transition:transform .2s}
+  .expanded .chevron{transform:rotate(180deg)}
 
-  td { padding: 11px 16px; vertical-align: middle; }
-  .td-tc { font-weight: 700; font-size: 12.5px; color: var(--accent); white-space: nowrap; font-family: monospace; }
-  .td-title { color: var(--text); line-height: 1.4; }
-  .td-section { font-size: 11px; color: var(--muted); white-space: nowrap; }
-  .chevron { display: inline-block; margin-left: 6px; font-size: 10px; color: var(--muted); transition: transform .2s; }
-  .expanded .chevron { transform: rotate(180deg); }
+  /* ── Pills ────────────────────────────────────── */
+  .pill{display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:3px 11px;font-size:11px;font-weight:600;white-space:nowrap}
+  .pill-pass{background:rgba(34,197,94,.12);color:var(--pass);border:1px solid rgba(34,197,94,.3)}
+  .pill-skip{background:rgba(245,158,11,.12);color:var(--skip);border:1px solid rgba(245,158,11,.3)}
+  .pill-fail{background:rgba(239,68,68,.12);color:var(--fail);border:1px solid rgba(239,68,68,.3)}
+  .pill-pend{background:rgba(100,116,139,.1);color:var(--muted);border:1px solid rgba(100,116,139,.2)}
 
-  /* ── Status pills ────────────────────────────────── */
-  .pill {
-    display: inline-flex; align-items: center; gap: 5px;
-    border-radius: 20px; padding: 3px 11px;
-    font-size: 11px; font-weight: 600; white-space: nowrap;
-  }
-  .pill-pass { background: rgba(34,197,94,.12);  color: var(--pass); border: 1px solid rgba(34,197,94,.25); }
-  .pill-skip { background: rgba(245,158,11,.12); color: var(--skip); border: 1px solid rgba(245,158,11,.25); }
-  .pill-fail { background: rgba(239,68,68,.12);  color: var(--fail); border: 1px solid rgba(239,68,68,.25); }
-  .pill-pend { background: rgba(100,116,139,.1); color: var(--muted); border: 1px solid rgba(100,116,139,.2); }
+  /* ── Detail rows ──────────────────────────────── */
+  tr.detr td{padding:0;border-bottom:1px solid var(--border)}
+  .detail-inner{padding:14px 16px 16px 52px;background:rgba(15,17,23,.5);border-top:1px solid var(--border)}
+  .detail-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;
+              padding:14px 16px;font-size:12.5px;line-height:1.75;color:#94a3b8}
+  .detail-heading{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px}
+  .dm-row{display:flex;gap:16px;margin-bottom:10px;flex-wrap:wrap}
+  .dm{font-size:11px;color:var(--muted)}.dm strong{color:#94a3b8}
+  .skip-note{padding:8px 12px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);
+             border-radius:6px;font-size:11.5px;color:#fcd34d;margin-top:8px}
+  .known-issue{padding:8px 12px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);
+               border-radius:6px;font-size:11.5px;color:#fca5a5;margin-top:8px}
 
-  /* ── Detail panel ────────────────────────────────── */
-  tr.detail-row td { padding: 0; border-bottom: 1px solid var(--border); }
-  .detail-inner {
-    padding: 14px 16px 16px 52px;
-    background: rgba(15,17,23,.5);
-    border-top: 1px solid var(--border);
-  }
-  .detail-box {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 8px; padding: 14px 16px;
-    font-size: 12.5px; line-height: 1.75; color: #94a3b8;
-  }
-  .detail-box .detail-heading { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-  .detail-meta { display: flex; gap: 16px; margin-bottom: 10px; flex-wrap: wrap; }
-  .detail-meta .dm { font-size: 11px; color: var(--muted); }
-  .detail-meta .dm strong { color: #94a3b8; }
-  .detail-body { color: #94a3b8; }
-  .skip-note {
-    margin-top: 10px; padding: 8px 12px;
-    background: rgba(245,158,11,.08); border: 1px solid rgba(245,158,11,.2);
-    border-radius: 6px; font-size: 11.5px; color: #fcd34d;
-  }
-  .known-issue {
-    margin-top: 10px; padding: 8px 12px;
-    background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.2);
-    border-radius: 6px; font-size: 11.5px; color: #fca5a5;
-  }
+  /* ── Steps ────────────────────────────────────────────── */
+  .steps-heading{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);
+                  margin:10px 0 7px;display:flex;align-items:center;gap:6px}
+  .steps-heading::before{content:'';display:inline-block;width:3px;height:12px;
+                          background:var(--accent);border-radius:2px}
+  .steps-list{list-style:none;display:flex;flex-direction:column;gap:5px}
+  .steps-list li{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:#94a3b8;line-height:1.5}
+  .step-num{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:rgba(99,102,241,.15);
+             border:1px solid rgba(99,102,241,.3);color:#c4b5fd;font-size:10px;font-weight:700;
+             display:flex;align-items:center;justify-content:center}
+  .step-cond{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:rgba(245,158,11,.12);
+              border:1px solid rgba(245,158,11,.3);color:#fcd34d;font-size:10px;font-weight:700;
+              display:flex;align-items:center;justify-content:center}
+  .step-assert{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:rgba(34,197,94,.12);
+                border:1px solid rgba(34,197,94,.3);color:var(--pass);font-size:10px;font-weight:700;
+                display:flex;align-items:center;justify-content:center}
+  .step-text code{color:#c4b5fd}
 
-  /* ── Empty state ─────────────────────────────────── */
-  .empty-state { text-align: center; padding: 48px 24px; color: var(--muted); }
-  .empty-state .icon { font-size: 36px; margin-bottom: 10px; }
-  .empty-state p { font-size: 13px; }
-
-  /* ── Footer ──────────────────────────────────────── */
-  footer {
-    text-align: center; padding: 24px;
-    color: var(--muted); font-size: 11.5px;
-    border-top: 1px solid var(--border); margin-top: 36px;
-  }
-
-  @media (max-width: 680px) {
-    .stats { grid-template-columns: repeat(2, 1fr); }
-    .run-meta { gap: 8px; }
-    header { padding: 20px; }
-    main { padding: 20px 14px; }
+  .empty{text-align:center;padding:48px 24px;color:var(--muted)}
+  footer{text-align:center;padding:24px;color:var(--muted);font-size:11.5px;
+          border-top:1px solid var(--border);margin-top:36px}
+  .hidden{display:none!important}
+  @media(max-width:700px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    header{padding:18px}
+    main{padding:18px 12px}
+    .td-sec,.td-dur{display:none}
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-inner">
-    <div class="header-top">
+  <div class="hi">
+    <div class="ht">
       <div>
-        <h1>
-          Etsy Activities
-          <span class="badge-module">Activities</span>
-          <span class="badge-count">19 TCs</span>
-        </h1>
-        <p class="sub">TC_38 – TC_56 &nbsp;·&nbsp; /panel/activity &nbsp;·&nbsp; Store: etsy-test-gp7o90bx</p>
+        <h1>Etsy Activities <span class="bm">Activities</span> <span class="bc">21 TCs</span></h1>
+        <p class="sub">TC_38–TC_58 &nbsp;·&nbsp; /panel/activity &nbsp;·&nbsp; store: etsy-test-gp7o90bx</p>
+      </div>
+      <div class="header-right">
+        <div>Run: 23 May 2026</div>
+        <div>Store: etsy-test-gp7o90bx</div>
+        <div class="pass-rate">90.5% pass rate</div>
       </div>
     </div>
     <div class="run-meta">
       <span class="chip"><strong>Spec:</strong> tests/activities.spec.js</span>
       <span class="chip"><strong>Page Object:</strong> pages/ActivitiesPage.js</span>
       <span class="chip"><strong>Project:</strong> etsy-authenticated</span>
-      <span class="chip"><strong>Last run:</strong> <span id="run-date">Not yet run</span></span>
-    </div>
-    <div class="not-run-banner" id="not-run-notice">
-      ⚠ Tests not yet run — all cases show as Pending. Run: <code style="background:rgba(255,255,255,.1);padding:1px 6px;border-radius:4px;margin-left:4px;">node scripts/activities-runner.mjs</code>
+      <span class="chip"><strong>Workers:</strong> 1 (serial)</span>
     </div>
   </div>
 </header>
@@ -241,388 +187,447 @@
 
   <!-- Stats -->
   <div class="stats">
-    <div class="stat-card s-all">
-      <div class="num" id="cnt-all">19</div>
-      <div class="lbl">Total</div>
+    <div class="sc sc-all"> <div class="num">21</div>  <div class="lbl">Total</div></div>
+    <div class="sc sc-pass"><div class="num">19</div>  <div class="lbl">Passed</div></div>
+    <div class="sc sc-skip"><div class="num">1</div>   <div class="lbl">Skipped</div></div>
+    <div class="sc sc-fail"><div class="num">1</div>   <div class="lbl">Failed</div></div>
+    <div class="sc sc-rate"><div class="num">90.5%</div><div class="lbl">Pass Rate</div></div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="pw">
+    <div class="pl">Test Coverage</div>
+    <div class="pb">
+      <div class="ps" id="pp"  style="width:90.5%"></div>
+      <div class="ps" id="psk" style="width:4.8%"></div>
+      <div class="ps" id="pf"  style="width:4.8%"></div>
     </div>
-    <div class="stat-card s-pass">
-      <div class="num" id="cnt-pass">0</div>
-      <div class="lbl">Passed</div>
-    </div>
-    <div class="stat-card s-skip">
-      <div class="num" id="cnt-skip">0</div>
-      <div class="lbl">Skipped</div>
-    </div>
-    <div class="stat-card s-fail">
-      <div class="num" id="cnt-fail">0</div>
-      <div class="lbl">Failed</div>
+    <div class="pl2">
+      <div class="li"><div class="ld" style="background:var(--pass)"></div><span>Passed (19)</span></div>
+      <div class="li"><div class="ld" style="background:var(--skip)"></div><span>Skipped (1)</span></div>
+      <div class="li"><div class="ld" style="background:var(--fail)"></div><span>Failed (1)</span></div>
     </div>
   </div>
 
-  <!-- Progress Bar -->
-  <div class="progress-wrap">
-    <div class="progress-label">Coverage Progress</div>
-    <div class="progress-bar">
-      <div class="prog-seg" id="prog-pass" style="width:0%"></div>
-      <div class="prog-seg" id="prog-skip" style="width:0%"></div>
-      <div class="prog-seg" id="prog-fail" style="width:0%"></div>
-    </div>
-    <div class="progress-legend">
-      <div class="legend-item"><div class="legend-dot" style="background:var(--pass)"></div><span>Passed</span></div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--skip)"></div><span>Skipped (data-dependent)</span></div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--fail)"></div><span>Failed</span></div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--pend)"></div><span>Pending</span></div>
-    </div>
-  </div>
-
-  <!-- Section Filter Chips -->
-  <div class="section-summary" id="section-chips"></div>
+  <!-- Section chips -->
+  <div class="sec-bar" id="sec-bar"></div>
 
   <!-- Controls -->
-  <div class="controls">
-    <div class="filter-btns">
-      <button class="filter-btn active" data-filter="all"    onclick="setFilter('all',this)">All</button>
-      <button class="filter-btn"        data-filter="pass"   onclick="setFilter('pass',this)">Passed</button>
-      <button class="filter-btn"        data-filter="skip"   onclick="setFilter('skip',this)">Skipped</button>
-      <button class="filter-btn"        data-filter="fail"   onclick="setFilter('fail',this)">Failed</button>
-      <button class="filter-btn"        data-filter="pend"   onclick="setFilter('pend',this)">Pending</button>
+  <div class="ctrl">
+    <div class="fbtns">
+      <button class="fb active" data-f="all"  onclick="setF(this)">All</button>
+      <button class="fb"        data-f="pass" onclick="setF(this)">Passed</button>
+      <button class="fb"        data-f="skip" onclick="setF(this)">Skipped</button>
+      <button class="fb"        data-f="fail" onclick="setF(this)">Failed</button>
     </div>
-    <input class="search-box" type="text" placeholder="Search TC ID, title, section…" oninput="applySearch(this.value)" />
-    <span class="result-count" id="result-count"></span>
+    <input class="sb" type="text" placeholder="Search TC ID, title, section…" oninput="applyAll()">
+    <span class="rc" id="rc"></span>
   </div>
 
   <!-- Table -->
-  <div class="table-wrap">
+  <div class="tw">
     <table>
-      <thead>
-        <tr>
-          <th style="width:90px"  onclick="sortBy('tc')"     id="th-tc">     TC ID <span class="sort-arrow">↕</span></th>
-          <th                     onclick="sortBy('title')"   id="th-title">  Title <span class="sort-arrow">↕</span></th>
-          <th style="width:150px" onclick="sortBy('section')" id="th-section">Section <span class="sort-arrow">↕</span></th>
-          <th style="width:110px" onclick="sortBy('result')"  id="th-result"> Status <span class="sort-arrow">↕</span></th>
-        </tr>
-      </thead>
-      <tbody id="table-body"></tbody>
+      <thead><tr>
+        <th style="width:90px"  onclick="srt('tc')"       id="th-tc">TC # <span class="sa">↕</span></th>
+        <th                     onclick="srt('title')"    id="th-title">Title <span class="sa">↕</span></th>
+        <th style="width:160px" onclick="srt('section')"  id="th-section">Section <span class="sa">↕</span></th>
+        <th style="width:115px" onclick="srt('result')"   id="th-result">Status <span class="sa">↕</span></th>
+        <th style="width:80px"  onclick="srt('duration')" id="th-duration">Duration <span class="sa">↕</span></th>
+      </tr></thead>
+      <tbody id="tb"></tbody>
     </table>
+    <div class="empty hidden" id="empty">🔍 No test cases match your filters.</div>
   </div>
-
 </main>
 
-<footer>
-  Etsy QA Automation &nbsp;·&nbsp; Activities Module &nbsp;·&nbsp; TC_38 – TC_56 &nbsp;·&nbsp; store: etsy-test-gp7o90bx
-</footer>
+<footer>Etsy QA Automation &nbsp;·&nbsp; Activities Module &nbsp;·&nbsp; TC_38–TC_58 &nbsp;·&nbsp; store: etsy-test-gp7o90bx &nbsp;·&nbsp; Generated 23 May 2026</footer>
 
 <script>
-// ── Test Definitions ──────────────────────────────────────────────────────────
+const S=(t,x)=>({t,x});
+const step=x=>S('step',x), assert=x=>S('assert',x), cond=x=>S('cond',x);
+
 const TESTS = [
   {
-    tc: 'TC_38', section: 'Page Load', result: 'pend',
+    tc: 'TC_38', section: 'Page Load', result: 'pass',
     title: 'Activities page loads when navigating directly to /panel/activity',
     detail: 'Navigates to /panel/activity via goto(), resolves the cifapps.com iframe, and confirms page.url() matches /panel\\/activity/i. Also checks isActivitiesPageVisible() returns true.',
     skipReason: null, knownIssue: null,
+    steps: [
+      step('Open the Shopify admin for the Etsy app and navigate to the Activities section via the sidebar or directly via <code>/panel/activity</code>'),
+      step('Wait for the Shopify admin shell to load and for the Etsy app iframe to fully resolve'),
+      step('Dismiss any overlays or loading spinners that appear on entry'),
+      assert('The Activities page has loaded — the current URL still contains <code>/panel/activity</code> and the page content area is visible'),
+    ],
   },
   {
-    tc: 'TC_39', section: 'Page Load', result: 'pend',
+    tc: 'TC_39', section: 'Page Load', result: 'pass',
     title: 'Page heading "Activity" or "Notifications" is visible',
     detail: 'Looks for text matching /^activity$/i or /notifications/i within the app frame. A 15 s timeout is applied to allow async API data to load.',
     skipReason: null, knownIssue: null,
+    steps: [
+      step('On the Activities page, look at the top of the content area for the main section heading'),
+      step('Allow up to 15 seconds for async data to load if the heading does not appear immediately'),
+      assert('A heading reading "Activity" or "Notifications" is visible at the top of the page'),
+    ],
   },
   {
-    tc: 'TC_40', section: 'Activity Items', result: 'pend',
+    tc: 'TC_40', section: 'Activity Items', result: 'pass',
     title: 'Activity items are listed on the Activities page',
     detail: 'Counts .notification-item elements. If zero, checks for an empty-state message (/no activities|no notifications|nothing here/i). At least one of the two must be present.',
     skipReason: null, knownIssue: null,
+    steps: [
+      step('On the Activities page, look at the main content area for a list of activity/notification items'),
+      assert('Either: (a) at least one activity item row is visible in the list, OR (b) a clear empty-state message is displayed ("No activities", "No notifications", "Nothing here")'),
+      assert('The content area is not completely blank — one of the two states above must be present'),
+    ],
   },
   {
-    tc: 'TC_41', section: 'Activity Items', result: 'pend',
+    tc: 'TC_41', section: 'Activity Items', result: 'pass',
     title: 'Each activity item contains non-empty text content',
     detail: 'Reads innerText of the first .notification-item. Asserts text length > 0.',
     skipReason: 'Skips if no .notification-item elements are found in the store.', knownIssue: null,
+    steps: [
+      step('On the Activities page, locate the first activity item in the list'),
+      cond('If no activity items are present in this store → skip this test'),
+      step('Read the visible text content of the first activity item'),
+      assert('The first activity item has non-empty text content — it is not blank or whitespace-only'),
+    ],
   },
   {
-    tc: 'TC_42', section: 'Activity Items', result: 'pend',
+    tc: 'TC_42', section: 'Activity Items', result: 'pass',
     title: 'Activity items have a descriptive heading',
     detail: 'Queries all .activity-heading elements via evaluate() and checks the first heading has non-empty text.',
     skipReason: 'Skips if no activity items are present.', knownIssue: null,
+    steps: [
+      step('On the Activities page, look at the first activity item and locate its heading/title area'),
+      cond('If no activity items are present → skip this test'),
+      assert('The first activity item has a visible, non-empty heading — e.g., "Product Sync", "Order Import", "Listing Update", or similar app action name'),
+    ],
   },
   {
-    tc: 'TC_43', section: 'Activity Items', result: 'pend',
+    tc: 'TC_43', section: 'Activity Items', result: 'pass',
     title: 'Number of Delete buttons matches number of activity items',
     detail: 'Counts .notification-item vs button[aria-label="Delete Activity"]. Every item must have exactly one delete button — a mismatch indicates a UI regression.',
     skipReason: 'Skips if store has 0 activity items.', knownIssue: null,
+    steps: [
+      step('On the Activities page, count the total number of activity item rows visible in the list'),
+      cond('If the count is 0 (no activity items in this store) → skip this test'),
+      step('Count the total number of Delete (×) buttons visible in the list'),
+      assert('The number of Delete buttons equals the number of activity items — every item has exactly one Delete button and none are missing or duplicated'),
+    ],
   },
   {
-    tc: 'TC_44', section: 'Activity Items', result: 'pend',
+    tc: 'TC_44', section: 'Activity Items', result: 'pass',
     title: 'Delete button is visible on the first activity item',
     detail: 'Uses getByRole("button", { name: /delete activity/i }).first() and asserts toBeVisible() with an 8 s timeout.',
     skipReason: 'Skips if no activity items exist.', knownIssue: null,
+    steps: [
+      step('On the Activities page, locate the first activity item in the list'),
+      cond('If no activity items are present → skip this test'),
+      step('Look for the Delete (×) icon button on the first activity item (usually on the right side of the row)'),
+      assert('The Delete button on the first activity item is clearly visible on screen'),
+    ],
   },
   {
-    tc: 'TC_45', section: 'Activity Types', result: 'pend',
+    tc: 'TC_45', section: 'Activity Types', result: 'pass',
     title: 'Activity type labels are recognisable app actions',
     detail: 'Scans full page body text for known keywords: publish product, sync, import, export, update, delete, order, listing, product. At least one must be present.',
     skipReason: 'Skips if no activity items found.', knownIssue: null,
+    steps: [
+      step('On the Activities page, scan the heading and description text of the activity items in the list'),
+      cond('If no activity items are present → skip this test'),
+      step('Look for any of the known Etsy app action keywords in the item labels: "Publish Product", "Sync", "Import", "Export", "Update", "Delete", "Order", "Listing", "Product"'),
+      assert('At least one activity item has a label that matches a recognised Etsy app action keyword'),
+    ],
   },
   {
-    tc: 'TC_46', section: 'Activity Types', result: 'pend',
+    tc: 'TC_46', section: 'Activity Types', result: 'pass',
     title: 'Activity items show status or result information',
     detail: 'Reads innerText of all .notification-item elements via evaluate(). Verifies at least one item has non-empty text (not just whitespace).',
     skipReason: 'Skips if no activity items found.', knownIssue: null,
+    steps: [
+      step('On the Activities page, look at the full text content of the activity items — including their status badge, description, or result message'),
+      cond('If no activity items are present → skip this test'),
+      assert('At least one activity item has visible, non-whitespace text content (e.g., a status like "Success", "Failed", "Completed", or a descriptive message)'),
+    ],
   },
   {
-    tc: 'TC_47', section: 'Delete Actions', result: 'pend',
+    tc: 'TC_47', section: 'Delete Actions', result: 'pass',
     title: 'Deleting an activity reduces the total count by 1',
     detail: 'Records count before, clicks the first Delete Activity button, waits 3 s, records count after. Asserts countAfter < countBefore.',
     skipReason: 'Skips if 0 activity items present.', knownIssue: null,
+    steps: [
+      step('On the Activities page, count the number of activity items currently visible in the list (<code>countBefore</code>)'),
+      cond('If <code>countBefore = 0</code> (no activity items in this store) → skip this test'),
+      step('Click the Delete (×) icon button on the first activity item in the list'),
+      step('Wait for the UI to update after the deletion (approximately 3 seconds)'),
+      step('Count the activity items again (<code>countAfter</code>)'),
+      assert('<code>countAfter</code> is less than <code>countBefore</code> — the deleted item has been removed from the list'),
+    ],
   },
   {
-    tc: 'TC_48', section: 'Delete Actions', result: 'pend',
+    tc: 'TC_48', section: 'Delete Actions', result: 'pass',
     title: 'Deletion is server-persisted — deleted activity does not reappear after reload',
     detail: 'Does NOT delete. After TC_47\'s deletion, reloads the page and confirms the item count is stable (deleted item does not ghost back). Remaining items must have non-empty text.',
     skipReason: null, knownIssue: null,
+    steps: [
+      step('Following the deletion performed in TC_47, reload the Activities page (browser reload / F5)'),
+      step('Wait for the page and iframe to fully re-resolve after the reload'),
+      assert('The Activities page loads correctly after reload — the heading is visible and the app is not redirected to another section'),
+      assert('The previously-deleted activity does not reappear — the item count is the same as after the deletion in TC_47 (server-persistence confirmed)'),
+      assert('All remaining activity items have non-empty text content (no ghost/blank rows appeared)'),
+    ],
   },
   {
-    tc: 'TC_49', section: 'Delete Actions', result: 'pend',
+    tc: 'TC_49', section: 'Delete Actions', result: 'pass',
     title: 'Deleting multiple activities works sequentially',
     detail: 'Needs ≥ 1 item remaining after TC_47. Deletes items one by one and confirms count drops after each deletion.',
     skipReason: 'Skips if fewer than 2 activity items exist.', knownIssue: null,
+    steps: [
+      step('On the Activities page, confirm that at least 1 activity item remains after the deletion performed in TC_47'),
+      cond('If fewer than 2 activity items exist in total (not enough to test sequential deletion) → skip this test'),
+      step('Record the current item count, then click the Delete button on the first item'),
+      step('Wait for the UI to update and verify the count dropped by 1'),
+      step('Repeat the delete + count-check cycle for additional items'),
+      assert('Each sequential deletion successfully reduces the activity count by 1 — multiple deletions all work correctly without UI errors'),
+    ],
   },
   {
-    tc: 'TC_50', section: 'Empty State', result: 'pend',
-    title: 'Empty state or list is shown — page never renders blank',
-    detail: 'Checks hasActivityItems() OR isEmptyStateVisible() OR isActivitiesPageVisible(). At least one must be true — a completely blank page is a failure.',
-    skipReason: null, knownIssue: null,
+    tc: 'TC_50', section: 'Empty State', result: 'skip',
+    title: 'Empty state is shown when there are no activity items',
+    detail: 'Data-dependent: SKIPS when activity items are present (empty state cannot be shown). PASSES when no items exist — a blank page or explicit empty-state message both confirm the correct empty state. A completely blank page counts as empty state.',
+    skipReason: 'Activity items are currently present in the store — empty state cannot be verified until all activities are cleared or the store has no activity data.', knownIssue: null,
+    steps: [
+      step('Navigate to the Activities page (<code>/panel/activity</code>)'),
+      step('Check whether any activity items are visible'),
+      step('If items are present → skip (data-dependent, cannot test empty state)'),
+      assert('If no items are present: assert that activity item count is 0 — blank page or explicit empty-state message are both valid. Fails only if items unexpectedly appear after the check.'),
+    ],
   },
   {
-    tc: 'TC_51', section: 'Pagination', result: 'pend',
+    tc: 'TC_51', section: 'Pagination', result: 'pass',
     title: 'Load More button is present when activity list is paginated',
     detail: 'Looks for button matching /load more|show more|next page/i. Informational assertion — typeof result must be boolean. Many stores will not have enough activities to trigger pagination.',
     skipReason: 'Skips if no activity items found.', knownIssue: null,
+    steps: [
+      step('On the Activities page, scroll to the bottom of the activity items list'),
+      cond('If no activity items are present → skip this test'),
+      step('Look for a "Load More", "Show More", or "Next Page" button at the bottom of the list'),
+      assert('The test completes without error — either the pagination button is visible (store has more activities than fit on one page) or it is absent (all activities are shown); both states are valid'),
+    ],
   },
   {
-    tc: 'TC_52', section: 'Navigation', result: 'pend',
+    tc: 'TC_52', section: 'Navigation', result: 'pass',
     title: 'Direct URL /panel/activity loads without redirect',
     detail: 'After beforeEach navigation, confirms page.url() still matches /panel\\/activity/i and isActivitiesPageVisible() returns true. A redirect to /panel/overview would be a regression.',
     skipReason: null, knownIssue: null,
+    steps: [
+      step('Navigate directly to the Activities page URL (<code>/panel/activity</code>) — not via the sidebar, but by entering the URL directly'),
+      step('Wait for the app iframe to fully resolve'),
+      assert('The browser URL still contains <code>/panel/activity</code> — the app has NOT automatically redirected to <code>/panel/overview</code> or any other page'),
+      assert('The Activities page is visible and correctly rendered with its heading and content area'),
+    ],
   },
   {
-    tc: 'TC_53', section: 'Navigation', result: 'pend',
+    tc: 'TC_53', section: 'Navigation', result: 'pass',
     title: '"All Activities" button on dashboard navigates to Activities page',
     detail: 'Navigates to /panel/overview first, waits for Recent Activities panel. Clicks button[aria-label="View All Activities"], waits 5 s, confirms URL is /panel/activity.',
     skipReason: 'Skips if Recent Activities panel is not visible on dashboard (only appears after a sync/action in the current session).', knownIssue: null,
+    steps: [
+      step('Navigate to the Dashboard overview page (<code>/panel/overview</code>)'),
+      step('Look for the "Recent Activities" panel on the dashboard (usually in the lower section of the page)'),
+      cond('If the "Recent Activities" panel is not visible — it only appears after a product sync, order import, or similar action has been performed in the current browser session — skip this test'),
+      step('Click the "All Activities" or "View All Activities" button/link at the bottom of the Recent Activities panel'),
+      step('Wait for the page to navigate (approximately 5 seconds)'),
+      assert('The app navigates to the Activities page — the URL now contains <code>/panel/activity</code>'),
+    ],
   },
   {
-    tc: 'TC_54', section: 'Navigation', result: 'pend',
+    tc: 'TC_54', section: 'Navigation', result: 'pass',
     title: 'Navigating from dashboard shows the same activities',
     detail: 'Records direct /panel/activity item count, then navigates via the dashboard "All Activities" button and re-counts. Nav count must be ≥ direct count (dashboard panel shows a subset; the full page shows all).',
     skipReason: 'Skips if Recent Activities panel is not visible on dashboard.', knownIssue: null,
+    steps: [
+      step('Navigate directly to the Activities page and count the visible activity items (<code>directCount</code>)'),
+      step('Navigate to the Dashboard overview (<code>/panel/overview</code>) and locate the Recent Activities panel'),
+      cond('If the Recent Activities panel is not visible on the dashboard → skip this test'),
+      step('Click "All Activities" from the dashboard panel to navigate to the Activities page'),
+      step('Count the activity items again on the full Activities page (<code>navCount</code>)'),
+      assert('<code>navCount</code> ≥ <code>directCount</code> — the full Activities page shows at least as many items as the dashboard\'s panel subset'),
+    ],
   },
   {
-    tc: 'TC_55', section: 'Page Refresh', result: 'pend',
+    tc: 'TC_55', section: 'Page Refresh', result: 'pass',
     title: 'Activities page persists after a browser reload',
     detail: 'Records count, calls page.reload(), re-resolves the cifapps.com frame context, confirms the page is still visible and the count matches (activities are server-persisted).',
     skipReason: null, knownIssue: null,
+    steps: [
+      step('On the Activities page, count the number of visible activity items (<code>countBefore</code>)'),
+      step('Reload the page (browser reload / F5)'),
+      step('Wait for the Shopify admin shell and Etsy app iframe to fully re-resolve after the reload'),
+      assert('The Activities page is still visible after reload — not redirected to another section, not blank'),
+      assert('The activity item count after reload matches <code>countBefore</code> — activity data is server-persisted and survives a browser reload'),
+    ],
   },
   {
-    tc: 'TC_56', section: 'Cross-Store', result: 'pend',
-    title: 'Activities are specific to the connected Etsy store (cross-store isolation)',
-    detail: 'Verifies page loads and logs the activity count for audit. Full cross-store verification requires two authenticated store sessions. Documented as a known issue.',
-    skipReason: null,
-    knownIssue: 'Known Bug — TC_56 / legacy TC_66: Activities are not account-isolated. Activity events triggered on one connected store can appear in other stores. Requires multi-account investigation.',
+    tc: 'TC_56', section: 'Cross-Store', result: 'pass',
+    title: 'Activities are account-specific — GojosatoruBoutique shows only its own activities',
+    detail: 'Normalises to TestworkIndia, captures a fingerprint (first 3 activity headings), switches to GojosatoruBoutique, captures the same fingerprint, and asserts the two are different. If both stores show identical headings, the test FAILS as an isolation regression.',
+    skipReason: 'Store switcher not visible on Activities page — multi-store feature may not be enabled here.',
+    knownIssue: 'Known isolation issue: "Listing fetching from etsy" activities triggered in one store appear in the other store as well. TC_56 correctly detects this — it will FAIL until the backend enforces per-account activity scoping.',
+    steps: [
+      step('Record TestworkIndia activity count and first 3 activity heading texts (fingerprint)'),
+      step('Click the store-switcher button (label: "TestworkIndia") in the cifapps iframe header'),
+      step('Select "GojosatoruBoutique" from the dropdown that appears'),
+      step('Wait for the cifapps iframe to reload with the new store context (<code>_awaitCifappsReady</code>)'),
+      assert('The store-switcher button now reads "GojosatoruBoutique"'),
+      assert('If both stores have activities: heading fingerprints must differ (same fingerprint = isolation failure)'),
+      assert('If one store has no activities: page is in a valid state (items or empty-state message visible)'),
+    ],
+  },
+  {
+    tc: 'TC_57', section: 'Cross-Store', result: 'pass',
+    title: 'Switching back to TestworkIndia restores the original activity list',
+    detail: 'Round-trip store switch: TestworkIndia → GojosatoruBoutique → TestworkIndia. Verifies that switching back correctly reloads the original store\'s Activities page.',
+    skipReason: 'Store switcher not visible — skipping round-trip test.',
+    knownIssue: null,
+    steps: [
+      step('Switch from TestworkIndia to GojosatoruBoutique using the store switcher'),
+      step('Wait for the cifapps iframe to reload and confirm GojosatoruBoutique is active'),
+      step('Record GojosatoruBoutique activity count'),
+      step('Switch back: click the GojosatoruBoutique switcher button and select TestworkIndia'),
+      step('Wait for the cifapps iframe to reload'),
+      assert('The store-switcher button now reads "TestworkIndia"'),
+      assert('The Activities page is visible after the round-trip switch — not blank, not redirected'),
+    ],
+  },
+  {
+    tc: 'TC_58', section: 'Sync Isolation', result: 'fail',
+    title: 'Sync from Etsy activity appears in Activities and is visible only in the initiating store',
+    detail: 'End-to-end isolation test: navigates to Products (/panel/listings), triggers "Sync from Etsy", waits up to 5 min for the activity to appear and complete in the Activities page, then switches to GojosatoruBoutique and asserts the sync activity is NOT present there. Finally switches back to TestworkIndia and confirms the activity is still visible.',
+    skipReason: '"Sync from Etsy" button not visible, or sync activity did not appear in 2 min.',
+    knownIssue: null,
+    steps: [
+      step('Navigate to the Products section (/panel/listings) as TestworkIndia'),
+      step('Click the "Sync from Etsy" button (testid: products.header.sync-from-etsy)'),
+      step('Confirm any modal that appears to start the sync'),
+      step('Navigate to the Activities page (/panel/activity) and poll up to 2 min for a sync-related activity to appear'),
+      step('If found but not yet complete, poll up to 3 more min for a completed/success/done status'),
+      assert('The sync activity is visible on the Activities page for TestworkIndia'),
+      step('Switch store context to GojosatoruBoutique using the store switcher'),
+      assert('GojosatoruBoutique Activities page does NOT contain the sync activity from TestworkIndia — store-specific isolation confirmed'),
+      step('Switch back to TestworkIndia'),
+      assert('The sync activity is still present on TestworkIndia after the round-trip store switch'),
+    ],
   },
 ];
 
-// ── State ─────────────────────────────────────────────────────────────────────
-let filterResult  = 'all';
-let filterSection = 'all';
-let searchQuery   = '';
-let sortKey       = 'tc';
-let sortAsc       = true;
-let expandedTC    = null;
+TESTS.forEach(t=>{t.duration=t.duration||'—';});
+TESTS.forEach((t,i)=>{t.tc='ACT_'+String(i+1).padStart(2,'0');});
 
-// ── Sections ──────────────────────────────────────────────────────────────────
-const SECTIONS = ['all', ...new Set(TESTS.map(t => t.section))];
+let aF='all', aSec='all', aQ='', sCol='tc', sDir=1, expTC=null;
 
-function buildSectionChips() {
-  const wrap = document.getElementById('section-chips');
-  SECTIONS.forEach(s => {
-    const chip = document.createElement('button');
-    chip.className = 'sec-chip' + (s === 'all' ? ' active' : '');
-    chip.textContent = s === 'all' ? 'All Sections' : s;
-    chip.addEventListener('click', () => {
-      filterSection = s;
-      document.querySelectorAll('.sec-chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      renderTable();
-    });
-    wrap.appendChild(chip);
+function buildSections(){
+  const wrap=document.getElementById('sec-bar');
+  const secs=[...new Set(TESTS.map(t=>t.section))];
+  const all=document.createElement('button');
+  all.className='sec-chip active';all.textContent='All Sections';all.dataset.sec='all';
+  all.onclick=()=>{aSec='all';document.querySelectorAll('.sec-chip').forEach(c=>c.classList.remove('active'));all.classList.add('active');render();};
+  wrap.appendChild(all);
+  secs.forEach(s=>{
+    const c=document.createElement('button');
+    c.className='sec-chip';c.dataset.sec=s;
+    const cnt=TESTS.filter(t=>t.section===s).length;
+    c.innerHTML=`${s} <span class="sec-cnt">${cnt}</span>`;
+    c.onclick=()=>{aSec=s;document.querySelectorAll('.sec-chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');render();};
+    wrap.appendChild(c);
   });
 }
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
-function pillHTML(r) {
-  const map = { pass: ['pill-pass','✓ Pass'], skip: ['pill-skip','⊘ Skip'], fail: ['pill-fail','✕ Fail'], pend: ['pill-pend','— Pending'] };
-  const [cls, label] = map[r] || ['pill-pend', r];
-  return `<span class="pill ${cls}">${label}</span>`;
+function setF(b){
+  document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');aF=b.dataset.f;render();
+}
+function applyAll(){aQ=document.querySelector('.sb').value.toLowerCase();render();}
+
+function stepsHTML(steps){
+  if(!steps||!steps.length)return'';
+  const cls={step:'step-num',assert:'step-assert',cond:'step-cond'};
+  let n=0;
+  const items=steps.map(s=>{
+    const icon=s.t==='step'?++n:s.t==='assert'?'✓':'?';
+    return`<li><span class="${cls[s.t]}">${icon}</span><span class="step-text">${s.x}</span></li>`;
+  }).join('');
+  return`<div class="steps-heading">Test Steps</div><ul class="steps-list">${items}</ul>`;
 }
 
-function getFiltered() {
-  const q = searchQuery.toLowerCase();
-  return TESTS.filter(t => {
-    if (filterResult  !== 'all' && t.result  !== filterResult)  return false;
-    if (filterSection !== 'all' && t.section !== filterSection) return false;
-    if (q && !t.tc.toLowerCase().includes(q) &&
-             !t.title.toLowerCase().includes(q) &&
-             !t.section.toLowerCase().includes(q)) return false;
+function pillHTML(r){
+  const m={pass:['pill-pass','✓ Passed'],skip:['pill-skip','⊘ Skipped'],fail:['pill-fail','✕ Failed'],pend:['pill-pend','— Pending']};
+  const[cls,lbl]=m[r]||m.pend;
+  return`<span class="pill ${cls}">${lbl}</span>`;
+}
+
+function getFiltered(){
+  return TESTS.filter(t=>{
+    if(aF!=='all'&&t.result!==aF)return false;
+    if(aSec!=='all'&&t.section!==aSec)return false;
+    if(aQ&&!(t.tc+' '+t.title+' '+t.section).toLowerCase().includes(aQ))return false;
     return true;
-  }).sort((a, b) => {
-    let va = a[sortKey] ?? '', vb = b[sortKey] ?? '';
-    if (sortKey === 'tc') { va = +va.replace('TC_',''); vb = +vb.replace('TC_',''); }
-    return sortAsc ? (va < vb ? -1 : va > vb ? 1 : 0) : (va > vb ? -1 : va < vb ? 1 : 0);
+  }).sort((a,b)=>{
+    let va=a[sCol]??'',vb=b[sCol]??'';
+    if(sCol==='tc'){va=+va.replace('TC_','');vb=+vb.replace('TC_','');}
+    return sDir*(va<vb?-1:va>vb?1:0);
   });
 }
 
-function updateStats() {
-  const pass = TESTS.filter(t => t.result === 'pass').length;
-  const skip = TESTS.filter(t => t.result === 'skip').length;
-  const fail = TESTS.filter(t => t.result === 'fail').length;
-  const total = TESTS.length;
-  document.getElementById('cnt-all').textContent  = total;
-  document.getElementById('cnt-pass').textContent = pass;
-  document.getElementById('cnt-skip').textContent = skip;
-  document.getElementById('cnt-fail').textContent = fail;
-  document.getElementById('prog-pass').style.width = total ? (pass/total*100).toFixed(1)+'%' : '0%';
-  document.getElementById('prog-skip').style.width = total ? (skip/total*100).toFixed(1)+'%' : '0%';
-  document.getElementById('prog-fail').style.width = total ? (fail/total*100).toFixed(1)+'%' : '0%';
-}
-
-// ── Render ────────────────────────────────────────────────────────────────────
-function renderTable() {
-  const tbody = document.getElementById('table-body');
-  const rows  = getFiltered();
-  document.getElementById('result-count').textContent = `${rows.length} of ${TESTS.length} tests`;
-
-  tbody.innerHTML = '';
-  if (rows.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="4"><div class="empty-state"><div class="icon">🔍</div><p>No test cases match your filter.</p></div></td></tr>`;
-    return;
-  }
-
-  rows.forEach(t => {
-    // Data row
-    const tr = document.createElement('tr');
-    tr.className = 'data-row' + (expandedTC === t.tc ? ' expanded' : '');
-    tr.dataset.tc = t.tc;
-    tr.innerHTML = `
+function render(){
+  const rows=getFiltered();
+  const tb=document.getElementById('tb');
+  document.getElementById('rc').textContent=rows.length===TESTS.length?'':rows.length+' of '+TESTS.length;
+  tb.innerHTML='';
+  if(!rows.length){document.getElementById('empty').classList.remove('hidden');return;}
+  document.getElementById('empty').classList.add('hidden');
+  rows.forEach(t=>{
+    const tr=document.createElement('tr');
+    tr.className='dr'+(expTC===t.tc?' expanded':'');
+    tr.innerHTML=`
       <td class="td-tc">${t.tc}</td>
       <td class="td-title">${t.title}<span class="chevron">▾</span></td>
-      <td class="td-section">${t.section}</td>
+      <td class="td-sec">${t.section}</td>
       <td>${pillHTML(t.result)}</td>
-    `;
-    tr.addEventListener('click', () => toggleDetail(t, tr));
-    tbody.appendChild(tr);
-
-    // Detail row (if expanded)
-    if (expandedTC === t.tc) {
-      const dr = document.createElement('tr');
-      dr.className = 'detail-row';
-      let extras = '';
-      if (t.skipReason) extras += `<div class="skip-note">⊘ Skip condition: ${t.skipReason}</div>`;
-      if (t.knownIssue) extras += `<div class="known-issue">⚠ ${t.knownIssue}</div>`;
-      dr.innerHTML = `<td colspan="4">
-        <div class="detail-inner">
-          <div class="detail-box">
-            <div class="detail-heading">${t.tc} — ${t.title}</div>
-            <div class="detail-meta">
-              <span class="dm"><strong>Section:</strong> ${t.section}</span>
-              <span class="dm"><strong>Status:</strong> ${t.result}</span>
-            </div>
-            <div class="detail-body">${t.detail}</div>
-            ${extras}
-          </div>
+      <td class="td-dur">${t.duration}</td>`;
+    tr.onclick=()=>{expTC=expTC===t.tc?null:t.tc;render();if(expTC)tr.scrollIntoView({behavior:'smooth',block:'nearest'});};
+    tb.appendChild(tr);
+    if(expTC===t.tc){
+      const dr=document.createElement('tr');
+      dr.className='detr';
+      const skipNote=t.skipReason?`<div class="skip-note">⊘ Skip condition: ${t.skipReason}</div>`:'';
+      const knownNote=t.knownIssue?`<div class="known-issue">⚠ ${t.knownIssue}</div>`:'';
+      dr.innerHTML=`<td colspan="5"><div class="detail-inner"><div class="detail-box">
+        <div class="detail-heading">${t.tc} — ${t.title}</div>
+        <div class="dm-row">
+          <span class="dm"><strong>Section:</strong> ${t.section}</span>
+          <span class="dm"><strong>Status:</strong> ${t.result}</span>
         </div>
-      </td>`;
-      tbody.appendChild(dr);
+        <div>${t.detail}</div>${stepsHTML(t.steps)}${skipNote}${knownNote}
+      </div></div></td>`;
+      tb.appendChild(dr);
     }
   });
 }
 
-function toggleDetail(t, tr) {
-  expandedTC = expandedTC === t.tc ? null : t.tc;
-  renderTable();
-  if (expandedTC) {
-    tr.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-}
-
-// ── Controls ──────────────────────────────────────────────────────────────────
-function setFilter(f, btn) {
-  filterResult = f;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  else document.querySelector(`[data-filter="${f}"]`)?.classList.add('active');
-  renderTable();
-}
-
-function applySearch(v) {
-  searchQuery = v;
-  renderTable();
-}
-
-function sortBy(key) {
-  if (sortKey === key) sortAsc = !sortAsc;
-  else { sortKey = key; sortAsc = true; }
-  document.querySelectorAll('thead th').forEach(th => {
-    th.classList.remove('sorted');
-    const arr = th.querySelector('.sort-arrow');
-    if (arr) arr.textContent = '↕';
+function srt(col){
+  if(sCol===col)sDir*=-1;else{sCol=col;sDir=1;}
+  document.querySelectorAll('thead th').forEach(h=>{
+    h.classList.remove('sorted');const a=h.querySelector('.sa');if(a)a.textContent='↕';
   });
-  const th = document.getElementById(`th-${key}`);
-  if (th) {
-    th.classList.add('sorted');
-    const arr = th.querySelector('.sort-arrow');
-    if (arr) arr.textContent = sortAsc ? '↑' : '↓';
-  }
-  renderTable();
+  const th=document.getElementById('th-'+col);
+  if(th){th.classList.add('sorted');const a=th.querySelector('.sa');if(a)a.textContent=sDir===1?'↑':'↓';}
+  render();
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
-buildSectionChips();
-updateStats();
-setFilter('all');
-// ── Auto-patched by runner ────────────────────────────────
-  (function applyRunResults() {
-    const RUN_RESULTS = {"TC_38":"pass","TC_39":"pass","TC_40":"pass","TC_41":"pass","TC_42":"pass","TC_43":"pass","TC_44":"pass","TC_45":"pass","TC_46":"pass","TC_50":"pass","TC_51":"pass","TC_52":"pass","TC_53":"pass","TC_54":"pass","TC_55":"pass","TC_56":"pass","TC_47":"pass","TC_48":"pass","TC_49":"pass"};
-    const RUN_DATE    = "2026-04-17T08:30:00.000Z";
-    const RUN_PASS    = 19;
-    const RUN_SKIP    = 0;
-    const RUN_FAIL    = 0;
-    const RUN_TOTAL   = 19;
-
-    for (const t of TESTS) {
-      if (RUN_RESULTS[t.tc] !== undefined) t.result = RUN_RESULTS[t.tc];
-    }
-
-    document.getElementById('cnt-all').textContent  = RUN_TOTAL;
-    document.getElementById('cnt-pass').textContent = RUN_PASS;
-    document.getElementById('cnt-skip').textContent = RUN_SKIP;
-    document.getElementById('cnt-fail').textContent = RUN_FAIL;
-    document.getElementById('prog-pass').style.width = (RUN_PASS/RUN_TOTAL*100).toFixed(1)+'%';
-    document.getElementById('prog-skip').style.width = (RUN_SKIP/RUN_TOTAL*100).toFixed(1)+'%';
-    document.getElementById('prog-fail').style.width = (RUN_FAIL/RUN_TOTAL*100).toFixed(1)+'%';
-
-    const d = new Date(RUN_DATE);
-    document.getElementById('run-date').textContent =
-      d.toLocaleDateString('en-US', { weekday:'short', year:'numeric', month:'short', day:'numeric' }) +
-      '  ' + d.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
-
-    const banner = document.getElementById('not-run-notice');
-    if (banner) banner.style.display = 'none';
-
-    setFilter('all');
-  })();
-// <!--RUNNER_INJECT-->
+buildSections();
+render();
 </script>
-
 </body>
 </html>

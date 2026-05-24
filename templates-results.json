@@ -1,7 +1,7 @@
 {
   "config": {
-    "configFile": "C:\\Users\\Sameera-2767\\playwright-qa\\playwright.config.ts",
-    "rootDir": "C:/Users/Sameera-2767/playwright-qa/tests",
+    "configFile": "C:\\Users\\Sameera-2767\\etsy-automation\\playwright.config.ts",
+    "rootDir": "C:/Users/Sameera-2767/etsy-automation/tests",
     "forbidOnly": false,
     "fullyParallel": true,
     "globalSetup": null,
@@ -16,7 +16,7 @@
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "C:/Users/Sameera-2767/playwright-qa/test-results",
+        "outputDir": "C:/Users/Sameera-2767/etsy-automation/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -24,7 +24,7 @@
         },
         "id": "chromium",
         "name": "chromium",
-        "testDir": "C:/Users/Sameera-2767/playwright-qa/tests",
+        "testDir": "C:/Users/Sameera-2767/etsy-automation/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -32,7 +32,7 @@
         "timeout": 30000
       },
       {
-        "outputDir": "C:/Users/Sameera-2767/playwright-qa/test-results",
+        "outputDir": "C:/Users/Sameera-2767/etsy-automation/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -40,7 +40,7 @@
         },
         "id": "firefox",
         "name": "firefox",
-        "testDir": "C:/Users/Sameera-2767/playwright-qa/tests",
+        "testDir": "C:/Users/Sameera-2767/etsy-automation/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -48,7 +48,7 @@
         "timeout": 30000
       },
       {
-        "outputDir": "C:/Users/Sameera-2767/playwright-qa/test-results",
+        "outputDir": "C:/Users/Sameera-2767/etsy-automation/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -56,7 +56,7 @@
         },
         "id": "webkit",
         "name": "webkit",
-        "testDir": "C:/Users/Sameera-2767/playwright-qa/tests",
+        "testDir": "C:/Users/Sameera-2767/etsy-automation/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -64,7 +64,7 @@
         "timeout": 30000
       },
       {
-        "outputDir": "C:/Users/Sameera-2767/playwright-qa/test-results",
+        "outputDir": "C:/Users/Sameera-2767/etsy-automation/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -72,15 +72,15 @@
         },
         "id": "etsy-authenticated",
         "name": "etsy-authenticated",
-        "testDir": "C:/Users/Sameera-2767/playwright-qa/tests",
+        "testDir": "C:/Users/Sameera-2767/etsy-automation/tests",
         "testIgnore": [],
         "testMatch": [
-          "/(etsy-app|etsy-dashboard|etsy-profiling|dashboard|dashboard-functional|onboarding|products|settings|templates|templates-functional|create-templates-manual|orders|pricing|profile|activities|bundle-products)\\.spec\\.(js|ts)/"
+          "/(etsy-app|etsy-dashboard|etsy-profiling|dashboard|dashboard-functional|onboarding|products|settings|templates|templates-functional|create-templates-manual|orders|orders-fetch-bulk|orders-debug|pricing|profile|activities|bundle-products)\\.spec\\.(js|ts)/"
         ],
         "timeout": 30000
       },
       {
-        "outputDir": "C:/Users/Sameera-2767/playwright-qa/test-results",
+        "outputDir": "C:/Users/Sameera-2767/etsy-automation/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -88,7 +88,7 @@
         },
         "id": "etsy-shopify-auth",
         "name": "etsy-shopify-auth",
-        "testDir": "C:/Users/Sameera-2767/playwright-qa/tests",
+        "testDir": "C:/Users/Sameera-2767/etsy-automation/tests",
         "testIgnore": [],
         "testMatch": [
           "/open-etsy-app\\.spec\\.(js|ts)/"
@@ -130,7 +130,7 @@
           "column": 6,
           "specs": [
             {
-              "title": "TC_01: Shipping – create first template",
+              "title": "TC_01: Shipping – fetch from Etsy",
               "ok": true,
               "tags": [],
               "tests": [
@@ -145,12 +145,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 20949,
+                      "duration": 8219,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:51:10.799Z",
+                      "startTime": "2026-05-23T18:36:38.452Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -158,13 +158,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-19850a33b813f2476290",
+              "id": "70f5661c76c1d62d1821-d9cf310cca7ca0d970c8",
               "file": "templates-functional.spec.js",
-              "line": 143,
+              "line": 149,
               "column": 3
             },
             {
-              "title": "TC_02: Shipping – create second template",
+              "title": "TC_02: Shipping – create first template",
               "ok": true,
               "tags": [],
               "tests": [
@@ -179,12 +179,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 20701,
+                      "duration": 19997,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:52:25.906Z",
+                      "startTime": "2026-05-23T18:37:07.633Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -192,13 +192,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-8633d692b18a0df3805e",
+              "id": "70f5661c76c1d62d1821-ffbfae5938be942847e3",
               "file": "templates-functional.spec.js",
-              "line": 151,
+              "line": 157,
               "column": 3
             },
             {
-              "title": "TC_03: Shipping – edit first template",
+              "title": "TC_03: Shipping – create second template",
               "ok": true,
               "tags": [],
               "tests": [
@@ -213,12 +213,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 37198,
+                      "duration": 19851,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:52:46.663Z",
+                      "startTime": "2026-05-23T18:37:27.640Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -226,13 +226,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-9e54d80abfab05f72612",
+              "id": "70f5661c76c1d62d1821-d50e3ccd89e644485981",
               "file": "templates-functional.spec.js",
-              "line": 158,
+              "line": 165,
               "column": 3
             },
             {
-              "title": "TC_04: Shipping – filter by name",
+              "title": "TC_04: Shipping – edit first template",
               "ok": true,
               "tags": [],
               "tests": [
@@ -247,12 +247,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 12278,
+                      "duration": 31114,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:53:23.882Z",
+                      "startTime": "2026-05-23T18:37:47.502Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -260,13 +260,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-b62b55d3399f19ee889c",
+              "id": "70f5661c76c1d62d1821-8987521239118cd05094",
               "file": "templates-functional.spec.js",
-              "line": 193,
+              "line": 172,
               "column": 3
             },
             {
-              "title": "TC_05: Shipping – sort by column header",
+              "title": "TC_05: Shipping – filter by name",
               "ok": true,
               "tags": [],
               "tests": [
@@ -281,12 +281,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3284,
+                      "duration": 6790,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:53:36.192Z",
+                      "startTime": "2026-05-23T18:38:18.628Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -294,13 +294,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-4aac29467c6d1defbf56",
+              "id": "70f5661c76c1d62d1821-d69f883747a9d7c50acd",
               "file": "templates-functional.spec.js",
-              "line": 202,
+              "line": 207,
               "column": 3
             },
             {
-              "title": "TC_06: Shipping – fetch from Etsy",
+              "title": "TC_06: Shipping – sort by column header",
               "ok": true,
               "tags": [],
               "tests": [
@@ -315,12 +315,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 8223,
+                      "duration": 3201,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:53:39.509Z",
+                      "startTime": "2026-05-23T18:38:25.460Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -328,9 +328,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-6722a3ea26d192dd27df",
+              "id": "70f5661c76c1d62d1821-1ac9b9ba6973c106b619",
               "file": "templates-functional.spec.js",
-              "line": 209,
+              "line": 216,
               "column": 3
             },
             {
@@ -349,12 +349,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 41852,
+                      "duration": 45696,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:53:47.772Z",
+                      "startTime": "2026-05-23T18:38:28.670Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -364,11 +364,11 @@
               ],
               "id": "70f5661c76c1d62d1821-b73184478d075ec7d70a",
               "file": "templates-functional.spec.js",
-              "line": 217,
+              "line": 223,
               "column": 3
             },
             {
-              "title": "TC_08: Inventory – create first template",
+              "title": "TC_08: Inventory – fetch from Etsy",
               "ok": true,
               "tags": [],
               "tests": [
@@ -383,12 +383,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 19588,
+                      "duration": 4204,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:54:29.667Z",
+                      "startTime": "2026-05-23T18:39:14.386Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -396,13 +396,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-0ceca9278dffab3e164c",
+              "id": "70f5661c76c1d62d1821-75fe27deae761ee798e8",
               "file": "templates-functional.spec.js",
-              "line": 235,
+              "line": 241,
               "column": 3
             },
             {
-              "title": "TC_09: Inventory – create second template",
+              "title": "TC_09: Inventory – create first template",
               "ok": true,
               "tags": [],
               "tests": [
@@ -417,12 +417,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 19439,
+                      "duration": 14521,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:54:49.286Z",
+                      "startTime": "2026-05-23T18:39:18.601Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -430,13 +430,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-2f77ad2ceff822089493",
+              "id": "70f5661c76c1d62d1821-e540e97b6588e749e5b5",
               "file": "templates-functional.spec.js",
-              "line": 242,
+              "line": 248,
               "column": 3
             },
             {
-              "title": "TC_10: Inventory – edit first template",
+              "title": "TC_10: Inventory – create second template",
               "ok": true,
               "tags": [],
               "tests": [
@@ -451,12 +451,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 47063,
+                      "duration": 14472,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:55:08.753Z",
+                      "startTime": "2026-05-23T18:39:33.142Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -464,13 +464,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-7aef4eff3a7252f43be3",
+              "id": "70f5661c76c1d62d1821-2198f2ed2234231ebd5c",
               "file": "templates-functional.spec.js",
-              "line": 249,
+              "line": 283,
               "column": 3
             },
             {
-              "title": "TC_11: Inventory – filter by name",
+              "title": "TC_11: Inventory – edit first template",
               "ok": true,
               "tags": [],
               "tests": [
@@ -485,12 +485,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 25550,
+                      "duration": 33042,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:55:55.848Z",
+                      "startTime": "2026-05-23T18:39:47.642Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -498,13 +498,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-5d4b88e90f6c831dc639",
+              "id": "70f5661c76c1d62d1821-2fd817acf3d6dd071ba4",
               "file": "templates-functional.spec.js",
-              "line": 288,
+              "line": 318,
               "column": 3
             },
             {
-              "title": "TC_12: Inventory – sort by column header",
+              "title": "TC_12: Inventory – filter by name",
               "ok": true,
               "tags": [],
               "tests": [
@@ -519,12 +519,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3363,
+                      "duration": 7023,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:56:21.435Z",
+                      "startTime": "2026-05-23T18:40:20.708Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -532,13 +532,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-baa5c1f7ad43391567b9",
+              "id": "70f5661c76c1d62d1821-2f08232521ab0c7a658c",
               "file": "templates-functional.spec.js",
-              "line": 296,
+              "line": 352,
               "column": 3
             },
             {
-              "title": "TC_13: Inventory – fetch from Etsy",
+              "title": "TC_13: Inventory – sort by column header",
               "ok": true,
               "tags": [],
               "tests": [
@@ -553,12 +553,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4220,
+                      "duration": 3261,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:56:24.830Z",
+                      "startTime": "2026-05-23T18:40:27.756Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -566,9 +566,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-365437bb5bd6cb063c1b",
+              "id": "70f5661c76c1d62d1821-86d5b42b59ec7e8d0453",
               "file": "templates-functional.spec.js",
-              "line": 302,
+              "line": 360,
               "column": 3
             },
             {
@@ -587,12 +587,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 42053,
+                      "duration": 49920,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:56:29.080Z",
+                      "startTime": "2026-05-23T18:40:31.049Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -602,11 +602,11 @@
               ],
               "id": "70f5661c76c1d62d1821-ddf1a03c520d3f2087c5",
               "file": "templates-functional.spec.js",
-              "line": 309,
+              "line": 366,
               "column": 3
             },
             {
-              "title": "TC_15: Price – create first template",
+              "title": "TC_15: Price – fetch from Etsy",
               "ok": true,
               "tags": [],
               "tests": [
@@ -621,12 +621,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 19157,
+                      "duration": 4428,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:57:11.158Z",
+                      "startTime": "2026-05-23T18:41:20.998Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -634,13 +634,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-f234094fea36645bf66b",
+              "id": "70f5661c76c1d62d1821-80f285591897d35eaac0",
               "file": "templates-functional.spec.js",
-              "line": 326,
+              "line": 384,
               "column": 3
             },
             {
-              "title": "TC_16: Price – create second template",
+              "title": "TC_16: Price – create first template",
               "ok": true,
               "tags": [],
               "tests": [
@@ -655,12 +655,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 18966,
+                      "duration": 17421,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:57:30.343Z",
+                      "startTime": "2026-05-23T18:41:25.457Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -668,13 +668,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-f4bdc5b6c31c4443cc94",
+              "id": "70f5661c76c1d62d1821-960073afbc5f8eb7ce0d",
               "file": "templates-functional.spec.js",
-              "line": 333,
+              "line": 391,
               "column": 3
             },
             {
-              "title": "TC_17: Price – edit first template",
+              "title": "TC_17: Price – create second template",
               "ok": true,
               "tags": [],
               "tests": [
@@ -689,12 +689,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 17687,
+                      "duration": 17426,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:57:49.341Z",
+                      "startTime": "2026-05-23T18:41:42.928Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -702,13 +702,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-500cade6d3a894017964",
+              "id": "70f5661c76c1d62d1821-02f418682f44862d0a27",
               "file": "templates-functional.spec.js",
-              "line": 340,
+              "line": 442,
               "column": 3
             },
             {
-              "title": "TC_18: Price – filter by name",
+              "title": "TC_18: Price – edit first template",
               "ok": true,
               "tags": [],
               "tests": [
@@ -723,12 +723,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 6342,
+                      "duration": 18360,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:58:07.064Z",
+                      "startTime": "2026-05-23T18:42:00.391Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -736,13 +736,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-44aaa09ed7270f8318ef",
+              "id": "70f5661c76c1d62d1821-556e7513faa112d888ae",
               "file": "templates-functional.spec.js",
-              "line": 353,
+              "line": 492,
               "column": 3
             },
             {
-              "title": "TC_19: Price – sort by column header",
+              "title": "TC_19: Price – filter by name",
               "ok": true,
               "tags": [],
               "tests": [
@@ -757,12 +757,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3428,
+                      "duration": 6949,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:58:13.440Z",
+                      "startTime": "2026-05-23T18:42:18.778Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -770,13 +770,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-d5f572da96b09cb1abdf",
+              "id": "70f5661c76c1d62d1821-2e158e91ef4e6e3ebbe5",
               "file": "templates-functional.spec.js",
-              "line": 361,
+              "line": 505,
               "column": 3
             },
             {
-              "title": "TC_20: Price – fetch from Etsy",
+              "title": "TC_20: Price – sort by column header",
               "ok": true,
               "tags": [],
               "tests": [
@@ -791,12 +791,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4237,
+                      "duration": 3384,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:58:16.905Z",
+                      "startTime": "2026-05-23T18:42:25.754Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -804,9 +804,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-6786ab910cb8ad4e7933",
+              "id": "70f5661c76c1d62d1821-2d5c02cf797d0bc9aea2",
               "file": "templates-functional.spec.js",
-              "line": 367,
+              "line": 513,
               "column": 3
             },
             {
@@ -825,12 +825,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 41958,
+                      "duration": 46286,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:58:21.171Z",
+                      "startTime": "2026-05-23T18:42:29.162Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -840,11 +840,11 @@
               ],
               "id": "70f5661c76c1d62d1821-6528272a8460d0e5dd6e",
               "file": "templates-functional.spec.js",
-              "line": 374,
+              "line": 519,
               "column": 3
             },
             {
-              "title": "TC_22: Policy – create first template",
+              "title": "TC_22: Policy – fetch from Etsy",
               "ok": true,
               "tags": [],
               "tests": [
@@ -859,12 +859,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 14380,
+                      "duration": 8594,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:59:03.161Z",
+                      "startTime": "2026-05-23T18:43:15.473Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -872,13 +872,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-f19a81440981c9ecd33a",
+              "id": "70f5661c76c1d62d1821-fcd5a7bcb5407d0f4b16",
               "file": "templates-functional.spec.js",
-              "line": 398,
+              "line": 543,
               "column": 3
             },
             {
-              "title": "TC_23: Policy – create second template",
+              "title": "TC_23: Policy – create first template",
               "ok": true,
               "tags": [],
               "tests": [
@@ -893,12 +893,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 14325,
+                      "duration": 15364,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:59:17.576Z",
+                      "startTime": "2026-05-23T18:43:24.096Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -906,13 +906,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-3af17d6f2110e1ffe7f0",
+              "id": "70f5661c76c1d62d1821-eea5a9b299fdb29dfa7e",
               "file": "templates-functional.spec.js",
-              "line": 405,
+              "line": 550,
               "column": 3
             },
             {
-              "title": "TC_24: Policy – edit first template",
+              "title": "TC_24: Policy – create second template",
               "ok": true,
               "tags": [],
               "tests": [
@@ -927,12 +927,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 55256,
+                      "duration": 15358,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T06:59:31.934Z",
+                      "startTime": "2026-05-23T18:43:39.492Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -940,13 +940,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-83cf80fe7238464d620c",
+              "id": "70f5661c76c1d62d1821-b4f7fa1198063924d462",
               "file": "templates-functional.spec.js",
-              "line": 412,
+              "line": 584,
               "column": 3
             },
             {
-              "title": "TC_25: Policy – filter by days",
+              "title": "TC_25: Policy – edit first template",
               "ok": true,
               "tags": [],
               "tests": [
@@ -961,12 +961,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 6369,
+                      "duration": 54008,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:00:27.221Z",
+                      "startTime": "2026-05-23T18:43:54.879Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -974,13 +974,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-b0c4ac53c7cd829ae26c",
+              "id": "70f5661c76c1d62d1821-96d76800ea278d2e95ef",
               "file": "templates-functional.spec.js",
-              "line": 430,
+              "line": 618,
               "column": 3
             },
             {
-              "title": "TC_26: Policy – sort by column header",
+              "title": "TC_26: Policy – filter by days",
               "ok": true,
               "tags": [],
               "tests": [
@@ -995,12 +995,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3281,
+                      "duration": 6971,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:00:33.627Z",
+                      "startTime": "2026-05-23T18:44:48.914Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1008,13 +1008,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-2977f59b0510ebd371cb",
+              "id": "70f5661c76c1d62d1821-cb132bc1aaeaa0a79f68",
               "file": "templates-functional.spec.js",
-              "line": 438,
+              "line": 636,
               "column": 3
             },
             {
-              "title": "TC_27: Policy – fetch from Etsy",
+              "title": "TC_27: Policy – sort by column header",
               "ok": true,
               "tags": [],
               "tests": [
@@ -1029,12 +1029,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 8222,
+                      "duration": 3328,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:00:36.945Z",
+                      "startTime": "2026-05-23T18:44:55.919Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1042,9 +1042,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-dc136c4135e198be44bb",
+              "id": "70f5661c76c1d62d1821-7a6ca2c7a59ad84d67f1",
               "file": "templates-functional.spec.js",
-              "line": 444,
+              "line": 644,
               "column": 3
             },
             {
@@ -1063,12 +1063,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 19317,
+                      "duration": 22483,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:00:45.195Z",
+                      "startTime": "2026-05-23T18:44:59.292Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1078,11 +1078,11 @@
               ],
               "id": "70f5661c76c1d62d1821-17d17effd4757aaced8e",
               "file": "templates-functional.spec.js",
-              "line": 451,
+              "line": 650,
               "column": 3
             },
             {
-              "title": "TC_29: Shop Sections – create first section",
+              "title": "TC_29: Shop Sections – fetch from Etsy",
               "ok": true,
               "tags": [],
               "tests": [
@@ -1097,12 +1097,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 28947,
+                      "duration": 11481,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:01:04.552Z",
+                      "startTime": "2026-05-23T18:45:21.824Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1110,13 +1110,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-1b319968a50426cb3c15",
+              "id": "70f5661c76c1d62d1821-1ee097b527875ffc110b",
               "file": "templates-functional.spec.js",
-              "line": 467,
+              "line": 666,
               "column": 3
             },
             {
-              "title": "TC_30: Shop Sections – create second section",
+              "title": "TC_30: Shop Sections – create first section",
               "ok": true,
               "tags": [],
               "tests": [
@@ -1131,12 +1131,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 28636,
+                      "duration": 17539,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:01:33.539Z",
+                      "startTime": "2026-05-23T18:45:33.338Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1144,13 +1144,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-a4c61e6dadca748c25f6",
+              "id": "70f5661c76c1d62d1821-61bfdd94a747dbe65634",
               "file": "templates-functional.spec.js",
-              "line": 480,
+              "line": 673,
               "column": 3
             },
             {
-              "title": "TC_31: Shop Sections – edit first section",
+              "title": "TC_31: Shop Sections – create second section",
               "ok": true,
               "tags": [],
               "tests": [
@@ -1165,12 +1165,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 33415,
+                      "duration": 17360,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:02:02.205Z",
+                      "startTime": "2026-05-23T18:45:50.903Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1178,13 +1178,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-d38126eb4f84449a61d4",
+              "id": "70f5661c76c1d62d1821-fcc72119d437ef89c204",
               "file": "templates-functional.spec.js",
-              "line": 492,
+              "line": 756,
               "column": 3
             },
             {
-              "title": "TC_32: Shop Sections – filter by name",
+              "title": "TC_32: Shop Sections – edit first section",
               "ok": true,
               "tags": [],
               "tests": [
@@ -1199,12 +1199,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 33532,
+                      "duration": 33389,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:02:35.649Z",
+                      "startTime": "2026-05-23T18:46:08.286Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1212,13 +1212,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-2da8df98b8940170986e",
+              "id": "70f5661c76c1d62d1821-d17f6dca45e2daf2a43b",
               "file": "templates-functional.spec.js",
-              "line": 511,
+              "line": 834,
               "column": 3
             },
             {
-              "title": "TC_33: Shop Sections – sort by column header",
+              "title": "TC_33: Shop Sections – filter by name",
               "ok": true,
               "tags": [],
               "tests": [
@@ -1233,12 +1233,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 5408,
+                      "duration": 33408,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:03:09.222Z",
+                      "startTime": "2026-05-23T18:46:41.698Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1246,13 +1246,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-1cb5e3009d0fbf4461a3",
+              "id": "70f5661c76c1d62d1821-8cf0d841a249c3ec282c",
               "file": "templates-functional.spec.js",
-              "line": 524,
+              "line": 853,
               "column": 3
             },
             {
-              "title": "TC_34: Shop Sections – fetch from Etsy",
+              "title": "TC_34: Shop Sections – sort by column header",
               "ok": true,
               "tags": [],
               "tests": [
@@ -1267,12 +1267,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 11458,
+                      "duration": 5294,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:03:14.660Z",
+                      "startTime": "2026-05-23T18:47:15.136Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1280,9 +1280,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-9b57b2604e86014b9f7c",
+              "id": "70f5661c76c1d62d1821-8a67a7113757ebd8f4d3",
               "file": "templates-functional.spec.js",
-              "line": 530,
+              "line": 866,
               "column": 3
             },
             {
@@ -1301,12 +1301,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 34957,
+                      "duration": 34934,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:03:26.148Z",
+                      "startTime": "2026-05-23T18:47:20.454Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1316,7 +1316,7 @@
               ],
               "id": "70f5661c76c1d62d1821-b0a4ca9caf2b89d309ff",
               "file": "templates-functional.spec.js",
-              "line": 537,
+              "line": 872,
               "column": 3
             },
             {
@@ -1335,12 +1335,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 6193,
+                      "duration": 6197,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:04:01.133Z",
+                      "startTime": "2026-05-23T18:47:55.414Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1350,7 +1350,7 @@
               ],
               "id": "70f5661c76c1d62d1821-c778aacb3b83390c4ca3",
               "file": "templates-functional.spec.js",
-              "line": 555,
+              "line": 890,
               "column": 3
             },
             {
@@ -1369,12 +1369,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 31688,
+                      "duration": 31708,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:04:07.359Z",
+                      "startTime": "2026-05-23T18:48:01.634Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1384,11 +1384,11 @@
               ],
               "id": "70f5661c76c1d62d1821-16f33be742e431703a77",
               "file": "templates-functional.spec.js",
-              "line": 563,
+              "line": 898,
               "column": 3
             },
             {
-              "title": "TC_38: Processing Profiles – create first profile",
+              "title": "TC_38: Processing Profiles – fetch from Etsy",
               "ok": true,
               "tags": [],
               "tests": [
@@ -1403,12 +1403,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 65330,
+                      "duration": 10307,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:04:39.075Z",
+                      "startTime": "2026-05-23T18:48:33.369Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1416,13 +1416,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-5e86e5946023ab672372",
+              "id": "70f5661c76c1d62d1821-6d50410a350d48a8fa14",
               "file": "templates-functional.spec.js",
-              "line": 590,
+              "line": 925,
               "column": 3
             },
             {
-              "title": "TC_39: Processing Profiles – create second profile",
+              "title": "TC_39: Processing Profiles – create first profile",
               "ok": true,
               "tags": [],
               "tests": [
@@ -1437,12 +1437,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 52374,
+                      "duration": 65188,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:05:44.439Z",
+                      "startTime": "2026-05-23T18:48:43.702Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1450,13 +1450,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-22bb77e79c46304a46de",
+              "id": "70f5661c76c1d62d1821-89365af8a5ccb00c0dd9",
               "file": "templates-functional.spec.js",
-              "line": 600,
+              "line": 933,
               "column": 3
             },
             {
-              "title": "TC_40: Processing Profiles – edit first profile",
+              "title": "TC_40: Processing Profiles – create second profile",
               "ok": true,
               "tags": [],
               "tests": [
@@ -1471,12 +1471,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 21052,
+                      "duration": 52238,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:06:36.873Z",
+                      "startTime": "2026-05-23T18:49:48.917Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1484,13 +1484,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-7dd2e74c53ccf1ffcfa5",
+              "id": "70f5661c76c1d62d1821-e43a711e8c6714035052",
               "file": "templates-functional.spec.js",
-              "line": 610,
+              "line": 944,
               "column": 3
             },
             {
-              "title": "TC_41: Processing Profiles – filter by name",
+              "title": "TC_41: Processing Profiles – edit first profile",
               "ok": true,
               "tags": [],
               "tests": [
@@ -1505,12 +1505,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 6273,
+                      "duration": 59848,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:06:57.955Z",
+                      "startTime": "2026-05-23T18:50:41.180Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1518,13 +1518,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-aecae4aedcfadb1c768f",
+              "id": "70f5661c76c1d62d1821-7d55defc16eafc3e0ed8",
               "file": "templates-functional.spec.js",
-              "line": 622,
+              "line": 955,
               "column": 3
             },
             {
-              "title": "TC_42: Processing Profiles – sort by column header",
+              "title": "TC_42: Processing Profiles – filter by name",
               "ok": true,
               "tags": [],
               "tests": [
@@ -1539,12 +1539,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3314,
+                      "duration": 6890,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:07:04.258Z",
+                      "startTime": "2026-05-23T18:51:41.052Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1552,13 +1552,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-762220b0ebb3ba762432",
+              "id": "70f5661c76c1d62d1821-5d8bbe4021132d9e5c74",
               "file": "templates-functional.spec.js",
-              "line": 630,
+              "line": 967,
               "column": 3
             },
             {
-              "title": "TC_43: Processing Profiles – fetch from Etsy",
+              "title": "TC_43: Processing Profiles – sort by column header",
               "ok": true,
               "tags": [],
               "tests": [
@@ -1573,12 +1573,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 10255,
+                      "duration": 3252,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:07:07.603Z",
+                      "startTime": "2026-05-23T18:51:47.971Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1586,9 +1586,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "70f5661c76c1d62d1821-8b3d350f95a31c4cba2f",
+              "id": "70f5661c76c1d62d1821-547e318a034287643ab2",
               "file": "templates-functional.spec.js",
-              "line": 636,
+              "line": 975,
               "column": 3
             },
             {
@@ -1607,12 +1607,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 51218,
+                      "duration": 54287,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-04-25T07:07:17.888Z",
+                      "startTime": "2026-05-23T18:51:51.252Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1622,7 +1622,7 @@
               ],
               "id": "70f5661c76c1d62d1821-db7ac992f506f0ba4c83",
               "file": "templates-functional.spec.js",
-              "line": 644,
+              "line": 981,
               "column": 3
             }
           ]
@@ -1632,8 +1632,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-04-25T06:51:08.854Z",
-    "duration": 1022156.746,
+    "startTime": "2026-05-23T18:36:36.137Z",
+    "duration": 1087831.465,
     "expected": 44,
     "skipped": 0,
     "unexpected": 0,

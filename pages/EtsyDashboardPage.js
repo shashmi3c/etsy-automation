@@ -143,14 +143,55 @@ class EtsyDashboardPage {
     return this.app.getByText(/new to the app/i).first().isVisible({ timeout: 5000 }).catch(() => false);
   }
 
-  /** Watch Guide button (accessibilityLabel="Watch Guide") */
+  /** Watch Guide button — data-testid: dashboard.banner-card[guide].watch */
   getWatchGuideButton() {
-    return this.app.getByRole('button', { name: /watch guide/i }).first();
+    return this.app.getByTestId('dashboard.banner-card[guide].watch')
+      .or(this.app.getByRole('button', { name: /watch guide/i })).first();
   }
 
-  /** Refresh Data button (accessibilityLabel="Refresh data") */
+  /** Refresh Data button — data-testid: dashboard.refresh */
   getRefreshDataButton() {
-    return this.app.getByRole('button', { name: /refresh data/i }).first();
+    return this.app.getByTestId('dashboard.refresh')
+      .or(this.app.getByRole('button', { name: /refresh data/i })).first();
+  }
+
+  /** Close guide banner — data-testid: dashboard.banner-card[guide].close */
+  getGuideBannerClose() {
+    return this.app.getByTestId('dashboard.banner-card[guide].close')
+      .or(this.app.getByRole('button', { name: /close.*guide|dismiss.*guide/i })).first();
+  }
+
+  /** Migration banner CTA — data-testid: dashboard.banner-card[migration].action */
+  getMigrationBannerCta() {
+    return this.app.getByTestId('dashboard.banner-card[migration].action')
+      .or(this.app.getByRole('button', { name: /migrate|start migration/i })).first();
+  }
+
+  /** Migration banner dismiss — data-testid: dashboard.banner-card[migration].dismiss */
+  getMigrationBannerDismiss() {
+    return this.app.getByTestId('dashboard.banner-card[migration].dismiss')
+      .or(this.app.getByRole('button', { name: /dismiss.*migration|close.*migration/i })).first();
+  }
+
+  /** Etsy shop store link — data-testid: dashboard.etsy-shop.store-link */
+  getEtsyShopStoreLink() {
+    return this.app.getByTestId('dashboard.etsy-shop.store-link')
+      .or(this.app.getByRole('link', { name: /visit.*shop|etsy shop/i })).first();
+  }
+
+  /** Onboarding checklist toggle — data-testid: dashboard.onboarding.toggle */
+  getOnboardingToggle() {
+    return this.app.getByTestId('dashboard.onboarding.toggle')
+      .or(this.app.getByRole('button', { name: /onboarding|getting started/i })).first();
+  }
+
+  /**
+   * Onboarding step action button — data-testid: dashboard.onboarding.step[${key}].action
+   * @param {string} key — step key, e.g. 'connect-etsy', 'create-profile'
+   */
+  getOnboardingStepAction(key) {
+    return this.app.getByTestId(`dashboard.onboarding.step[${key}].action`)
+      .or(this.app.getByRole('button', { name: new RegExp(key.replace(/-/g, ' '), 'i') })).first();
   }
 
   // ─── Order Analysis ───────────────────────────────────────────────────
@@ -175,19 +216,26 @@ class EtsyDashboardPage {
       .isVisible({ timeout: 5000 }).catch(() => false);
   }
 
-  /** "View All Orders" button (accessibilityLabel="View All Orders") */
+  /** "View All Orders" button — data-testid: dashboard.orders.view-all */
   getViewAllOrdersButton() {
-    return this.app.getByRole('button', { name: /view all orders/i }).first();
+    return this.app.getByTestId('dashboard.orders.view-all')
+      .or(this.app.getByRole('button', { name: /view all orders/i })).first();
   }
 
   /**
    * Click an order status badge by name — redirects to /panel/orders.
-   * Uses Playwright locator to verify badge exists, then evaluate() to click the
-   * sibling count button (which carries the navigation handler).
+   * Tries data-testid (dashboard.order-analysis.badge[label]) first, then
+   * falls back to class-based selector.
    */
   async clickOrderStatusBadge(name) {
     try {
-      // Step 1: verify badge is present using Playwright locator
+      // Step 1: try data-testid badge — label matches the badge text exactly (case-sensitive in testid)
+      const tidBadge = this.app.locator(`[data-testid*="dashboard.order-analysis.badge"]`).filter({ hasText: new RegExp(name, 'i') }).first();
+      if (await tidBadge.isVisible({ timeout: 3000 }).catch(() => false)) {
+        await tidBadge.click({ force: true });
+        return true;
+      }
+      // Step 2: verify badge is present using Playwright locator
       const badge = this.app.locator('[class*="status_badge"]').filter({ hasText: new RegExp(name, 'i') }).first();
       const visible = await badge.isVisible({ timeout: 5000 }).catch(() => false);
       if (!visible) return false;
@@ -228,9 +276,10 @@ class EtsyDashboardPage {
     return this.app.getByText(/total revenue/i).first().isVisible({ timeout: 5000 }).catch(() => false);
   }
 
-  /** Date range filter button e.g. "Last 7 days" */
+  /** Date range filter toggle — data-testid: dashboard.date-range.toggle */
   getRevenueDateFilter() {
-    return this.app.getByRole('button', { name: /select date range|last 7 days|last 30 days|this month/i }).first();
+    return this.app.getByTestId('dashboard.date-range.toggle')
+      .or(this.app.getByRole('button', { name: /select date range|last 7 days|last 30 days|this month/i })).first();
   }
 
   // ─── Product Analysis ─────────────────────────────────────────────────
@@ -249,19 +298,25 @@ class EtsyDashboardPage {
     return found;
   }
 
-  /** "View All Products" button (accessibilityLabel="View All Products") */
+  /** "View All Products" button — data-testid: dashboard.products.view-all */
   getViewAllProductsButton() {
-    return this.app.getByRole('button', { name: /view all products/i }).first();
+    return this.app.getByTestId('dashboard.products.view-all')
+      .or(this.app.getByRole('button', { name: /view all products/i })).first();
   }
 
   /**
    * Click a product status badge by name — redirects to /panel/listings.
-   * Uses Playwright locator to verify badge exists, then evaluate() to click the
-   * sibling count button (which carries the navigation handler).
-   * Handles non-breaking spaces (U+00A0) in badge text like "Not Published".
+   * Tries data-testid (dashboard.product-analysis.badge[label]) first, then
+   * falls back to class-based selector. Handles non-breaking spaces.
    */
   async clickProductStatusBadge(name) {
     try {
+      // Try data-testid badge first
+      const tidBadge = this.app.locator(`[data-testid*="dashboard.product-analysis.badge"]`).filter({ hasText: new RegExp(name, 'i') }).first();
+      if (await tidBadge.isVisible({ timeout: 3000 }).catch(() => false)) {
+        await tidBadge.click({ force: true });
+        return true;
+      }
       // Build regex that matches both regular and non-breaking spaces between words
       const flexPattern = new RegExp(name.split(/\s+/).join('[\\s\\u00a0]+'), 'i');
 
@@ -325,9 +380,10 @@ class EtsyDashboardPage {
       .isVisible({ timeout: 10000 }).catch(() => false);
   }
 
-  /** Refresh button in Etsy Shop Status (aria-label="Refresh Etsy Shop") */
+  /** Refresh button in Etsy Shop Status — data-testid: dashboard.etsy-shop.refresh */
   getShopRefreshButton() {
-    return this.app.locator('button[aria-label="Refresh Etsy Shop"]').first();
+    return this.app.getByTestId('dashboard.etsy-shop.refresh')
+      .or(this.app.locator('button[aria-label="Refresh Etsy Shop"]')).first();
   }
 
   async getShopMetricsCount() {
@@ -345,11 +401,12 @@ class EtsyDashboardPage {
   }
 
   /**
-   * "All Activities" button (accessibilityLabel="View All Activities")
+   * "All Activities" button — data-testid: dashboard.recent-activities.view-all
    * Navigates to /panel/activity
    */
   getAllActivitiesLink() {
-    return this.app.getByRole('button', { name: /view all activities|all activities/i }).first();
+    return this.app.getByTestId('dashboard.recent-activities.view-all')
+      .or(this.app.getByRole('button', { name: /view all activities|all activities/i })).first();
   }
 
   /** Count activity items on the dashboard recent activities panel */
@@ -403,8 +460,10 @@ class EtsyDashboardPage {
     return found;
   }
 
+  /** View Plan Details link — data-testid: dashboard.plan-overview.view-details */
   getViewPlanDetailsLink() {
-    return this.app.getByText(/view plan details/i).first();
+    return this.app.getByTestId('dashboard.plan-overview.view-details')
+      .or(this.app.getByText(/view plan details/i)).first();
   }
 
   // ─── Feedback ─────────────────────────────────────────────────────────
@@ -414,12 +473,16 @@ class EtsyDashboardPage {
       .isVisible({ timeout: 5000 }).catch(() => false);
   }
 
+  /** Good feedback button — data-testid: dashboard.app-experience.good */
   getGoodButton() {
-    return this.app.getByRole('button', { name: /good/i }).first();
+    return this.app.getByTestId('dashboard.app-experience.good')
+      .or(this.app.getByRole('button', { name: /good/i })).first();
   }
 
+  /** Bad feedback button — data-testid: dashboard.app-experience.bad */
   getBadButton() {
-    return this.app.getByRole('button', { name: /bad/i }).first();
+    return this.app.getByTestId('dashboard.app-experience.bad')
+      .or(this.app.getByRole('button', { name: /bad/i })).first();
   }
 
   // ─── Reverse Sync Banner ──────────────────────────────────────────────

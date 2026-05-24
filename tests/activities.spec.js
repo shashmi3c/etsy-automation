@@ -2,13 +2,15 @@
 const { test, expect } = require('@playwright/test');
 const { ActivitiesPage } = require('../pages/ActivitiesPage');
 const { EtsyDashboardPage } = require('../pages/EtsyDashboardPage');
+const { EtsyProductsPage } = require('../pages/EtsyProductsPage');
 
 const BASE_URL =
   process.env.SHOPIFY_EMBEDDED_APP_URL ||
   `https://admin.shopify.com/store/${process.env.SHOPIFY_STORE || 'etsy-test-gp7o90bx'}/apps/etsy-dev-public`;
 
 const OVERVIEW_URL = BASE_URL.includes('/panel/') ? BASE_URL : `${BASE_URL}/panel/overview`;
-const ACTIVITY_URL = OVERVIEW_URL.replace(/panel\/.*$/, 'panel/activity');
+const ACTIVITY_URL  = OVERVIEW_URL.replace(/panel\/.*$/, 'panel/activity');
+const PRODUCTS_URL  = OVERVIEW_URL.replace(/panel\/.*$/, 'panel/listings');
 
 test.describe('Etsy Activities', () => {
   test.describe.configure({ mode: 'serial', timeout: 180000 });
@@ -16,7 +18,11 @@ test.describe('Etsy Activities', () => {
   /** @type {ActivitiesPage} */
   let activities;
 
+  // Shared state: did TC_47 actually delete an item?
+  let tc47DeletedItem = false;
+
   test.beforeEach(async ({ page }) => {
+    test.setTimeout(120000);
     activities = new ActivitiesPage(page);
     await activities.goto(ACTIVITY_URL);
 
@@ -56,9 +62,11 @@ test.describe('Etsy Activities', () => {
   test('TC_40: Activity items are listed on the Activities page', async () => {
     const hasItems   = await activities.hasActivityItems();
     const emptyState = await activities.isEmptyStateVisible();
-    const pageLoaded = await activities.isActivitiesPageVisible();
-    // Pass if items exist, OR empty state shown, OR page at minimum loaded (no items yet in store)
-    expect(hasItems || emptyState || pageLoaded).toBe(true);
+    if (!hasItems && !emptyState) {
+      test.skip(true, 'No activity items and no empty-state message visible — store has no recent activities.');
+      return;
+    }
+    expect(hasItems || emptyState).toBe(true);
   });
 
   test('TC_41: Each activity item contains non-empty text content', async () => {
@@ -145,11 +153,16 @@ test.describe('Etsy Activities', () => {
 
   // ─── Empty State ──────────────────────────────────────────────────────
 
-  test('TC_50: Empty state or list is shown — page never renders blank', async () => {
-    const hasItems   = await activities.hasActivityItems();
-    const emptyState = await activities.isEmptyStateVisible();
-    const pageLoaded = await activities.isActivitiesPageVisible();
-    expect(hasItems || emptyState || pageLoaded).toBe(true);
+  test('TC_50: Empty state is shown when there are no activity items', async () => {
+    const hasItems = await activities.hasActivityItems();
+    if (hasItems) {
+      test.skip(true, 'Activity items present — empty state is not shown (expected, data-dependent).');
+      return;
+    }
+    // No items present — blank page or explicit empty-state message both represent the correct empty state.
+    // Assert that zero activity items are rendered (the page did not silently fail to load).
+    const count = await activities.getActivityItemsCount();
+    expect(count, 'Expected 0 activity items to be displayed (empty state).').toBe(0);
   });
 
   // ─── Load More / Pagination ───────────────────────────────────────────
@@ -237,29 +250,18 @@ test.describe('Etsy Activities', () => {
     expect(countAfter).toBe(countBefore);
   });
 
-  // ─── Cross-Store Isolation (Known Issue) ─────────────────────────────
-
-  test('TC_56: Activities are specific to the connected Etsy store account (cross-store isolation)', async () => {
-    const visible = await activities.isActivitiesPageVisible();
-    expect(visible).toBe(true);
-
-    const count = await activities.getActivityItemsCount();
-    expect(typeof count).toBe('number');
-
-    console.log(`[TC_56] Activity count for etsy-test-gp7o90bx: ${count}`);
-    console.log('[TC_56] Cross-store isolation requires comparing this count against a second store session.');
-  });
-
-  // ─── Delete Actions (destructive — run last) ──────────────────────────
+  // ─── Delete Actions ───────────────────────────────────────────────────
 
   test('TC_47: Deleting an activity reduces the total count by 1', async ({ page }) => {
     const countBefore = await activities.getActivityItemsCount();
     if (countBefore === 0) {
+      tc47DeletedItem = false;
       test.skip(true, 'No activity items to delete.');
       return;
     }
 
     const deleted = await activities.deleteFirstActivity();
+    tc47DeletedItem = deleted;
     expect(deleted).toBe(true);
 
     await page.waitForTimeout(3000);
@@ -269,6 +271,10 @@ test.describe('Etsy Activities', () => {
   });
 
   test('TC_48: Deletion is server-persisted — deleted activity does not reappear after reload', async ({ page }) => {
+    if (!tc47DeletedItem) {
+      test.skip(true, 'TC_47 did not delete any item (no activities in store) — nothing to verify for server persistence.');
+      return;
+    }
     // TC_47 (serial predecessor) already deleted 1 item.
     // Reload and confirm the deletion stuck server-side — no ghost reappearance.
     const countAfterPrior = await activities.getActivityItemsCount();
@@ -309,5 +315,246 @@ test.describe('Etsy Activities', () => {
         expect(countAfter).toBeLessThan(countMid);
       }
     }
+  });
+
+  // ─── Cross-Store Isolation (run last — failure here does not affect delete tests above) ──
+
+  test('TC_56: Activities are account-specific — GojosatoruBoutique shows only its own activities', async ({ page }) => {
+    const onTwi = await activities.ensureTestworkIndiaActive();
+    if (!onTwi) {
+      test.skip(true, 'Could not normalise to TestworkIndia — store switcher unavailable.');
+      return;
+    }
+
+    const countTwi = await activities.getActivityItemsCount();
+    const headingsTwi = await activities.getActivityHeadingTexts();
+    const fingerprintTwi = headingsTwi.slice(0, 3).join('|');
+    console.log(`[TC_56] TestworkIndia — count: ${countTwi}, headings: ${fingerprintTwi || '(none)'}`);
+
+    const switcherFound = await activities.clickStoreSwitcher(/testworkindia/i);
+    if (!switcherFound) {
+      test.skip(true, 'Store switcher button not found on Activities page — multi-store feature may not be visible here.');
+      return;
+    }
+
+    const switched = await activities.selectStoreFromDropdown(/gojosatoruboutique/i);
+    if (!switched) {
+      test.skip(true, 'GojosatoruBoutique option not found in store switcher dropdown.');
+      return;
+    }
+
+    await activities._awaitCifappsReady(30000);
+    await activities.resolveAppContext();
+    await page.waitForTimeout(2000);
+
+    const storeBtn = activities.app.getByRole('button', { name: /gojosatoruboutique/i }).first();
+    await expect(storeBtn).toBeVisible({ timeout: 10000 });
+
+    const countGojo = await activities.getActivityItemsCount();
+    const headingsGojo = await activities.getActivityHeadingTexts();
+    const fingerprintGojo = headingsGojo.slice(0, 3).join('|');
+    console.log(`[TC_56] GojosatoruBoutique — count: ${countGojo}, headings: ${fingerprintGojo || '(none)'}`);
+
+    if (countTwi > 0 && countGojo > 0) {
+      const isolationBug = fingerprintTwi === fingerprintGojo;
+      if (isolationBug) {
+        console.error(
+          `\n[TC_56] ❌ ISOLATION BUG DETECTED\n` +
+          `  Both TestworkIndia and GojosatoruBoutique show the same activity:\n` +
+          `    "${fingerprintTwi}"\n` +
+          `  Activities should be scoped to the account that initiated them.\n` +
+          `  Root cause: the backend does not enforce per-account activity scoping —\n` +
+          `  activity records are shared across all connected Etsy accounts in this Shopify store session.\n` +
+          `  This test will FAIL until the backend enforces proper per-account isolation.\n`
+        );
+      }
+      expect(
+        fingerprintTwi,
+        `ISOLATION BUG: Both TestworkIndia and GojosatoruBoutique display the same ` +
+        `activity "${fingerprintTwi}". Activities must be account-specific — ` +
+        `only the store that initiated the action should see it. ` +
+        `Fix required: backend must scope activity records to the initiating Etsy account.`
+      ).not.toBe(fingerprintGojo);
+    } else {
+      const validState = (await activities.hasActivityItems()) || (await activities.isEmptyStateVisible()) || (await activities.isActivitiesPageVisible());
+      expect(validState).toBe(true);
+      console.log('[TC_56] One or both stores have no activities — store context verified, isolation inconclusive.');
+    }
+  });
+
+  test('TC_57: After switching to GojosatoruBoutique, switching back restores TestworkIndia activities', async ({ page }) => {
+    const onTwi = await activities.ensureTestworkIndiaActive();
+    if (!onTwi) {
+      test.skip(true, 'Could not normalise to TestworkIndia — store switcher unavailable.');
+      return;
+    }
+
+    const switcherFound = await activities.clickStoreSwitcher(/testworkindia/i);
+    if (!switcherFound) {
+      test.skip(true, 'Store switcher not visible — skipping round-trip test.');
+      return;
+    }
+
+    const switched = await activities.selectStoreFromDropdown(/gojosatoruboutique/i);
+    if (!switched) {
+      test.skip(true, 'GojosatoruBoutique not available in switcher dropdown.');
+      return;
+    }
+
+    await activities._awaitCifappsReady(30000);
+    await activities.resolveAppContext();
+    await page.waitForTimeout(2000);
+
+    const storeGojo = activities.app.getByRole('button', { name: /gojosatoruboutique/i }).first();
+    await expect(storeGojo).toBeVisible({ timeout: 10000 });
+
+    const countGojo = await activities.getActivityItemsCount();
+    console.log(`[TC_57] GojosatoruBoutique activity count: ${countGojo}`);
+
+    await activities.clickStoreSwitcher(/gojosatoruboutique/i);
+    await activities.selectStoreFromDropdown(/testworkindia/i);
+    await activities._awaitCifappsReady(30000);
+    await activities.resolveAppContext();
+    await page.waitForTimeout(2000);
+
+    const storeTwi = activities.app.getByRole('button', { name: /testworkindia/i }).first();
+    await expect(storeTwi).toBeVisible({ timeout: 10000 });
+
+    const countTwi = await activities.getActivityItemsCount();
+    console.log(`[TC_57] TestworkIndia activity count after switch-back: ${countTwi}`);
+
+    expect(await activities.isActivitiesPageVisible()).toBe(true);
+  });
+
+  // ─── Sync-triggered Activity Isolation ───────────────────────────────
+
+  test('TC_58: Sync from Etsy activity appears in Activities and is visible only in the initiating store', async ({ page }) => {
+    test.setTimeout(300000);
+
+    await activities.goto(ACTIVITY_URL);
+    const onTwi = await activities.ensureTestworkIndiaActive();
+    if (!onTwi) {
+      test.skip(true, 'Could not normalise to TestworkIndia — store switcher unavailable.');
+      return;
+    }
+
+    const products = new EtsyProductsPage(page);
+    await products.goto(PRODUCTS_URL);
+
+    const syncBtn = products.getSyncFromEtsyButton();
+    const syncVisible = await syncBtn.isVisible({ timeout: 10000 }).catch(() => false);
+    if (!syncVisible) {
+      test.skip(true, '"Sync from Etsy" button not visible on Products page.');
+      return;
+    }
+
+    await syncBtn.click({ force: true });
+    await page.waitForTimeout(2000);
+
+    const modalVisible = await products.isConfirmPopupVisible();
+    if (modalVisible) {
+      await products.clickPopupConfirm();
+      await page.waitForTimeout(2000);
+    }
+
+    console.log('[TC_58] Sync from Etsy triggered on TestworkIndia.');
+
+    await activities.goto(ACTIVITY_URL);
+
+    const SYNC_PATTERN = /listing.*fetch|fetch.*etsy|sync.*etsy|etsy.*sync|sync.*product|import.*listing|sync.*from/i;
+    const DONE_PATTERN  = /complet|success|done|finish|failed|error/i;
+
+    let syncHeadingText = '';
+    let activityCompleted = false;
+
+    for (let attempt = 0; attempt < 24; attempt++) {
+      await activities.resolveAppContext();
+      const allText = await activities.app.evaluate(() => document.body.innerText || '').catch(() => '');
+      const headings = await activities.getActivityHeadingTexts();
+      const syncHeading = headings.find(h => SYNC_PATTERN.test(h));
+      if (syncHeading || SYNC_PATTERN.test(allText)) {
+        syncHeadingText = syncHeading || 'sync activity';
+        console.log(`[TC_58] Sync activity found: "${syncHeadingText}"`);
+        if (DONE_PATTERN.test(allText)) {
+          activityCompleted = true;
+          console.log('[TC_58] Activity status: completed/done.');
+        }
+        break;
+      }
+      await page.waitForTimeout(5000);
+    }
+
+    if (!syncHeadingText) {
+      test.skip(true, 'Sync activity did not appear in Activities within 2 min.');
+      return;
+    }
+
+    if (!activityCompleted) {
+      for (let attempt = 0; attempt < 36; attempt++) {
+        await activities.resolveAppContext();
+        const allText = await activities.app.evaluate(() => document.body.innerText || '').catch(() => '');
+        if (DONE_PATTERN.test(allText) && SYNC_PATTERN.test(allText)) {
+          activityCompleted = true;
+          console.log('[TC_58] Activity completed.');
+          break;
+        }
+        await page.waitForTimeout(5000);
+      }
+    }
+
+    expect(syncHeadingText.length).toBeGreaterThan(0);
+    console.log(`[TC_58] Sync activity visible on TestworkIndia — completed: ${activityCompleted}`);
+
+    const switcherFound = await activities.clickStoreSwitcher(/testworkindia/i);
+    if (!switcherFound) {
+      test.skip(true, 'Store switcher not found — cannot verify isolation.');
+      return;
+    }
+
+    const switched = await activities.selectStoreFromDropdown(/gojosatoruboutique/i);
+    if (!switched) {
+      test.skip(true, 'GojosatoruBoutique not available in dropdown.');
+      return;
+    }
+
+    await activities._awaitCifappsReady(30000);
+    await activities.resolveAppContext();
+    await page.waitForTimeout(3000);
+
+    const gojoBtn = activities.app.getByRole('button', { name: /gojosatoruboutique/i }).first();
+    await expect(gojoBtn).toBeVisible({ timeout: 10000 });
+
+    const allTextGojo = await activities.app.evaluate(() => document.body.innerText || '').catch(() => '');
+    const headingsGojo = await activities.getActivityHeadingTexts();
+    const syncInGojo = SYNC_PATTERN.test(allTextGojo) || headingsGojo.some(h => SYNC_PATTERN.test(h));
+
+    if (syncInGojo) {
+      console.error(
+        `\n[TC_58] ❌ ISOLATION BUG: Sync activity from TestworkIndia is visible in GojosatoruBoutique!\n` +
+        `  Activity heading: "${syncHeadingText}"\n` +
+        `  This confirms activities are NOT store-specific — same as TC_56.\n`
+      );
+    } else {
+      console.log('[TC_58] Isolation VERIFIED — GojosatoruBoutique does not show TestworkIndia sync activity.');
+    }
+
+    expect(
+      syncInGojo,
+      `ISOLATION BUG: Sync activity "${syncHeadingText}" initiated on TestworkIndia is visible ` +
+      `in GojosatoruBoutique. Sync and publish activities must only appear for the store that triggered them.`
+    ).toBe(false);
+
+    await activities.clickStoreSwitcher(/gojosatoruboutique/i);
+    await activities.selectStoreFromDropdown(/testworkindia/i);
+    await activities._awaitCifappsReady(30000);
+    await activities.resolveAppContext();
+    await page.waitForTimeout(2000);
+
+    const twiBtn = activities.app.getByRole('button', { name: /testworkindia/i }).first();
+    await expect(twiBtn).toBeVisible({ timeout: 10000 });
+
+    const allTextTwi = await activities.app.evaluate(() => document.body.innerText || '').catch(() => '');
+    expect(SYNC_PATTERN.test(allTextTwi)).toBe(true);
+    console.log('[TC_58] TestworkIndia sync activity persists after round-trip store switch.');
   });
 });

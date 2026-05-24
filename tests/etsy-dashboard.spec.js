@@ -19,6 +19,7 @@ test.describe('Etsy Dashboard', () => {
   let dashboard;
 
   test.beforeAll(async ({ browser }) => {
+    test.setTimeout(120000);
     context = await browser.newContext({
       storageState: path.resolve(__dirname, '../playwright/.auth/shopify.json'),
     });

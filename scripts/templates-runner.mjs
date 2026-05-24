@@ -11,7 +11,7 @@
  */
 
 import { spawnSync } from 'child_process';
-import { writeFileSync, readFileSync, existsSync, unlinkSync } from 'fs';
+import { writeFileSync, readFileSync, unlinkSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -27,50 +27,101 @@ const grepVal  = grepIdx !== -1 ? args[grepIdx + 1] : null;
 
 // ── TC definitions ────────────────────────────────────────────────────────────
 const TC_DEFS = [
-  { tc:  1, section: 'Shipping Templates',   title: 'Create first template'        },
-  { tc:  2, section: 'Shipping Templates',   title: 'Create second template'       },
-  { tc:  3, section: 'Shipping Templates',   title: 'Edit first template'          },
-  { tc:  4, section: 'Shipping Templates',   title: 'Filter by name'               },
-  { tc:  5, section: 'Shipping Templates',   title: 'Sort by column header'        },
-  { tc:  6, section: 'Shipping Templates',   title: 'Fetch from Etsy'              },
-  { tc:  7, section: 'Shipping Templates',   title: 'Delete one template'          },
-  { tc:  8, section: 'Inventory Templates',  title: 'Create first template'        },
-  { tc:  9, section: 'Inventory Templates',  title: 'Create second template'       },
-  { tc: 10, section: 'Inventory Templates',  title: 'Edit first template'          },
-  { tc: 11, section: 'Inventory Templates',  title: 'Filter by name'               },
-  { tc: 12, section: 'Inventory Templates',  title: 'Sort by column header'        },
-  { tc: 13, section: 'Inventory Templates',  title: 'Fetch from Etsy'              },
-  { tc: 14, section: 'Inventory Templates',  title: 'Delete one template'          },
-  { tc: 15, section: 'Price Templates',      title: 'Create first template'        },
-  { tc: 16, section: 'Price Templates',      title: 'Create second template'       },
-  { tc: 17, section: 'Price Templates',      title: 'Edit first template'          },
-  { tc: 18, section: 'Price Templates',      title: 'Filter by name'               },
-  { tc: 19, section: 'Price Templates',      title: 'Sort by column header'        },
-  { tc: 20, section: 'Price Templates',      title: 'Fetch from Etsy'              },
-  { tc: 21, section: 'Price Templates',      title: 'Delete one template'          },
-  { tc: 22, section: 'Policy Templates',     title: 'Create first template'        },
-  { tc: 23, section: 'Policy Templates',     title: 'Create second template'       },
-  { tc: 24, section: 'Policy Templates',     title: 'Edit first template'          },
-  { tc: 25, section: 'Policy Templates',     title: 'Filter by days'               },
-  { tc: 26, section: 'Policy Templates',     title: 'Sort by column header'        },
-  { tc: 27, section: 'Policy Templates',     title: 'Fetch from Etsy'              },
-  { tc: 28, section: 'Policy Templates',     title: 'Delete one template'          },
-  { tc: 29, section: 'Shop Sections',        title: 'Create first section'         },
-  { tc: 30, section: 'Shop Sections',        title: 'Create second section'        },
-  { tc: 31, section: 'Shop Sections',        title: 'Edit first section'           },
-  { tc: 32, section: 'Shop Sections',        title: 'Filter by name'               },
-  { tc: 33, section: 'Shop Sections',        title: 'Sort by column header'        },
-  { tc: 34, section: 'Shop Sections',        title: 'Fetch from Etsy'              },
-  { tc: 35, section: 'Shop Sections',        title: 'Delete one section'           },
-  { tc: 36, section: 'Production Partners',  title: 'Fetch from Etsy'              },
-  { tc: 37, section: 'Production Partners',  title: 'Filter (if data present)',     skipReason: 'Skips when no production partners exist in the test store' },
-  { tc: 38, section: 'Processing Profiles',  title: 'Create first profile'         },
-  { tc: 39, section: 'Processing Profiles',  title: 'Create second profile'        },
-  { tc: 40, section: 'Processing Profiles',  title: 'Edit first profile'           },
-  { tc: 41, section: 'Processing Profiles',  title: 'Filter by name'               },
-  { tc: 42, section: 'Processing Profiles',  title: 'Sort by column header'        },
-  { tc: 43, section: 'Processing Profiles',  title: 'Fetch from Etsy'              },
-  { tc: 44, section: 'Processing Profiles',  title: 'Delete one profile'           },
+  { tc:  1, section: 'Shipping Templates',  title: 'Fetch from Etsy',
+    steps: ['Navigate to /panel/template and open the Shipping Templates tab','Click the Fetch from Etsy button','Wait 3 s for the sync response','Assert the templates page is still visible (no crash or redirect)'] },
+  { tc:  2, section: 'Shipping Templates',  title: 'Create first template',
+    steps: ['Navigate to Shipping Templates tab','Click Create button','Enter template name Auto_Ship_1 in the name field','Click Save','Navigate back to Shipping Templates tab','Assert a row with name Auto_Ship_1 is visible in the list'] },
+  { tc:  3, section: 'Shipping Templates',  title: 'Create second template',
+    steps: ['Navigate to Shipping Templates tab','Click Create button','Enter template name Auto_Ship_2 in the name field','Click Save','Navigate back to Shipping Templates tab','Assert a row with name Auto_Ship_2 is visible in the list'] },
+  { tc:  4, section: 'Shipping Templates',  title: 'Edit first template',
+    steps: ['Navigate to Shipping Templates tab','Search for Auto_Ship_1','Click Edit on the first matching row','Update name to Auto_Ship_1_edit and change shipping field values (zip, numeric)','Click Save','Navigate back → assert updated name visible','Re-open the template and verify the changed field values are persisted','Click Cancel to close'] },
+  { tc:  5, section: 'Shipping Templates',  title: 'Filter by name',
+    steps: ['Navigate to Shipping Templates tab','Type Auto_Ship_2 in the search box','Assert at least one row matching Auto_Ship_2 is visible','Clear the search box and verify all rows return'] },
+  { tc:  6, section: 'Shipping Templates',  title: 'Sort by column header',
+    steps: ['Navigate to Shipping Templates tab','Click the Name column header to sort ascending','Assert templates page remains functional (no crash)'] },
+  { tc:  7, section: 'Shipping Templates',  title: 'Delete one template',
+    steps: ['Navigate to Shipping Templates tab','Search for Auto_Ship_2','Click Delete on the first matching row','Confirm deletion in the dialog','Navigate back and search for Auto_Ship_2 again','Assert zero rows match (template removed)'] },
+
+  { tc:  8, section: 'Inventory Templates', title: 'Fetch from Etsy',
+    steps: ['Navigate to /panel/template and open the Inventory Templates tab','Click the Fetch from Etsy button','Wait 2 s for the sync response','Assert the templates page is still visible'] },
+  { tc:  9, section: 'Inventory Templates', title: 'Create first template',
+    steps: ['Navigate to Inventory Templates tab','Click Create button','Enter template name Auto_Inv_1','Set Minimum Threshold Value = 5 (placeholder "0" input)','Set Maximum Inventory Level = 100 (placeholder "Enter value" input)','Click Save','Navigate back and assert row Auto_Inv_1 is visible'] },
+  { tc: 10, section: 'Inventory Templates', title: 'Create second template',
+    steps: ['Navigate to Inventory Templates tab','Click Create button','Enter template name Auto_Inv_2','Set Minimum Threshold Value = 5','Set Maximum Inventory Level = 100','Click Save','Navigate back and assert row Auto_Inv_2 is visible'] },
+  { tc: 11, section: 'Inventory Templates', title: 'Edit first template',
+    steps: ['Navigate to Inventory Templates tab','Search for Auto_Inv_1','Click Edit on the matching row','Update name to Auto_Inv_1_edit','Update threshold and max inventory fields','Click Save → navigate back → assert updated name visible','Re-open template and verify threshold/max values are persisted','Click Cancel'] },
+  { tc: 12, section: 'Inventory Templates', title: 'Filter by name',
+    steps: ['Navigate to Inventory Templates tab','Type Auto_Inv_2 in the search box','Assert at least one row matching Auto_Inv_2 is visible','Clear search'] },
+  { tc: 13, section: 'Inventory Templates', title: 'Sort by column header',
+    steps: ['Navigate to Inventory Templates tab','Click the Name column header','Assert page remains functional'] },
+  { tc: 14, section: 'Inventory Templates', title: 'Delete one template',
+    steps: ['Navigate to Inventory Templates tab','Search for Auto_Inv_2','Click Delete on the matching row','Confirm deletion','Navigate back → search Auto_Inv_2 → assert zero rows match'] },
+
+  { tc: 15, section: 'Price Templates',     title: 'Fetch from Etsy',
+    steps: ['Navigate to /panel/template and open the Price Templates tab','Click Fetch from Etsy','Wait 2 s','Assert templates page is still visible'] },
+  { tc: 16, section: 'Price Templates',     title: 'Create first template',
+    steps: ['Navigate to Price Templates tab','Click Create button','Enter template name Auto_Price_1','Optionally enable Compare at Price toggle','Set pricing value field','Click Save','Navigate back → assert row Auto_Price_1 visible'] },
+  { tc: 17, section: 'Price Templates',     title: 'Create second template',
+    steps: ['Navigate to Price Templates tab','Click Create button','Enter template name Auto_Price_2','Configure pricing fields','Click Save','Navigate back → assert row Auto_Price_2 visible'] },
+  { tc: 18, section: 'Price Templates',     title: 'Edit first template',
+    steps: ['Navigate to Price Templates tab','Search for Auto_Price_1','Click Edit','Update name to Auto_Price_1_edit and change pricing fields','Click Save → navigate back → assert updated name visible','Re-open and verify pricing field values persisted','Click Cancel'] },
+  { tc: 19, section: 'Price Templates',     title: 'Filter by name',
+    steps: ['Navigate to Price Templates tab','Type Auto_Price_2 in search box','Assert matching row is visible','Clear search'] },
+  { tc: 20, section: 'Price Templates',     title: 'Sort by column header',
+    steps: ['Navigate to Price Templates tab','Click Name column header','Assert page remains functional'] },
+  { tc: 21, section: 'Price Templates',     title: 'Delete one template',
+    steps: ['Navigate to Price Templates tab','Search for Auto_Price_2','Click Delete → Confirm','Navigate back → search again → assert zero rows match'] },
+
+  { tc: 22, section: 'Policy Templates',    title: 'Fetch from Etsy',
+    steps: ['Navigate to /panel/template and open the Policy Templates tab','Click Fetch from Etsy','Wait 2 s','Assert templates page is still visible'] },
+  { tc: 23, section: 'Policy Templates',    title: 'Create first template',
+    steps: ['Navigate to Policy Templates tab (no name field — identified by return-window days)','Click Create button','Select return-window days value (e.g., 7 days)','Fill required policy fields','Click Save','Navigate back → assert new policy row visible'] },
+  { tc: 24, section: 'Policy Templates',    title: 'Create second template',
+    steps: ['Navigate to Policy Templates tab','Click Create','Select a different return-window days value','Fill required fields','Click Save','Navigate back → assert second policy row visible'] },
+  { tc: 25, section: 'Policy Templates',    title: 'Edit first template',
+    steps: ['Navigate to Policy Templates tab','Locate first policy row','Click Edit','Change return-window days and/or other fields','Click Save → navigate back → assert change is visible','Re-open and verify values persisted','Click Cancel'] },
+  { tc: 26, section: 'Policy Templates',    title: 'Filter by days',
+    steps: ['Navigate to Policy Templates tab','Type a days value in the search box','Assert only matching rows are shown','Clear search'] },
+  { tc: 27, section: 'Policy Templates',    title: 'Sort by column header',
+    steps: ['Navigate to Policy Templates tab','Click a column header','Assert page remains functional'] },
+  { tc: 28, section: 'Policy Templates',    title: 'Delete one template',
+    steps: ['Navigate to Policy Templates tab','Locate a policy template row','Click Delete → Confirm','Navigate back → assert template no longer appears'] },
+
+  { tc: 29, section: 'Shop Sections',       title: 'Fetch from Etsy',
+    steps: ['Navigate to /panel/template and open the Shop Sections tab','Click Fetch from Etsy','Wait for sync','Assert page is still visible'] },
+  { tc: 30, section: 'Shop Sections',       title: 'Create first section',
+    steps: ['Navigate to Shop Sections tab','Click Add Section button','Shopify overlay modal appears — enter section title (max 24 chars)','Click Save in the modal','Navigate back → assert new section row is visible in list'] },
+  { tc: 31, section: 'Shop Sections',       title: 'Create second section',
+    steps: ['Navigate to Shop Sections tab','Click Add Section','Enter a second unique section title (max 24 chars)','Click Save','Navigate back → assert second section row visible'] },
+  { tc: 32, section: 'Shop Sections',       title: 'Edit first section',
+    steps: ['Navigate to Shop Sections tab','Search for first section','Click Edit','Update section name','Click Save','Navigate back → assert updated name visible'] },
+  { tc: 33, section: 'Shop Sections',       title: 'Filter by name',
+    steps: ['Navigate to Shop Sections tab','Type section name in search box','Assert matching row is visible','Clear search'] },
+  { tc: 34, section: 'Shop Sections',       title: 'Sort by column header',
+    steps: ['Navigate to Shop Sections tab','Click Name column header','Assert page remains functional'] },
+  { tc: 35, section: 'Shop Sections',       title: 'Delete one section',
+    steps: ['Navigate to Shop Sections tab','Search for target section','Click Delete → Confirm','Navigate back → search again → assert zero rows match'] },
+
+  { tc: 36, section: 'Production Partners', title: 'Fetch from Etsy',
+    steps: ['Navigate to /panel/template and open the Production Partners tab','Click Fetch from Etsy (or equivalent sync)','Wait for response','Assert page is still visible'] },
+  { tc: 37, section: 'Production Partners', title: 'Filter (if data present)',
+    skipReason: 'Skips automatically when no production partners exist in the test store',
+    steps: ['Navigate to Production Partners tab','Skip test if no partner rows are present (data-dependent)','Type partner name in search box','Assert only matching rows are shown','Clear search'] },
+
+  { tc: 38, section: 'Processing Profiles', title: 'Fetch from Etsy',
+    steps: ['Navigate to /panel/template and open the Processing Profiles tab','Click Fetch from Etsy','Wait for sync response','Assert page is still visible'] },
+  { tc: 39, section: 'Processing Profiles', title: 'Create first profile',
+    steps: ['Navigate to Processing Profiles tab','Click Create button','Enter profile name Auto_Proc_1','Click Save','Navigate back → assert row Auto_Proc_1 is visible'] },
+  { tc: 40, section: 'Processing Profiles', title: 'Create second profile',
+    steps: ['Navigate to Processing Profiles tab','Click Create','Enter profile name Auto_Proc_2','Click Save','Navigate back → assert row Auto_Proc_2 visible'] },
+  { tc: 41, section: 'Processing Profiles', title: 'Edit first profile',
+    steps: ['Navigate to Processing Profiles tab','Search for Auto_Proc_1','Click Edit','Update profile name to Auto_Proc_1_edit','Click Save → navigate back → assert updated name visible'] },
+  { tc: 42, section: 'Processing Profiles', title: 'Filter by name',
+    steps: ['Navigate to Processing Profiles tab','Type Auto_Proc_2 in search box','Assert matching row is visible','Clear search'] },
+  { tc: 43, section: 'Processing Profiles', title: 'Sort by column header',
+    steps: ['Navigate to Processing Profiles tab','Click Name column header','Assert page remains functional'] },
+  { tc: 44, section: 'Processing Profiles', title: 'Delete one profile',
+    steps: ['Navigate to Processing Profiles tab','Search for Auto_Proc_2','Click Delete → Confirm','Navigate back → search again → assert zero rows match'] },
 ];
 
 const SECTION_META = {
@@ -197,25 +248,30 @@ const sectionChips = sections.map(s => {
 const tableRows = tests.map(t => {
   const meta = SECTION_META[t.section] ?? { icon: '●', color: '#64748b' };
   const tcLabel = `TC_${String(t.tc).padStart(2, '0')}`;
-  const detailContent = t.error
-    ? `<div class="detail-box">
-        <div class="detail-heading">Error Details</div>
-        <div class="dm-row"><span class="dm"><strong>Duration:</strong> ${fmtMs(t.duration)}</span><span class="dm"><strong>Section:</strong> ${esc(t.section)}</span></div>
-        <pre class="err-pre">${esc(t.error.slice(0, 1500))}</pre>
-       </div>`
-    : t.skipReason
-    ? `<div class="detail-box"><div class="skip-note">⊘ ${esc(t.skipReason)}</div></div>`
-    : `<div class="detail-box" style="color:#64748b;font-size:12px">${esc(t.title)} — completed in ${fmtMs(t.duration)}</div>`;
+  const stepsHtml = (t.steps ?? []).length
+    ? `<ol class="steps-list">${(t.steps).map(s => `<li>${esc(s)}</li>`).join('')}</ol>`
+    : '';
+  const detailContent = `<div class="detail-box">
+      <div class="detail-heading">Test Steps</div>
+      <div class="dm-row">
+        <span class="dm"><strong>Duration:</strong> ${fmtMs(t.duration)}</span>
+        <span class="dm"><strong>Section:</strong> ${esc(t.section)}</span>
+        <span class="dm"><strong>Status:</strong> ${t.status}</span>
+      </div>
+      ${stepsHtml}
+      ${t.status === 'skipped' && t.skipReason ? `<div class="skip-note" style="margin-top:10px">⊘ ${esc(t.skipReason)}</div>` : ''}
+      ${t.error ? `<div class="detail-heading" style="margin-top:12px;color:#f87171">Error Details</div><pre class="err-pre">${esc(t.error.slice(0, 1500))}</pre>` : ''}
+     </div>`;
 
   return `
-<tr class="data-row" data-status="${t.status}" data-section="${esc(t.section)}" data-tc="${t.tc}" onclick="toggleRow(this)">
+<tr class="dr" data-status="${t.status}" data-section="${esc(t.section)}" data-tc="${t.tc}" onclick="toggleRow(this)">
   <td class="td-tc">${tcLabel}</td>
   <td class="td-title">${esc(t.title)}<span class="chevron">▼</span></td>
   <td class="td-sec"><span class="sec-label">${meta.icon} ${esc(t.section)}</span></td>
   <td>${pill(t.status)}</td>
   <td class="td-dur">${fmtMs(t.duration)}</td>
 </tr>
-<tr class="detail-row" style="display:none" data-status="${t.status}" data-section="${esc(t.section)}" data-tc="${t.tc}">
+<tr class="detr" style="display:none" data-status="${t.status}" data-section="${esc(t.section)}" data-tc="${t.tc}">
   <td colspan="5"><div class="detail-inner">${detailContent}</div></td>
 </tr>`;
 }).join('');
@@ -344,6 +400,11 @@ const html = `<!DOCTYPE html>
     border-radius:6px;font-size:11.5px;color:#fcd34d}
   .err-pre{white-space:pre-wrap;word-break:break-word;font-size:12px;
     color:#f87171;font-family:'Cascadia Code','Courier New',monospace;margin-top:8px}
+
+  /* Steps list */
+  .steps-list{margin:10px 0 4px 18px;padding:0;display:flex;flex-direction:column;gap:5px}
+  .steps-list li{font-size:12.5px;color:#94a3b8;line-height:1.6;padding-left:4px}
+  .steps-list li::marker{color:var(--accent);font-weight:700}
 
   .empty{text-align:center;padding:48px 24px;color:var(--muted)}
   footer{text-align:center;padding:24px;color:var(--muted);font-size:11.5px;
@@ -512,6 +573,7 @@ writeFileSync(REPORT, html);
 console.log(`\n  ✅ Report → ${REPORT}`);
 const { exec } = await import('child_process');
 exec(`start "" "${REPORT}"`);
+
 
 console.log(`\n  ${'─'.repeat(38)}`);
 console.log(`  ${runDate}  |  Runtime: ${fmtMs(elapsed)}`);

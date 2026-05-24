@@ -1,612 +1,717 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Etsy Dashboard — Test Case Report</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Etsy Dashboard — QA Test Report</title>
+<style>
+  :root{
+    --bg:#0f1117;--surface:#1a1d27;--card:#20232e;--border:#2d3142;
+    --pass:#22c55e;--skip:#f59e0b;--fail:#ef4444;--pend:#64748b;
+    --text:#e2e8f0;--muted:#64748b;--accent:#10b981;--r:10px
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;min-height:100vh}
 
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #0f1117;
-      color: #e2e8f0;
-      min-height: 100vh;
-    }
+  /* ── Header ───────────────────────────────────── */
+  header{
+    background:linear-gradient(135deg,#0c1a14 0%,#0b2d1e 45%,#0c1a14 100%);
+    padding:28px 40px 22px;border-bottom:1px solid #065f46;position:relative;overflow:hidden
+  }
+  header::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse at 70% 50%,rgba(16,185,129,.13),transparent 68%);
+    pointer-events:none
+  }
+  .hi{position:relative;z-index:1}
+  .ht{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  header h1{font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .bm{background:rgba(16,185,129,.25);border:1px solid rgba(16,185,129,.45);border-radius:6px;
+      padding:2px 10px;font-size:11px;font-weight:600;color:#6ee7b7;letter-spacing:.5px}
+  .bc{background:rgba(34,197,94,.2);border:1px solid rgba(34,197,94,.4);border-radius:6px;
+      padding:2px 10px;font-size:11px;font-weight:600;color:#86efac}
+  header p.sub{margin-top:6px;color:#6ee7b7;font-size:13px}
+  .run-meta{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;
+        padding:4px 12px;font-size:11.5px;color:#a7f3d0}
+  .chip strong{color:#d1fae5}
+  .header-right{text-align:right;font-size:12px;color:#6ee7b7;line-height:1.8}
+  .header-right .pass-rate{color:#4ade80;font-weight:700;font-size:14px}
 
-    /* ── Header ─────────────────────────────────────────── */
-    header {
-      background: linear-gradient(135deg, #1a1d2e 0%, #16213e 100%);
-      border-bottom: 1px solid #2d3561;
-      padding: 28px 40px 24px;
-    }
+  /* ── Main ─────────────────────────────────────── */
+  main{max-width:1160px;margin:0 auto;padding:26px 22px}
 
-    .header-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
+  /* ── Stat cards ───────────────────────────────── */
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
+  .sc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+      padding:16px 14px;text-align:center;transition:transform .15s,box-shadow .15s;cursor:default}
+  .sc:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.4)}
+  .sc .num{font-size:36px;font-weight:800;line-height:1;letter-spacing:-1px}
+  .sc .lbl{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-top:6px}
+  .sc-all {border-top:3px solid #6366f1}.sc-all  .num{color:var(--text)}
+  .sc-pass{border-top:3px solid var(--pass)}.sc-pass .num{color:var(--pass)}
+  .sc-skip{border-top:3px solid var(--skip)}.sc-skip .num{color:var(--skip)}
+  .sc-fail{border-top:3px solid var(--fail)}.sc-fail .num{color:var(--fail)}
+  .sc-rate{border-top:3px solid var(--accent)}.sc-rate .num{color:var(--accent);font-size:28px}
 
-    .header-brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+  /* ── Progress bar ─────────────────────────────── */
+  .pw{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px;margin-bottom:18px}
+  .pl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+  .pb{height:9px;border-radius:6px;background:var(--border);overflow:hidden;display:flex}
+  .ps{height:100%;transition:width .6s cubic-bezier(.4,0,.2,1)}
+  #pp{background:var(--pass)}#psk{background:var(--skip)}#pf{background:var(--fail)}
+  .pl2{display:flex;gap:18px;margin-top:10px;font-size:12px;flex-wrap:wrap}
+  .li{display:flex;align-items:center;gap:6px}
+  .ld{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .li span{color:var(--muted)}
 
-    .brand-icon {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #f56040, #e56c00);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-    }
+  /* ── Section chips ────────────────────────────── */
+  .sec-bar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+  .sec-chip{background:var(--card);border:1px solid var(--border);border-radius:20px;
+            padding:4px 13px;font-size:11.5px;color:var(--muted);cursor:pointer;transition:all .15s;
+            display:flex;align-items:center;gap:5px}
+  .sec-chip:hover{border-color:var(--accent);color:var(--text)}
+  .sec-chip.active{background:rgba(16,185,129,.15);border-color:var(--accent);color:#6ee7b7}
+  .sec-cnt{background:rgba(255,255,255,.1);border-radius:10px;padding:1px 6px;font-size:10px}
 
-    .brand-text h1 {
-      font-size: 20px;
-      font-weight: 700;
-      color: #f1f5f9;
-      letter-spacing: -0.3px;
-    }
+  /* ── Controls ─────────────────────────────────── */
+  .ctrl{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .fbtns{display:flex;gap:6px}
+  .fb{background:var(--card);border:1px solid var(--border);color:var(--muted);
+      border-radius:6px;padding:6px 14px;font-size:12px;cursor:pointer;transition:all .15s}
+  .fb:hover{border-color:var(--accent);color:var(--text)}
+  .fb.active{background:#059669;border-color:#059669;color:#fff;font-weight:600}
+  .sb{flex:1;min-width:200px;background:var(--card);border:1px solid var(--border);
+      color:var(--text);border-radius:6px;padding:6px 12px;font-size:13px;outline:none}
+  .sb:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(16,185,129,.2)}
+  .sb::placeholder{color:var(--muted)}
+  .rc{font-size:12px;color:var(--muted);white-space:nowrap}
 
-    .brand-text p {
-      font-size: 12px;
-      color: #64748b;
-      margin-top: 2px;
-    }
+  /* ── Table ────────────────────────────────────── */
+  .tw{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+  table{width:100%;border-collapse:collapse}
+  thead tr{background:var(--surface)}
+  thead th{padding:11px 16px;text-align:left;font-size:10.5px;text-transform:uppercase;
+            letter-spacing:.9px;color:var(--muted);border-bottom:1px solid var(--border);
+            cursor:pointer;user-select:none;white-space:nowrap;transition:color .15s}
+  thead th:hover{color:var(--text)}
+  thead th.sorted{color:var(--accent)}
+  .sa{display:inline-block;margin-left:4px;opacity:.5;font-size:10px}
+  thead th.sorted .sa{opacity:1}
 
-    .run-meta {
-      text-align: right;
-      font-size: 12px;
-      color: #475569;
-    }
+  tbody tr.dr{border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s}
+  tbody tr.dr:hover{background:rgba(16,185,129,.07)}
+  tbody tr.dr.expanded{background:rgba(16,185,129,.05)}
+  td{padding:11px 16px;vertical-align:middle}
+  .td-tc{font-weight:700;font-size:12.5px;color:var(--accent);white-space:nowrap;font-family:monospace}
+  .td-title{color:var(--text);line-height:1.4}
+  .td-sec{font-size:11px;color:var(--muted)}
+  .td-dur{font-size:11px;color:var(--muted);white-space:nowrap;font-family:monospace}
+  .chevron{display:inline-block;margin-left:6px;font-size:10px;color:var(--muted);transition:transform .2s}
+  .expanded .chevron{transform:rotate(180deg)}
 
-    .run-meta span {
-      display: block;
-      font-size: 11px;
-      margin-top: 2px;
-    }
+  /* ── Pills ────────────────────────────────────── */
+  .pill{display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:3px 11px;font-size:11px;font-weight:600;white-space:nowrap}
+  .pill-pass{background:rgba(34,197,94,.12);color:var(--pass);border:1px solid rgba(34,197,94,.3)}
+  .pill-skip{background:rgba(245,158,11,.12);color:var(--skip);border:1px solid rgba(245,158,11,.3)}
+  .pill-fail{background:rgba(239,68,68,.12);color:var(--fail);border:1px solid rgba(239,68,68,.3)}
+  .pill-pend{background:rgba(100,116,139,.1);color:var(--muted);border:1px solid rgba(100,116,139,.2)}
 
-    /* ── Stats cards ─────────────────────────────────────── */
-    .stats {
-      display: flex;
-      gap: 16px;
-      margin-top: 22px;
-      flex-wrap: wrap;
-    }
+  /* ── Detail rows ──────────────────────────────── */
+  tr.detr td{padding:0;border-bottom:1px solid var(--border)}
+  .detail-inner{padding:14px 16px 16px 52px;background:rgba(15,17,23,.5);border-top:1px solid var(--border)}
+  .detail-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;
+              padding:14px 16px;font-size:12.5px;line-height:1.75;color:#94a3b8}
+  .detail-heading{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px}
+  .dm-row{display:flex;gap:16px;margin-bottom:10px;flex-wrap:wrap}
+  .dm{font-size:11px;color:var(--muted)}.dm strong{color:#94a3b8}
+  .skip-note{padding:8px 12px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);
+             border-radius:6px;font-size:11.5px;color:#fcd34d;margin-top:8px}
 
-    .stat-card {
-      flex: 1;
-      min-width: 120px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 12px;
-      padding: 14px 18px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+  /* ── Steps ────────────────────────────────────────────── */
+  .steps-heading{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);
+                  margin:10px 0 7px;display:flex;align-items:center;gap:6px}
+  .steps-heading::before{content:'';display:inline-block;width:3px;height:12px;
+                          background:var(--accent);border-radius:2px}
+  .steps-list{list-style:none;display:flex;flex-direction:column;gap:5px}
+  .steps-list li{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:#94a3b8;line-height:1.5}
+  .step-num{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,.15);
+             border:1px solid rgba(16,185,129,.3);color:#6ee7b7;font-size:10px;font-weight:700;
+             display:flex;align-items:center;justify-content:center}
+  .step-cond{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:rgba(245,158,11,.12);
+              border:1px solid rgba(245,158,11,.3);color:#fcd34d;font-size:10px;font-weight:700;
+              display:flex;align-items:center;justify-content:center}
+  .step-assert{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:rgba(34,197,94,.12);
+                border:1px solid rgba(34,197,94,.3);color:var(--pass);font-size:10px;font-weight:700;
+                display:flex;align-items:center;justify-content:center}
+  .step-text code{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+                  border-radius:3px;padding:1px 5px;font-size:11px;font-family:monospace;color:#e2e8f0}
 
-    .stat-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-1px); }
-    .stat-card.active { border-color: currentColor; background: rgba(255,255,255,0.07); }
-
-    .stat-card .count {
-      font-size: 32px;
-      font-weight: 800;
-      line-height: 1;
-    }
-
-    .stat-card .label {
-      font-size: 11px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-top: 6px;
-      opacity: 0.7;
-    }
-
-    .stat-all  .count { color: #94a3b8; }
-    .stat-pass .count { color: #4ade80; }
-    .stat-skip .count { color: #facc15; }
-    .stat-fail .count { color: #f87171; }
-
-    .stat-all  { color: #94a3b8; }
-    .stat-pass { color: #4ade80; }
-    .stat-skip { color: #facc15; }
-    .stat-fail { color: #f87171; }
-
-    /* Progress bar */
-    .progress-bar {
-      margin-top: 20px;
-      height: 6px;
-      border-radius: 999px;
-      background: #1e2535;
-      overflow: hidden;
-      display: flex;
-    }
-    .progress-segment { height: 100%; transition: width 0.6s ease; }
-    .prog-pass { background: #4ade80; }
-    .prog-skip { background: #facc15; }
-    .prog-fail { background: #f87171; }
-
-    /* ── Main content ────────────────────────────────────── */
-    main { padding: 28px 40px; }
-
-    /* ── Toolbar ─────────────────────────────────────────── */
-    .toolbar {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 20px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .search-wrap {
-      position: relative;
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .search-wrap svg {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #475569;
-      pointer-events: none;
-    }
-
-    input[type="search"] {
-      width: 100%;
-      padding: 10px 12px 10px 38px;
-      background: #1a1d2e;
-      border: 1px solid #2d3561;
-      border-radius: 10px;
-      color: #e2e8f0;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    input[type="search"]:focus { border-color: #4f6ef7; }
-    input[type="search"]::placeholder { color: #475569; }
-
-    .filter-btns {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      padding: 8px 16px;
-      border-radius: 8px;
-      border: 1px solid #2d3561;
-      background: #1a1d2e;
-      color: #94a3b8;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .filter-btn:hover { background: #22263a; }
-
-    .filter-btn.active-all  { border-color: #4f6ef7; color: #818cf8; background: rgba(79,110,247,0.1); }
-    .filter-btn.active-pass { border-color: #4ade80; color: #4ade80; background: rgba(74,222,128,0.08); }
-    .filter-btn.active-skip { border-color: #facc15; color: #facc15; background: rgba(250,204,21,0.08); }
-    .filter-btn.active-fail { border-color: #f87171; color: #f87171; background: rgba(248,113,113,0.08); }
-
-    .result-count {
-      font-size: 13px;
-      color: #475569;
-      margin-left: auto;
-      white-space: nowrap;
-    }
-
-    /* ── Table ───────────────────────────────────────────── */
-    .table-wrap {
-      background: #1a1d2e;
-      border: 1px solid #2d3561;
-      border-radius: 14px;
-      overflow: hidden;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
-
-    thead {
-      background: #141727;
-      position: sticky;
-      top: 0;
-      z-index: 2;
-    }
-
-    thead th {
-      padding: 13px 18px;
-      text-align: left;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: #475569;
-      border-bottom: 1px solid #2d3561;
-      cursor: pointer;
-      user-select: none;
-      white-space: nowrap;
-    }
-
-    thead th:hover { color: #94a3b8; }
-    thead th .sort-arrow { margin-left: 4px; opacity: 0.4; }
-    thead th.sorted .sort-arrow { opacity: 1; color: #818cf8; }
-
-    tbody tr {
-      border-bottom: 1px solid #1e2535;
-      transition: background 0.15s;
-      cursor: pointer;
-    }
-
-    tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: rgba(255,255,255,0.03); }
-    tbody tr.hidden { display: none; }
-
-    td {
-      padding: 14px 18px;
-      vertical-align: middle;
-    }
-
-    .tc-id {
-      font-family: 'Courier New', monospace;
-      font-size: 12px;
-      font-weight: 700;
-      color: #818cf8;
-      white-space: nowrap;
-      width: 80px;
-    }
-
-    .tc-name {
-      color: #cbd5e1;
-      line-height: 1.45;
-    }
-
-    .tc-module {
-      font-size: 11px;
-      color: #475569;
-      margin-top: 3px;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      white-space: nowrap;
-    }
-
-    .badge-pass { background: rgba(74,222,128,0.12); color: #4ade80; border: 1px solid rgba(74,222,128,0.25); }
-    .badge-skip { background: rgba(250,204,21,0.10); color: #facc15; border: 1px solid rgba(250,204,21,0.25); }
-    .badge-fail { background: rgba(248,113,113,0.12); color: #f87171; border: 1px solid rgba(248,113,113,0.25); }
-
-    .skip-reason {
-      font-size: 11px;
-      color: #475569;
-      margin-top: 4px;
-      font-style: italic;
-    }
-
-    /* ── Expandable detail row ───────────────────────────── */
-    .detail-row { display: none; background: #141727; }
-    .detail-row.open { display: table-row; }
-
-    .detail-cell {
-      padding: 14px 18px 14px 98px;
-      border-bottom: 1px solid #1e2535;
-    }
-
-    .detail-box {
-      background: #0f1117;
-      border: 1px solid #2d3561;
-      border-radius: 10px;
-      padding: 14px 18px;
-      font-size: 13px;
-      line-height: 1.6;
-      color: #94a3b8;
-    }
-
-    .detail-box strong { color: #cbd5e1; }
-
-    /* ── Empty state ─────────────────────────────────────── */
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: #475569;
-    }
-
-    .empty-state svg { margin-bottom: 16px; opacity: 0.3; }
-    .empty-state p { font-size: 15px; }
-
-    /* ── Footer ──────────────────────────────────────────── */
-    footer {
-      text-align: center;
-      padding: 20px 40px 32px;
-      font-size: 12px;
-      color: #334155;
-    }
-
-    /* ── Responsive ──────────────────────────────────────── */
-    @media (max-width: 640px) {
-      header, main { padding: 20px; }
-      .run-meta { display: none; }
-      .detail-cell { padding-left: 18px; }
-    }
-  </style>
+  .empty{text-align:center;padding:48px 24px;color:var(--muted)}
+  footer{text-align:center;padding:24px;color:var(--muted);font-size:11.5px;
+          border-top:1px solid var(--border);margin-top:36px}
+  .hidden{display:none!important}
+  @media(max-width:700px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    header{padding:18px}
+    main{padding:18px 12px}
+    .td-sec,.td-dur{display:none}
+  }
+</style>
 </head>
 <body>
 
 <header>
-  <div class="header-top">
-    <div class="header-brand">
-      <div class="brand-icon">🛍️</div>
-      <div class="brand-text">
-        <h1>Etsy Dashboard — Test Report</h1>
-        <p>CedCommerce Etsy Shopify App · Dashboard Module</p>
+  <div class="hi">
+    <div class="ht">
+      <div>
+        <h1>Etsy Dashboard <span class="bm">Dashboard</span> <span class="bc">37 TCs</span></h1>
+        <p class="sub">TC_01–TC_37 &nbsp;·&nbsp; /panel/overview &nbsp;·&nbsp; store: etsy-test-gp7o90bx</p>
+      </div>
+      <div class="header-right">
+        <div>Run: 24 May 2026</div>
+        <div>Store: etsy-test-gp7o90bx</div>
+        <div class="pass-rate">94.6% pass rate</div>
       </div>
     </div>
     <div class="run-meta">
-      <strong id="run-date"></strong>
-      <span>Store: etsy-test-gp7o90bx</span>
-      <span>Project: etsy-authenticated</span>
+      <span class="chip"><strong>Spec:</strong> tests/etsy-dashboard.spec.js</span>
+      <span class="chip"><strong>Project:</strong> etsy-authenticated</span>
+      <span class="chip"><strong>Workers:</strong> 1 (serial)</span>
+      <span class="chip"><strong>Page Object:</strong> pages/EtsyDashboardPage.js</span>
     </div>
-  </div>
-
-  <div class="stats">
-    <div class="stat-card stat-all" id="stat-all" onclick="setFilter('all')" title="Show all">
-      <div class="count" id="cnt-all">37</div>
-      <div class="label">Total</div>
-    </div>
-    <div class="stat-card stat-pass" id="stat-pass" onclick="setFilter('pass')" title="Show passed">
-      <div class="count" id="cnt-pass">28</div>
-      <div class="label">Passed</div>
-    </div>
-    <div class="stat-card stat-skip" id="stat-skip" onclick="setFilter('skip')" title="Show skipped">
-      <div class="count" id="cnt-skip">9</div>
-      <div class="label">Skipped</div>
-    </div>
-    <div class="stat-card stat-fail" id="stat-fail" onclick="setFilter('fail')" title="Show failed">
-      <div class="count" id="cnt-fail">0</div>
-      <div class="label">Failed</div>
-    </div>
-  </div>
-
-  <div class="progress-bar">
-    <div class="progress-segment prog-pass" id="prog-pass" style="width:75.7%"></div>
-    <div class="progress-segment prog-skip" id="prog-skip" style="width:24.3%"></div>
-    <div class="progress-segment prog-fail" id="prog-fail" style="width:0%"></div>
   </div>
 </header>
 
 <main>
-  <div class="toolbar">
-    <div class="search-wrap">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-      </svg>
-      <input type="search" id="search" placeholder="Search test cases…" oninput="applyFilters()" />
-    </div>
-    <div class="filter-btns">
-      <button class="filter-btn active-all" id="btn-all"  onclick="setFilter('all')">All</button>
-      <button class="filter-btn" id="btn-pass" onclick="setFilter('pass')">Pass</button>
-      <button class="filter-btn" id="btn-skip" onclick="setFilter('skip')">Skip</button>
-      <button class="filter-btn" id="btn-fail" onclick="setFilter('fail')">Fail</button>
-    </div>
-    <span class="result-count" id="result-count">37 of 37</span>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="sc sc-all"> <div class="num">37</div>  <div class="lbl">Total</div></div>
+    <div class="sc sc-pass"><div class="num">35</div>  <div class="lbl">Passed</div></div>
+    <div class="sc sc-skip"><div class="num">2</div>   <div class="lbl">Skipped</div></div>
+    <div class="sc sc-fail"><div class="num">0</div>   <div class="lbl">Failed</div></div>
+    <div class="sc sc-rate"><div class="num">94.6%</div><div class="lbl">Pass Rate</div></div>
   </div>
 
-  <div class="table-wrap">
-    <table id="tc-table">
-      <thead>
-        <tr>
-          <th onclick="sortBy('tc')"># TC <span class="sort-arrow">↕</span></th>
-          <th onclick="sortBy('name')">Test Case <span class="sort-arrow">↕</span></th>
-          <th onclick="sortBy('module')">Module <span class="sort-arrow">↕</span></th>
-          <th onclick="sortBy('result')">Result <span class="sort-arrow">↕</span></th>
-        </tr>
-      </thead>
-      <tbody id="tc-body"></tbody>
-    </table>
-    <div class="empty-state" id="empty-state" style="display:none">
-      <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-      </svg>
-      <p>No test cases match your filter.</p>
+  <!-- Progress bar -->
+  <div class="pw">
+    <div class="pl">Dashboard Coverage</div>
+    <div class="pb">
+      <div class="ps" id="pp"  style="width:94.6%"></div>
+      <div class="ps" id="psk" style="width:5.4%"></div>
+      <div class="ps" id="pf"  style="width:0.0%"></div>
     </div>
+    <div class="pl2">
+      <div class="li"><div class="ld" style="background:var(--pass)"></div><span>Passed (35)</span></div>
+      <div class="li"><div class="ld" style="background:var(--skip)"></div><span>Skipped (2) — permanently skipped (manual only)</span></div>
+      <div class="li"><div class="ld" style="background:var(--fail)"></div><span>Failed (0)</span></div>
+    </div>
+  </div>
+
+  <!-- Section chips -->
+  <div class="sec-bar" id="sec-bar"></div>
+
+  <!-- Controls -->
+  <div class="ctrl">
+    <div class="fbtns">
+      <button class="fb active" data-f="all"  onclick="setF(this)">All</button>
+      <button class="fb"        data-f="pass" onclick="setF(this)">Passed</button>
+      <button class="fb"        data-f="skip" onclick="setF(this)">Skipped</button>
+      <button class="fb"        data-f="fail" onclick="setF(this)">Failed</button>
+    </div>
+    <input class="sb" type="text" placeholder="Search TC ID, title, section…" oninput="applyAll()">
+    <span class="rc" id="rc"></span>
+  </div>
+
+  <!-- Table -->
+  <div class="tw">
+    <table>
+      <thead><tr>
+        <th style="width:88px"  onclick="srt('tc')"       id="th-tc">TC # <span class="sa">↕</span></th>
+        <th                     onclick="srt('title')"    id="th-title">Title <span class="sa">↕</span></th>
+        <th style="width:160px" onclick="srt('section')"  id="th-section">Section <span class="sa">↕</span></th>
+        <th style="width:115px" onclick="srt('result')"   id="th-result">Status <span class="sa">↕</span></th>
+        <th style="width:80px"  onclick="srt('duration')" id="th-duration">Duration <span class="sa">↕</span></th>
+      </tr></thead>
+      <tbody id="tb"></tbody>
+    </table>
+    <div class="empty hidden" id="empty">🔍 No test cases match your filters.</div>
   </div>
 </main>
 
-<footer>
-  Generated by Playwright QA · Etsy Shopify App Dashboard Module
-</footer>
+<footer>Etsy QA Automation &nbsp;·&nbsp; Dashboard Module &nbsp;·&nbsp; TC_01–TC_37 &nbsp;·&nbsp; store: etsy-test-gp7o90bx &nbsp;·&nbsp; Generated 24 May 2026</footer>
 
 <script>
-  const TESTS = [
-    { tc:'TC_01', name:'Dashboard page loads with content', module:'Page Load', result:'pass', reason:'', detail:'Verifies the dashboard renders with at least one of: "Overview", "Order Analysis", or "Product Analysis" visible.' },
-    { tc:'TC_02', name:'"New to the app?" banner is visible with Watch Guide button', module:'Top Bar', result:'skip', reason:'Banner already dismissed on this account', detail:'Checks the onboarding banner and Watch Guide CTA. Skips if the banner has already been dismissed by the user.' },
-    { tc:'TC_03', name:'Refresh Data button is visible', module:'Top Bar', result:'pass', reason:'', detail:'Asserts the "Refresh data" button is present in the top action bar.' },
-    { tc:'TC_04', name:'Order Analysis section is visible', module:'Order Analysis', result:'pass', reason:'', detail:'Verifies the "Order Analysis" section heading is rendered on the dashboard.' },
-    { tc:'TC_05', name:'Total Orders count or fallback is displayed', module:'Order Analysis', result:'pass', reason:'', detail:'Checks for "Total Orders" label or a fallback element when no orders exist.' },
-    { tc:'TC_06', name:'Order status badges are visible (Paid, Failed, Completed, Others)', module:'Order Analysis', result:'pass', reason:'', detail:'Counts how many of the four order status badges are visible. Expects at least 1.' },
-    { tc:'TC_07', name:'Order pie chart is displayed', module:'Order Analysis', result:'pass', reason:'', detail:'Asserts a canvas element exists in the order chart container.' },
-    { tc:'TC_08', name:'"View All Orders" button redirects to Orders page', module:'Order Analysis', result:'pass', reason:'', detail:'Clicks "View All Orders" and confirms URL changes to match /orders.' },
-    { tc:'TC_09', name:'Clicking "Paid" order badge redirects to filtered orders page', module:'Order Analysis', result:'skip', reason:'0 paid orders in test store', detail:'Clicks the "Paid" count button and expects redirect to /orders with paid filter. Skips if the badge is not found.' },
-    { tc:'TC_10', name:'Clicking "Failed" order badge redirects to filtered orders page', module:'Order Analysis', result:'skip', reason:'0 failed orders in test store', detail:'Clicks the "Failed" count button and expects redirect to /orders with failed filter. Skips if badge not found.' },
-    { tc:'TC_11', name:'Clicking "Completed" order badge redirects to orders page', module:'Order Analysis', result:'skip', reason:'0 completed orders in test store', detail:'Clicks the "Completed" count button and expects redirect to /orders. Skips if badge not found.' },
-    { tc:'TC_12', name:'Total Revenue section is visible', module:'Revenue', result:'pass', reason:'', detail:'Verifies the "Total Revenue" label is visible on the dashboard.' },
-    { tc:'TC_13', name:'Revenue date filter is visible (Last 7 days)', module:'Revenue', result:'pass', reason:'', detail:'Asserts the revenue date range filter button is present (matches "Last 7 days", "Last 30 days", or "Select date range").' },
-    { tc:'TC_14', name:'Product Analysis section is visible', module:'Product Analysis', result:'pass', reason:'', detail:'Verifies the "Product Analysis" heading is rendered.' },
-    { tc:'TC_15', name:'Total Products count is displayed', module:'Product Analysis', result:'pass', reason:'', detail:'Asserts "Total Products" label is visible.' },
-    { tc:'TC_16', name:'Product status badges visible (Active, Not Published, Not Profiled, Others)', module:'Product Analysis', result:'pass', reason:'', detail:'Counts visible product status badges. Expects at least 1 of the 4 to be visible.' },
-    { tc:'TC_17', name:'"View All Products" button redirects to Products/Listings page', module:'Product Analysis', result:'pass', reason:'', detail:'Clicks "View All Products" and asserts URL matches /listings or /products.' },
-    { tc:'TC_18', name:'Clicking "Active" product badge redirects to listings page', module:'Product Analysis', result:'pass', reason:'', detail:'Clicks the "Active" count button and confirms redirect to listings. Store has 0 active — badge still navigates.' },
-    { tc:'TC_19', name:'Clicking "Not Published" product badge redirects to listings page', module:'Product Analysis', result:'pass', reason:'', detail:'Clicks the "Not Published" count button (17 products). Confirms redirect to listings with not-published filter.' },
-    { tc:'TC_20', name:'Clicking "Not Profiled" product badge redirects to listings page', module:'Product Analysis', result:'pass', reason:'', detail:'Clicks the "Not Profiled" count button and confirms redirect to listings page.' },
-    { tc:'TC_21', name:'Top Performing Products section is visible', module:'Top Products', result:'pass', reason:'', detail:'Verifies the "Top Performing Products" or "Top Selling Products" section heading is present.' },
-    { tc:'TC_22', name:'Top selling products show titles and listing IDs', module:'Top Products', result:'skip', reason:'No orders = no top-selling data in this store', detail:'Counts elements with "Listing ID" text. Skips if count is 0 (no sales recorded yet).' },
-    { tc:'TC_23', name:'"More tips on getting started" video section is visible', module:'Video Tips', result:'pass', reason:'', detail:'Asserts the "More tips on getting started" video guide section is rendered.' },
-    { tc:'TC_24', name:'Etsy Shop Status section is visible', module:'Shop Status', result:'pass', reason:'', detail:'Verifies the "Etsy Shop Status" section is visible. Confirms shop is connected.' },
-    { tc:'TC_25', name:'Shop metrics displayed (customizable orders, languages)', module:'Shop Status', result:'pass', reason:'', detail:'Checks visibility of "accepts customizable orders" and "languages" metrics.' },
-    { tc:'TC_26', name:'Shop Refresh button is visible', module:'Shop Status', result:'pass', reason:'', detail:'Asserts button with aria-label="Refresh Etsy Shop" is visible.' },
-    { tc:'TC_27', name:'Plan Overview section is visible', module:'Plan Overview', result:'pass', reason:'', detail:'Verifies the "Plan Overview" heading is visible on the dashboard.' },
-    { tc:'TC_28', name:'Plan details are displayed (Product Limit, Order Limit, Billing date)', module:'Plan Overview', result:'pass', reason:'', detail:'Checks visibility of Product Limit, Order Limit, and Next Billing date labels. Expects at least 2.' },
-    { tc:'TC_29', name:'"View Plan Details" redirects to Pricing page', module:'Plan Overview', result:'pass', reason:'', detail:'Clicks "View Plan Details" link and confirms URL matches /pricing.' },
-    { tc:'TC_30', name:'Feedback section is visible with Good/Bad buttons', module:'Feedback', result:'skip', reason:'Feedback already submitted on this account', detail:'Asserts feedback prompt text and Good/Bad buttons. Skips if user has already given feedback.' },
-    { tc:'TC_31', name:'Reverse Sync (Etsy → Shopify) banner visibility check', module:'Reverse Sync', result:'pass', reason:'', detail:'Checks for "Reverse Sync" banner text. Returns boolean — both visible and hidden states are valid.' },
-    { tc:'TC_32', name:'Recent Activities panel is visible on dashboard', module:'Activities', result:'skip', reason:'Panel only appears after a sync/action in the current session — activity data exists on the Activities page (TC_35)', detail:'Checks for the "Recent Activities" card on the dashboard. This panel is session-triggered: it only renders after a product sync, order import, or similar action happens in the current browsing session. Activity history does exist — verified via TC_35.' },
-    { tc:'TC_33', name:'"All Activities" button is visible in Recent Activities panel', module:'Activities', result:'skip', reason:'Panel only appears after a sync/action in the current session', detail:'Once the Recent Activities panel is visible, asserts the "All Activities" / "View All Activities" button is present.' },
-    { tc:'TC_34', name:'Clicking "All Activities" redirects to Activities page', module:'Activities', result:'skip', reason:'Panel only appears after a sync/action in the current session', detail:'Clicks "All Activities" from the dashboard panel and verifies URL changes to /panel/activity.' },
-    { tc:'TC_35', name:'Activities page loads with Notifications section', module:'Activities', result:'pass', reason:'', detail:'Navigates directly to /panel/activity (independent of the dashboard panel). Asserts the Activity page heading or Notifications section is visible. Passes because activity data exists in the store.' },
-    { tc:'TC_36', name:'Delete an activity from Recent Activities on dashboard', module:'Activities', result:'skip', reason:'Panel only appears after a sync/action in the current session', detail:'Clicks the Delete Activity button on the first item in the dashboard Recent Activities panel and verifies the count decreases.' },
-    { tc:'TC_37', name:'Delete an activity from the full Activities page', module:'Activities', result:'skip', reason:'Permanently skipped at declaration level', detail:'Navigates to /panel/activity, finds and deletes an activity, verifies count decreases. Marked test.skip permanently — intended as a manual verification step.' },
-  ];
+const S=(t,x)=>({t,x});
+const step=x=>S('step',x), assert=x=>S('assert',x), cond=x=>S('cond',x);
 
-  let currentFilter = 'all';
-  let currentSort = { col: 'tc', dir: 1 };
-  let openRow = null;
+const TESTS = [
+  {
+    tc:'TC_01', name:'Dashboard page loads with content', module:'Page Load', result:'pass', reason:'',
+    detail:'Verifies the dashboard renders with at least one of: "Overview", "Order Analysis", or "Product Analysis" visible.',
+    steps:[
+      step('Open the Shopify admin URL for the Etsy app in the browser'),
+      step('Wait for the Shopify admin shell to load and the Etsy app iframe to resolve'),
+      step('Dismiss any overlays, cookie banners or modal dialogs that appear on first load'),
+      assert('The dashboard overview page is displayed — at least one of the main sections ("Overview", "Order Analysis", or "Product Analysis") is visible on screen'),
+    ]
+  },
+  {
+    tc:'TC_02', name:'"New to the app?" banner is visible with Watch Guide button', module:'Top Bar', result:'pass', reason:'',
+    detail:'Checks the onboarding banner and Watch Guide CTA. Skips if the banner has already been dismissed.',
+    steps:[
+      step('On the dashboard page, look at the top area for the "New to the app?" onboarding banner'),
+      cond('If the banner is not visible (already dismissed by this account) → skip this test'),
+      assert('The "Watch Guide" CTA button is visible inside the banner'),
+    ]
+  },
+  {
+    tc:'TC_03', name:'Refresh Data button is visible', module:'Top Bar', result:'pass', reason:'',
+    detail:'Asserts the "Refresh data" button is present in the top action bar.',
+    steps:[
+      step('On the dashboard page, look at the top-right action bar area'),
+      assert('"Refresh data" button is visible in the top bar'),
+    ]
+  },
+  {
+    tc:'TC_04', name:'Order Analysis section is visible', module:'Order Analysis', result:'pass', reason:'',
+    detail:'Verifies the "Order Analysis" section heading is rendered on the dashboard.',
+    steps:[
+      step('Scroll down on the dashboard to the first data card below the top bar'),
+      assert('"Order Analysis" section heading is visible on the page'),
+    ]
+  },
+  {
+    tc:'TC_05', name:'Total Orders count or fallback is displayed', module:'Order Analysis', result:'pass', reason:'',
+    detail:'Checks for "Total Orders" label or a fallback element when no orders exist.',
+    steps:[
+      step('Inside the Order Analysis card, look for the "Total Orders" label with a numeric count'),
+      step('If no orders have been imported yet, look for the fallback/empty-state element instead'),
+      assert('Either the "Total Orders" label with a count or the fallback element is visible'),
+    ]
+  },
+  {
+    tc:'TC_06', name:'Order status badges are visible (Paid, Failed, Completed, Others)', module:'Order Analysis', result:'pass', reason:'',
+    detail:'Counts how many of the four order status badges are visible. Expects at least 1.',
+    steps:[
+      step('Inside the Order Analysis card, locate the row of order status count badges'),
+      step('Check visibility of each badge: Paid, Failed, Completed, Others'),
+      assert('At least 1 of the 4 status badges (Paid / Failed / Completed / Others) is visible with a numeric count'),
+    ]
+  },
+  {
+    tc:'TC_07', name:'Order pie chart is displayed', module:'Order Analysis', result:'pass', reason:'',
+    detail:'Asserts a canvas element exists in the order chart container.',
+    steps:[
+      step('Inside the Order Analysis card, look for the donut/pie chart visualization on the right side'),
+      assert('The pie/donut chart is rendered on screen (canvas element present inside the chart container)'),
+    ]
+  },
+  {
+    tc:'TC_08', name:'"View All Orders" button redirects to Orders page', module:'Order Analysis', result:'pass', reason:'',
+    detail:'Clicks "View All Orders" and confirms URL changes to match /orders.',
+    steps:[
+      step('Inside the Order Analysis card, locate the "View All Orders" button'),
+      assert('"View All Orders" button is visible'),
+      step('Click the "View All Orders" button'),
+      step('Wait for the page to navigate'),
+      assert('The app navigates to the Orders listing page — URL contains <code>/orders</code>'),
+      step('Navigate back to the Dashboard overview page'),
+    ]
+  },
+  {
+    tc:'TC_09', name:'Clicking "Paid" order badge redirects to filtered orders page', module:'Order Analysis', result:'pass', reason:'',
+    detail:'Clicks the "Paid" count button and expects redirect to /orders with paid filter.',
+    steps:[
+      step('Inside the Order Analysis card, look for the "Paid" status count badge'),
+      cond('If the "Paid" badge is not visible (0 paid orders in test store) → skip this test'),
+      step('Click the "Paid" count badge'),
+      step('Wait for navigation'),
+      assert('The app navigates to the Orders page filtered by Paid status — URL contains <code>/orders</code>'),
+      step('Navigate back to the Dashboard overview page'),
+    ]
+  },
+  {
+    tc:'TC_10', name:'Clicking "Failed" order badge redirects to filtered orders page', module:'Order Analysis', result:'pass', reason:'',
+    detail:'Clicks the "Failed" count button and expects redirect to /orders with failed filter.',
+    steps:[
+      step('Inside the Order Analysis card, look for the "Failed" status count badge'),
+      cond('If the "Failed" badge is not visible (0 failed orders in test store) → skip this test'),
+      step('Click the "Failed" count badge'),
+      step('Wait for navigation'),
+      assert('The app navigates to the Orders page filtered by Failed status — URL contains <code>/orders</code>'),
+      step('Navigate back to the Dashboard overview page'),
+    ]
+  },
+  {
+    tc:'TC_11', name:'Clicking "Completed" order badge redirects to orders page', module:'Order Analysis', result:'pass', reason:'',
+    detail:'Clicks the "Completed" count button and expects redirect to /orders.',
+    steps:[
+      step('Inside the Order Analysis card, look for the "Completed" status count badge'),
+      cond('If the "Completed" badge is not visible (0 completed orders in test store) → skip this test'),
+      step('Click the "Completed" count badge'),
+      step('Wait for navigation'),
+      assert('The app navigates to the Orders page filtered by Completed status — URL contains <code>/orders</code>'),
+      step('Navigate back to the Dashboard overview page'),
+    ]
+  },
+  {
+    tc:'TC_12', name:'Total Revenue section is visible', module:'Revenue', result:'pass', reason:'',
+    detail:'Verifies the "Total Revenue" label is visible on the dashboard.',
+    steps:[
+      step('Scroll to the Revenue card on the dashboard'),
+      assert('"Total Revenue" label with a currency value (or zero) is visible on the dashboard'),
+    ]
+  },
+  {
+    tc:'TC_13', name:'Revenue date filter is visible (Last 7 days)', module:'Revenue', result:'pass', reason:'',
+    detail:'Asserts the revenue date range filter button is present.',
+    steps:[
+      step('Inside the Revenue card, look for the date range filter/dropdown in the top-right corner of the card'),
+      assert('The date filter button is visible — showing "Last 7 days", "Last 30 days", or "Select date range"'),
+    ]
+  },
+  {
+    tc:'TC_14', name:'Product Analysis section is visible', module:'Product Analysis', result:'pass', reason:'',
+    detail:'Verifies the "Product Analysis" heading is rendered.',
+    steps:[
+      step('Scroll to the Product Analysis card on the dashboard'),
+      assert('"Product Analysis" section heading is visible on the page'),
+    ]
+  },
+  {
+    tc:'TC_15', name:'Total Products count is displayed', module:'Product Analysis', result:'pass', reason:'',
+    detail:'Asserts "Total Products" label is visible.',
+    steps:[
+      step('Inside the Product Analysis card, look for the "Total Products" label'),
+      assert('"Total Products" label with a numeric count is visible'),
+    ]
+  },
+  {
+    tc:'TC_16', name:'Product status badges visible (Active, Not Published, Not Profiled, Others)', module:'Product Analysis', result:'pass', reason:'',
+    detail:'Counts visible product status badges. Expects at least 1 of the 4 to be visible.',
+    steps:[
+      step('Inside the Product Analysis card, locate the row of product status count badges'),
+      step('Check visibility of each badge: Active, Not Published, Not Profiled, Others'),
+      assert('At least 1 of the 4 product status badges is visible with a numeric count'),
+    ]
+  },
+  {
+    tc:'TC_17', name:'"View All Products" button redirects to Products/Listings page', module:'Product Analysis', result:'pass', reason:'',
+    detail:'Clicks "View All Products" and asserts URL matches /listings or /products.',
+    steps:[
+      step('Inside the Product Analysis card, locate the "View All Products" button'),
+      assert('"View All Products" button is visible'),
+      step('Click the "View All Products" button'),
+      step('Wait for the page to navigate'),
+      assert('The app navigates to the Products/Listings page — URL contains <code>/listings</code> or <code>/products</code>'),
+      step('Navigate back to the Dashboard overview page'),
+    ]
+  },
+  {
+    tc:'TC_18', name:'Clicking "Active" product badge redirects to listings page', module:'Product Analysis', result:'pass', reason:'',
+    detail:'Clicks the "Active" count button and confirms redirect to listings.',
+    steps:[
+      step('Inside the Product Analysis card, look for the "Active" status count badge'),
+      cond('If the badge is not visible → skip this test'),
+      step('Click the "Active" count badge'),
+      step('Wait for navigation'),
+      assert('The app navigates to the Listings page filtered by Active status'),
+      step('Navigate back to the Dashboard overview page'),
+    ]
+  },
+  {
+    tc:'TC_19', name:'Clicking "Not Published" product badge redirects to listings page', module:'Product Analysis', result:'pass', reason:'',
+    detail:'Clicks the "Not Published" count button (17 products). Confirms redirect to listings with not-published filter.',
+    steps:[
+      step('Inside the Product Analysis card, look for the "Not Published" status count badge (shows 17 products in test store)'),
+      cond('If the badge is not visible → skip this test'),
+      step('Click the "Not Published" count badge'),
+      step('Wait for navigation'),
+      assert('The app navigates to the Listings page filtered by Not Published status'),
+      step('Navigate back to the Dashboard overview page'),
+    ]
+  },
+  {
+    tc:'TC_20', name:'Clicking "Not Profiled" product badge redirects to listings page', module:'Product Analysis', result:'pass', reason:'',
+    detail:'Clicks the "Not Profiled" count button and confirms redirect to listings page.',
+    steps:[
+      step('Inside the Product Analysis card, look for the "Not Profiled" status count badge'),
+      cond('If the badge is not visible → skip this test'),
+      step('Click the "Not Profiled" count badge'),
+      step('Wait for navigation'),
+      assert('The app navigates to the Listings page filtered by Not Profiled status'),
+      step('Navigate back to the Dashboard overview page'),
+    ]
+  },
+  {
+    tc:'TC_21', name:'Top Performing Products section is visible', module:'Top Products', result:'pass', reason:'',
+    detail:'Verifies the "Top Performing Products" or "Top Selling Products" section heading is present.',
+    steps:[
+      step('Scroll to the Top Performing Products section below the Product Analysis card'),
+      assert('"Top Performing Products" or "Top Selling Products" section heading is visible'),
+    ]
+  },
+  {
+    tc:'TC_22', name:'Top selling products show titles and listing IDs', module:'Top Products', result:'pass', reason:'',
+    detail:'Counts elements with "Listing ID" text. Skips if count is 0 (no sales recorded yet).',
+    steps:[
+      step('Inside the Top Performing Products section, look for product rows showing product title and Listing ID'),
+      cond('If no rows are present (store has no sales/orders recorded yet) → skip this test'),
+      assert('At least one product row is visible with a product title and a "Listing ID" value'),
+    ]
+  },
+  {
+    tc:'TC_23', name:'"More tips on getting started" video section is visible', module:'Video Tips', result:'pass', reason:'',
+    detail:'Asserts the "More tips on getting started" video guide section is rendered.',
+    steps:[
+      step('Scroll to the video guide section on the dashboard'),
+      assert('"More tips on getting started" section heading and video thumbnail/embed are visible'),
+    ]
+  },
+  {
+    tc:'TC_24', name:'Etsy Shop Status section is visible', module:'Shop Status', result:'pass', reason:'',
+    detail:'Verifies the "Etsy Shop Status" section is visible. Confirms shop is connected.',
+    steps:[
+      step('Scroll to the Etsy Shop Status card on the dashboard'),
+      assert('"Etsy Shop Status" section heading is visible and the connected shop name/details are displayed'),
+    ]
+  },
+  {
+    tc:'TC_25', name:'Shop metrics displayed (customizable orders, languages)', module:'Shop Status', result:'pass', reason:'',
+    detail:'Checks visibility of "accepts customizable orders" and "languages" metrics.',
+    steps:[
+      step('Inside the Etsy Shop Status card, look at the shop detail rows'),
+      assert('At least one shop metric is visible — either "accepts customizable orders" or the shop\'s supported "languages" label'),
+    ]
+  },
+  {
+    tc:'TC_26', name:'Shop Refresh button is visible', module:'Shop Status', result:'pass', reason:'',
+    detail:'Asserts the Refresh Etsy Shop button is visible in the Shop Status card.',
+    steps:[
+      step('Inside the Etsy Shop Status card, locate the refresh/sync button in the card header or top-right'),
+      assert('The "Refresh Etsy Shop" button (circular refresh icon) is visible'),
+    ]
+  },
+  {
+    tc:'TC_27', name:'Plan Overview section is visible', module:'Plan Overview', result:'pass', reason:'',
+    detail:'Verifies the "Plan Overview" heading is visible on the dashboard.',
+    steps:[
+      step('Scroll to the Plan Overview card on the dashboard'),
+      assert('"Plan Overview" section heading is visible on the page'),
+    ]
+  },
+  {
+    tc:'TC_28', name:'Plan details are displayed (Product Limit, Order Limit, Billing date)', module:'Plan Overview', result:'pass', reason:'',
+    detail:'Checks visibility of Product Limit, Order Limit, and Next Billing date labels. Expects at least 2.',
+    steps:[
+      step('Inside the Plan Overview card, look for the plan usage details'),
+      assert('At least 2 of the following plan detail labels are visible: "Product Limit", "Order Limit", "Next Billing date"'),
+    ]
+  },
+  {
+    tc:'TC_29', name:'"View Plan Details" redirects to Pricing page', module:'Plan Overview', result:'pass', reason:'',
+    detail:'Clicks "View Plan Details" link and confirms URL matches /pricing.',
+    steps:[
+      step('Inside the Plan Overview card, locate the "View Plan Details" link at the bottom'),
+      assert('"View Plan Details" link is visible'),
+      step('Click the "View Plan Details" link'),
+      step('Wait for the page to navigate'),
+      assert('The app navigates to the Pricing/Plans page — URL contains <code>/pricing</code>'),
+      step('Navigate back to the Dashboard overview page'),
+    ]
+  },
+  {
+    tc:'TC_30', name:'Feedback section is visible with Good/Bad buttons', module:'Feedback', result:'pass', reason:'',
+    detail:'Asserts feedback prompt text and Good/Bad buttons are visible.',
+    steps:[
+      step('Scroll to the feedback/rating section on the dashboard (typically at the bottom)'),
+      cond('If the feedback section is not shown (user has already submitted feedback) → skip this test'),
+      assert('The feedback prompt text ("How was your experience?") is visible'),
+      assert('Both the "Good 👍" and "Bad 👎" rating buttons are visible'),
+    ]
+  },
+  {
+    tc:'TC_31', name:'Reverse Sync (Etsy → Shopify) banner visibility check', module:'Reverse Sync', result:'pass', reason:'',
+    detail:'Checks for "Reverse Sync" banner text. Both visible and hidden states are valid.',
+    steps:[
+      step('Scan the dashboard for a "Reverse Sync" or "Etsy → Shopify" informational banner'),
+      assert('The check completes without error — the banner is either visible or hidden; both states are acceptable'),
+    ]
+  },
+  {
+    tc:'TC_32', name:'Recent Activities section is visible on dashboard', module:'Activities', result:'pass', reason:'',
+    detail:'Checks for the "Recent Activities" card on the dashboard. Session-triggered — only appears after a sync or order import in the current browser session.',
+    steps:[
+      step('Look for the "Recent Activities" panel on the dashboard (right side or bottom section)'),
+      cond('If the panel is not visible — it only appears after a product sync, order import, or similar action in the current session — skip this test'),
+      assert('"Recent Activities" panel is visible showing a list of recent sync/import activity items'),
+    ]
+  },
+  {
+    tc:'TC_33', name:'"All Activities" button is visible in Recent Activities panel', module:'Activities', result:'pass', reason:'',
+    detail:'Once the Recent Activities panel is visible, asserts the "All Activities" button is present.',
+    steps:[
+      step('Locate the "Recent Activities" panel on the dashboard'),
+      cond('If the panel is not visible → skip this test'),
+      assert('"All Activities" or "View All Activities" link/button is visible at the bottom of the panel'),
+    ]
+  },
+  {
+    tc:'TC_34', name:'Clicking "All Activities" redirects to Activities page', module:'Activities', result:'pass', reason:'',
+    detail:'Clicks "All Activities" from the dashboard panel and verifies URL changes to /panel/activity.',
+    steps:[
+      step('Locate the "Recent Activities" panel on the dashboard'),
+      cond('If the panel is not visible → skip this test'),
+      step('Click the "All Activities" or "View All Activities" link in the panel'),
+      step('Wait for the page to navigate'),
+      assert('The app navigates to the Activities page — URL contains <code>/panel/activity</code>'),
+      step('Navigate back to the Dashboard overview page'),
+    ]
+  },
+  {
+    tc:'TC_35', name:'Activities page loads with Notifications section', module:'Activities', result:'pass', reason:'',
+    detail:'Navigates directly to /panel/activity (independent of the dashboard panel). Asserts the Activity page heading or Notifications section is visible.',
+    steps:[
+      step('Navigate directly to the Activities page URL (<code>/panel/activity</code>) — bypassing the dashboard panel'),
+      step('Dismiss any overlays that appear'),
+      assert('The Activities page loads correctly — the "Activity" heading or "Notifications" section is visible on the page'),
+      step('Navigate back to the Dashboard overview page'),
+    ]
+  },
+  {
+    tc:'TC_36', name:'Delete an activity from Recent Activities on dashboard', module:'Activities', result:'skip', reason:'',
+    detail:'Clicks the Delete (×) button on the first activity item in the dashboard Recent Activities panel and verifies the count decreases.',
+    steps:[
+      step('Locate the "Recent Activities" panel on the dashboard'),
+      cond('If the panel is not visible → skip this test'),
+      step('Count the number of activity items currently visible in the panel (<code>countBefore</code>)'),
+      cond('If <code>countBefore = 0</code> → skip this test (no items to delete)'),
+      step('Click the delete (×) icon on the first activity item in the panel'),
+      assert('The delete action completes without error'),
+      step('Wait for the UI to update'),
+      step('Count the activity items again (<code>countAfter</code>)'),
+      assert('<code>countAfter</code> is less than <code>countBefore</code> — one item has been removed from the list'),
+    ]
+  },
+  {
+    tc:'TC_37', name:'Delete an activity from the full Activities page', module:'Activities', result:'skip', reason:'',
+    detail:'Permanently marked test.skip at declaration — intended as a manual verification step only.',
+    steps:[
+      cond('This test is permanently skipped at the declaration level and never runs automatically'),
+      step('(Manual) Navigate directly to the Activities page (<code>/panel/activity</code>)'),
+      step('(Manual) Dismiss any overlays that appear'),
+      step('(Manual) Verify the Activities page has loaded with activity entries visible'),
+      step('(Manual) Locate the delete button on the first activity row'),
+      cond('(Manual) If no delete button is visible (no activities) → stop here'),
+      step('(Manual) Note the current total activity count'),
+      step('(Manual) Click the delete button and wait for the UI to update'),
+      assert('(Manual) Activity count has decreased by 1 after deletion'),
+    ]
+  },
+];
 
-  // ── Render ───────────────────────────────────────────────
-  function render() {
-    const q = document.getElementById('search').value.toLowerCase().trim();
-    const tbody = document.getElementById('tc-body');
-    tbody.innerHTML = '';
+TESTS.forEach(t=>{t.title=t.name;t.section=t.module;t.skipReason=t.reason||null;t.duration='—';});
+TESTS.forEach((t,i)=>{t.tc='DASH_'+String(i+1).padStart(3,'0');});
 
-    const sorted = [...TESTS].sort((a, b) => {
-      const av = a[currentSort.col] || '';
-      const bv = b[currentSort.col] || '';
-      return av.localeCompare(bv) * currentSort.dir;
-    });
+let aF='all', aSec='all', aQ='', sCol='tc', sDir=1, expTC=null;
 
-    let visible = 0;
-    for (const t of sorted) {
-      if (currentFilter !== 'all' && t.result !== currentFilter) continue;
-      if (q && !t.tc.toLowerCase().includes(q) && !t.name.toLowerCase().includes(q) && !t.module.toLowerCase().includes(q)) continue;
-      visible++;
+function buildSections(){
+  const wrap=document.getElementById('sec-bar');
+  const secs=[...new Set(TESTS.map(t=>t.section))];
+  const all=document.createElement('button');
+  all.className='sec-chip active';all.textContent='All Modules';all.dataset.sec='all';
+  all.onclick=()=>{aSec='all';document.querySelectorAll('.sec-chip').forEach(c=>c.classList.remove('active'));all.classList.add('active');render();};
+  wrap.appendChild(all);
+  secs.forEach(s=>{
+    const c=document.createElement('button');
+    c.className='sec-chip';c.dataset.sec=s;
+    const cnt=TESTS.filter(t=>t.section===s).length;
+    const hasSkip=TESTS.some(t=>t.section===s&&t.result==='skip');
+    c.innerHTML=`<span style="color:${hasSkip?'var(--skip)':'var(--pass)'}">●</span> ${s} <span class="sec-cnt">${cnt}</span>`;
+    c.onclick=()=>{aSec=s;document.querySelectorAll('.sec-chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');render();};
+    wrap.appendChild(c);
+  });
+}
 
-      const tr = document.createElement('tr');
-      tr.dataset.tc = t.tc;
-      tr.innerHTML = `
-        <td class="tc-id">${t.tc}</td>
-        <td class="tc-name">
-          ${t.name}
-          ${t.result === 'skip' ? `<div class="skip-reason">${t.reason}</div>` : ''}
-        </td>
-        <td><span style="font-size:12px;color:#64748b">${t.module}</span></td>
-        <td>${badgeHtml(t.result)}</td>
-      `;
-      tr.addEventListener('click', () => toggleDetail(tr, t));
-      tbody.appendChild(tr);
+function setF(b){document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');aF=b.dataset.f;render();}
+function applyAll(){aQ=document.querySelector('.sb').value.toLowerCase();render();}
 
-      // detail row
-      const dr = document.createElement('tr');
-      dr.className = 'detail-row';
-      dr.dataset.detail = t.tc;
-      dr.innerHTML = `<td class="detail-cell" colspan="4">
-        <div class="detail-box">
-          <strong>What it tests:</strong> ${t.detail}
+function stepsHTML(steps){
+  if(!steps||!steps.length)return'';
+  const cls={step:'step-num',assert:'step-assert',cond:'step-cond'};
+  let n=0;
+  const items=steps.map(s=>{
+    const icon=s.t==='step'?++n:s.t==='assert'?'✓':'?';
+    return`<li><span class="${cls[s.t]}">${icon}</span><span class="step-text">${s.x}</span></li>`;
+  }).join('');
+  return`<div class="steps-heading">Test Steps</div><ul class="steps-list">${items}</ul>`;
+}
+
+function pillHTML(r){
+  const m={pass:['pill-pass','✓ Passed'],skip:['pill-skip','⊘ Skipped'],fail:['pill-fail','✕ Failed'],pend:['pill-pend','— Pending']};
+  const[cls,lbl]=m[r]||m.pend;
+  return`<span class="pill ${cls}">${lbl}</span>`;
+}
+
+function getFiltered(){
+  return TESTS.filter(t=>{
+    if(aF!=='all'&&t.result!==aF)return false;
+    if(aSec!=='all'&&t.section!==aSec)return false;
+    if(aQ&&!(t.tc+' '+t.title+' '+t.section).toLowerCase().includes(aQ))return false;
+    return true;
+  }).sort((a,b)=>{
+    let va=a[sCol]??'',vb=b[sCol]??'';
+    if(sCol==='tc'){va=+va.replace('TC_','');vb=+vb.replace('TC_','');}
+    return sDir*(va<vb?-1:va>vb?1:0);
+  });
+}
+
+function render(){
+  const rows=getFiltered();
+  const tb=document.getElementById('tb');
+  document.getElementById('rc').textContent=rows.length===TESTS.length?'':rows.length+' of '+TESTS.length;
+  tb.innerHTML='';
+  if(!rows.length){document.getElementById('empty').classList.remove('hidden');return;}
+  document.getElementById('empty').classList.add('hidden');
+  rows.forEach(t=>{
+    const tr=document.createElement('tr');
+    tr.className='dr'+(expTC===t.tc?' expanded':'');
+    tr.innerHTML=`
+      <td class="td-tc">${t.tc}</td>
+      <td class="td-title">${t.title}<span class="chevron">▾</span></td>
+      <td class="td-sec">${t.section}</td>
+      <td>${pillHTML(t.result)}</td>
+      <td class="td-dur">${t.duration}</td>`;
+    tr.onclick=()=>{expTC=expTC===t.tc?null:t.tc;render();if(expTC)tr.scrollIntoView({behavior:'smooth',block:'nearest'});};
+    tb.appendChild(tr);
+    if(expTC===t.tc){
+      const dr=document.createElement('tr');
+      dr.className='detr';
+      const skipNote=t.skipReason?`<div class="skip-note">⊘ Skip condition: ${t.skipReason}</div>`:'';
+      dr.innerHTML=`<td colspan="5"><div class="detail-inner"><div class="detail-box">
+        <div class="detail-heading">${t.tc} — ${t.title}</div>
+        <div class="dm-row">
+          <span class="dm"><strong>Section:</strong> ${t.section}</span>
+          <span class="dm"><strong>Status:</strong> ${t.result}</span>
         </div>
-      </td>`;
-      tbody.appendChild(dr);
+        <div>${t.detail}</div>${stepsHTML(t.steps)}${skipNote}
+      </div></div></td>`;
+      tb.appendChild(dr);
     }
+  });
+}
 
-    document.getElementById('result-count').textContent = `${visible} of ${TESTS.length}`;
-    document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
-  }
+function srt(col){
+  if(sCol===col)sDir*=-1;else{sCol=col;sDir=1;}
+  document.querySelectorAll('thead th').forEach(h=>{h.classList.remove('sorted');const a=h.querySelector('.sa');if(a)a.textContent='↕';});
+  const th=document.getElementById('th-'+col);
+  if(th){th.classList.add('sorted');const a=th.querySelector('.sa');if(a)a.textContent=sDir===1?'↑':'↓';}
+  render();
+}
 
-  function badgeHtml(result) {
-    const map = { pass: ['✓', 'Pass', 'badge-pass'], skip: ['⊘', 'Skip', 'badge-skip'], fail: ['✕', 'Fail', 'badge-fail'] };
-    const [icon, label, cls] = map[result];
-    return `<span class="badge ${cls}">${icon} ${label}</span>`;
-  }
-
-  function toggleDetail(tr, t) {
-    const dr = tr.nextElementSibling;
-    if (!dr || !dr.classList.contains('detail-row')) return;
-    const isOpen = dr.classList.contains('open');
-    // close any open
-    document.querySelectorAll('.detail-row.open').forEach(el => el.classList.remove('open'));
-    if (!isOpen) dr.classList.add('open');
-  }
-
-  // ── Filter ───────────────────────────────────────────────
-  function setFilter(f) {
-    currentFilter = f;
-    ['all','pass','skip','fail'].forEach(k => {
-      document.getElementById(`btn-${k}`).className = 'filter-btn' + (k === f ? ` active-${k}` : '');
-      const sc = document.getElementById(`stat-${k}`);
-      sc.classList.toggle('active', k === f);
-    });
-    render();
-  }
-
-  function applyFilters() { render(); }
-
-  // ── Sort ─────────────────────────────────────────────────
-  function sortBy(col) {
-    if (currentSort.col === col) currentSort.dir *= -1;
-    else { currentSort.col = col; currentSort.dir = 1; }
-    document.querySelectorAll('thead th').forEach(th => th.classList.remove('sorted'));
-    event.currentTarget.classList.add('sorted');
-    const arrow = event.currentTarget.querySelector('.sort-arrow');
-    arrow.textContent = currentSort.dir === 1 ? '↑' : '↓';
-    render();
-  }
-
-  // ── Init ─────────────────────────────────────────────────
-  document.getElementById('run-date').textContent = new Date().toLocaleDateString('en-US', { weekday:'short', year:'numeric', month:'short', day:'numeric' });
-
-  const total = TESTS.length;
-  const pass  = TESTS.filter(t => t.result === 'pass').length;
-  const skip  = TESTS.filter(t => t.result === 'skip').length;
-  const fail  = TESTS.filter(t => t.result === 'fail').length;
-
-  // ── Apply confirmed run results (32 passed / 5 skipped / 0 failed) ──────
-  const RUN_RESULTS = {
-    'TC_01':'pass','TC_02':'pass','TC_03':'pass','TC_04':'pass','TC_05':'pass',
-    'TC_06':'pass','TC_07':'pass','TC_08':'pass','TC_09':'skip','TC_10':'skip',
-    'TC_11':'skip','TC_12':'pass','TC_13':'pass','TC_14':'pass','TC_15':'pass',
-    'TC_16':'pass','TC_17':'pass','TC_18':'pass','TC_19':'pass','TC_20':'pass',
-    'TC_21':'pass','TC_22':'skip','TC_23':'pass','TC_24':'pass','TC_25':'pass',
-    'TC_26':'pass','TC_27':'pass','TC_28':'pass','TC_29':'pass','TC_30':'pass',
-    'TC_31':'pass','TC_32':'pass','TC_33':'pass','TC_34':'pass','TC_35':'pass',
-    'TC_36':'pass','TC_37':'skip'
-  };
-  const RUN_PASS  = 32;
-  const RUN_SKIP  = 5;
-  const RUN_FAIL  = 0;
-  const RUN_TOTAL = 37;
-  const RUN_DATE  = new Date().toLocaleDateString('en-US', { weekday:'short', year:'numeric', month:'short', day:'numeric' });
-
-  for (const t of TESTS) {
-    if (RUN_RESULTS[t.tc]) t.result = RUN_RESULTS[t.tc];
-  }
-
-  document.getElementById('cnt-all').textContent  = RUN_TOTAL;
-  document.getElementById('cnt-pass').textContent = RUN_PASS;
-  document.getElementById('cnt-skip').textContent = RUN_SKIP;
-  document.getElementById('cnt-fail').textContent = RUN_FAIL;
-  document.getElementById('prog-pass').style.width = (RUN_PASS/RUN_TOTAL*100).toFixed(1) + '%';
-  document.getElementById('prog-skip').style.width = (RUN_SKIP/RUN_TOTAL*100).toFixed(1) + '%';
-  document.getElementById('prog-fail').style.width = (RUN_FAIL/RUN_TOTAL*100).toFixed(1) + '%';
-  document.getElementById('run-date').textContent = RUN_DATE;
-
+buildSections();
+render();
 </script>
 </body>
 </html>

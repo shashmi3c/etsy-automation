@@ -37,7 +37,7 @@ log(`${C.dim}  Running 37 test cases against live store…${C.reset}\n`);
 const proc = spawnSync(
   'npx',
   ['playwright', 'test', 'tests/etsy-dashboard.spec.js',
-   '--project=etsy-authenticated', '--reporter=json'],
+   '--project=etsy-authenticated', '--reporter=json', '--headed'],
   { cwd: ROOT, encoding: 'utf8', timeout: 1_200_000, shell: true }
 );
 
@@ -111,44 +111,47 @@ const tcResultJs = Object.entries(resultMap)
   .map(([tc, r]) => `"${tc}":"${r}"`)
   .join(',');
 
-const patch = `
-  // ── Auto-patched by runner ────────────────────────────────
-  (function applyRunResults() {
-    const RUN_RESULTS = {${tcResultJs}};
-    const RUN_DATE    = "${new Date().toISOString()}";
-    const RUN_PASS    = ${pass};
-    const RUN_SKIP    = ${skip};
-    const RUN_FAIL    = ${fail};
-    const RUN_TOTAL   = ${total};
+const runDate = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+const passRate = total > 0 ? (pass / total * 100).toFixed(1) : '0.0';
+const passWidth = total > 0 ? (pass / total * 100).toFixed(1) : '0';
+const skipWidth = total > 0 ? (skip / total * 100).toFixed(1) : '0';
+const failWidth = total > 0 ? (fail / total * 100).toFixed(1) : '0';
 
-    // Patch TESTS array
-    for (const t of TESTS) {
-      if (RUN_RESULTS[t.tc] !== undefined) t.result = RUN_RESULTS[t.tc];
-    }
+// ── Patch static HTML stats ───────────────────────────────
+// Header run date + pass rate
+html = html.replace(/(<div>Run: ).*?(<\/div>)/, `$1${runDate}$2`);
+html = html.replace(/(<div class="pass-rate">).*?(<\/div>)/, `$1${passRate}% pass rate$2`);
 
-    // Update counts
-    document.getElementById('cnt-all').textContent  = RUN_TOTAL;
-    document.getElementById('cnt-pass').textContent = RUN_PASS;
-    document.getElementById('cnt-skip').textContent = RUN_SKIP;
-    document.getElementById('cnt-fail').textContent = RUN_FAIL;
-    document.getElementById('prog-pass').style.width = (RUN_PASS/RUN_TOTAL*100).toFixed(1)+'%';
-    document.getElementById('prog-skip').style.width = (RUN_SKIP/RUN_TOTAL*100).toFixed(1)+'%';
-    document.getElementById('prog-fail').style.width = (RUN_FAIL/RUN_TOTAL*100).toFixed(1)+'%';
+// Stat cards
+html = html.replace(/(<div class="sc sc-pass"><div class="num">)\d+(<\/div>)/, `$1${pass}$2`);
+html = html.replace(/(<div class="sc sc-skip"><div class="num">)\d+(<\/div>)/, `$1${skip}$2`);
+html = html.replace(/(<div class="sc sc-fail"><div class="num">)\d+(<\/div>)/, `$1${fail}$2`);
+html = html.replace(/(<div class="sc sc-rate"><div class="num">)[\d.]+%(<\/div>)/, `$1${passRate}%$2`);
 
-    // Update run date
-    const d = new Date(RUN_DATE);
-    document.getElementById('run-date').textContent =
-      d.toLocaleDateString('en-US', { weekday:'short', year:'numeric', month:'short', day:'numeric' }) +
-      '  ' + d.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
+// Progress bar widths
+html = html.replace(/(id="pp"\s+style="width:)[\d.]+%(")/,  `$1${passWidth}%$2`);
+html = html.replace(/(id="psk"\s+style="width:)[\d.]+%(")/,`$1${skipWidth}%$2`);
+html = html.replace(/(id="pf"\s+style="width:)[\d.]+%(")/,  `$1${failWidth}%$2`);
 
-    setFilter('all');
-  })();
-`;
+// Legend labels
+html = html.replace(/(Passed \()\d+(\))/, `$1${pass}$2`);
+html = html.replace(/(Skipped \()\d+(\))/, `$1${skip}$2`);
+html = html.replace(/(Failed \()\d+(\))/, `$1${fail}$2`);
 
-// Remove previous patch if any
-html = html.replace(/\/\/ ── Auto-patched[\s\S]*?\}\)\(\);/g, '');
-// Inject before closing </script>
-html = html.replace(/(\s*setFilter\('all'\);[\s\S]*?<\/script>)/, `\n${patch}\n</script>`);
+// Footer date
+html = html.replace(/(Generated )[\d]+ \w+ \d{4}/, `$1${runDate}`);
+
+// ── Patch TESTS array results in the script block ─────────
+const results = { ...resultMap }; // TC_01 → 'pass'|'skip'|'fail'
+for (const [tc, res] of Object.entries(results)) {
+  // Match:  tc:'TC_XX', ..., result:'whatever', reason:'...',
+  const escaped = tc.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+  const newReason = res === 'skip' ? '' : '';
+  html = html.replace(
+    new RegExp(`(tc:'${escaped}',[^}]*result:)'(?:pass|skip|fail|pend)'(, reason:)'[^']*'`),
+    `$1'${res}'$2'${newReason}'`
+  );
+}
 
 writeFileSync(HTML_PATH, html, 'utf8');
 log(`  ${C.green}✓ Report updated:${C.reset} dashboard-test-report.html`);
